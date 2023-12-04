@@ -1,0 +1,57 @@
+#sidebar a.active {
+	position: relative;
+	background: none;
+	border: 3px solid #ddd;
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+	border: none;
+	color: crimson;
+	
+	
+
+	/* color: red;
+	font-weight: bold;	
+	font-size: 20px;
+	box-shadow: 11px 5px 14px rgba(15, 107, 216, 0.99); */
+}
+/* #sidebar{
+	background-color: var(--backgroundColor);
+	color: var(--textColor);
+} */
+
+/* #sidebar,
+#sidebar::before {	
+	transition: 0.3s;
+	
+}
+#sidebar::after {
+	transition: 0.3s;
+} */
+
+.bar {
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+	border: none;
+	/* color: rgb(255, 0, 255); */
+}
+/* .bar::after,
+.bar::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(255, 0, 255, 0.1);
+	border: 3px solid rgb(255, 0, 255, 0.1);
+}
+.bar:hover::before {
+	transform: rotate(45deg);
+	background-color: transparent;
+}
+.bar:hover::after {
+	transform: rotate(-45deg);
+	background-color: transparent;
+} */

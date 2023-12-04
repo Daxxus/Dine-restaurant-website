@@ -1,0 +1,43 @@
+{
+  "clients": [
+    {
+      "email": "dariuszcudny@wp.pl",
+      "password": "Qazxsw",
+      "confirmPassword": "Qazxsw",
+      "avatar": "https://i.pinimg.com/236x/80/73/70/8073708198bf9dace0f6369aba0df0a2.jpg",
+      "rememberMe": true,
+      "id": 1
+    },
+    {
+      "email": "jacek@interia.pl",
+      "password": "Wsxzaq",
+      "confirmPassword": "Wsxzaq",
+      "avatar": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1744695785.1701196934&semt=sph",
+      "rememberMe": true,
+      "id": 2
+    },
+    {
+      "email": "antek@onet.pl",
+      "password": "Qazxsw",
+      "confirmPassword": "Qazxsw",
+      "avatar": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
+      "rememberMe": true,
+      "id": 3
+    }
+ 
+  ],
+  "avatars": [
+    {
+      "pic": "https://i.pinimg.com/236x/80/73/70/8073708198bf9dace0f6369aba0df0a2.jpg",
+      "id": 1
+    },
+    {
+      "pic": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
+      "id": 2
+    },
+    {
+      "pic": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1744695785.1701196934&semt=sph",
+      "id": 3
+    }
+  ]
+}
