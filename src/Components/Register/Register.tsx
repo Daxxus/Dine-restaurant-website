@@ -1,12 +1,13 @@
-import { Formik, Field } from "formik"
+import { Formik, Field, useFormik } from "formik"
 import { ToastContainer, toast } from "react-toastify"
-import { object } from "yup"
+import { InferType, object } from "yup"
 import * as yup from "yup"
 import { useNavigate } from "react-router-dom"
 import { useAvatar } from "../SelectAvatar/Avatar"
 import useEmailDataCheck from "../Email/useEmailDataCheck"
 
 import {
+	Avatar,
 	Box,
 	Button,
 	Checkbox,
@@ -33,7 +34,7 @@ interface Register {
 	avatar: string
 	rememberMe: boolean
 }
-
+// type FormValues = InferType<typeof yupSchema>
 const yupSchema = object({
 	email: yup
 		.string()
@@ -51,19 +52,29 @@ const yupSchema = object({
 		.string()
 		.oneOf([yup.ref("password")], "Hasła muszą być zgodne.")
 		.required("To pole jest wymagane"),
-	avatar: yup
-		.string()
-		// .url()
-		.nullable()
-		.required("Don't forget Your Avatar😊"),
+	avatar: yup.string().url().nullable().required("Don't forget Your Avatar😊"),
 })
 
 const notify = () => toast("Great job, You've just beeing signed up")
 const notify2 = () => toast("The email address provided already exists")
 
 export default function FormRegister() {
+	// const formik = useFormik<FormValues>({
+	// 	initialValues: {
+	// 		email: "",
+	// 		password: "",
+	// 		confirmPassword: "",
+	// 		avatar: "",
+	// 		// createdOn:yup.DateSchema<Date | undefined, yup.AnyObject, Date, "d">
+	// 	},
+	// 	validationSchema: yupSchema, //wpięcie schematu walidacji
+	// 	onSubmit: (values: FormValues) => {
+	// 		console.log(values)
+	// 		alert(JSON.stringify(values, null, 2))
+	// 	},
+	// })
 	const { colorMode } = useColorMode()
-	console.log(colorMode)
+
 	const { verifyMailAvilable } = useEmailDataCheck() //array
 	const [isError, setIsError] = useState(false)
 
@@ -88,6 +99,7 @@ export default function FormRegister() {
 	const jumpToSignInPage = () => {
 		navigate(`/login`)
 	}
+
 	if (!avatars) <p>No data...</p>
 
 	return (
@@ -105,7 +117,7 @@ export default function FormRegister() {
 				p={6}
 				width={"auto"}
 				maxW={"300px"}
-				bg={colorMode === "light" ? "white" : "black"}>
+				bg={colorMode === "light" ? "white" : "gray.900"}>
 				<Formik
 					initialValues={{
 						email: "",
@@ -131,9 +143,8 @@ export default function FormRegister() {
 							notify2()
 							resetForm()
 						}
-						// resetForm({ values: "" || undefined })
 					}}>
-					{({ handleSubmit, errors, touched }) => (
+					{({ handleSubmit, errors, touched, handleChange }) => (
 						<form onSubmit={handleSubmit}>
 							<VStack spacing={4} align='flex-start'>
 								<FormControl isInvalid={!!errors.email && touched.email}>
@@ -176,34 +187,48 @@ export default function FormRegister() {
 									/>
 									<FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
 								</FormControl>
+
+								{/* <Select
+									id='avatar'
+									name='avatar'
+									variant='filled'
+									placeholder='-Select Your Avatar-'
+									options={avatars}
+									formatOptionLabel={(avatar: { pic: string }) => (
+										<Avatar src={avatar.pic} size={"xl"} />
+									)}
+									value={""}
+									onChange={handleChange}
+								/> */}
 								<FormControl isInvalid={!!errors.avatar && touched.avatar}>
 									<FormLabel htmlFor='avatar'></FormLabel>
-									<Select
-										id='avatar'
-										name='avatar'
-										variant='filled'
-										placeholder='-Select Your Avatar-'
-										options={avatars}
-										formatOptionLabel={(avatar: { pic: string }) => (
-											<img src={avatar.pic} />
-										)}>
-										{/* {console.log(avatars)} */}
-									</Select>
-
-									{/* <Field
+									<Field
 										as={Select}
 										id='avatar'
 										maxWidth={"420px"}
 										name='avatar'
+										options={avatars}
 										type='string'
 										variant='filled'
+										formatOptionLabel={(avatar: { pic: string }) => (
+											<Avatar src={avatar.pic} size={"xl"} />
+										)}
+										// onClick={(avatar: { pic: string }) =>
+										// 	formik.setFieldValue("avatar", avatar.pic)
+										// }
+										onClick={(avatar: { pic: string }) => (
+											<Avatar src={avatar.pic} size={"xl"} />
+											// <Avatar key={avatar.pic}>{avatar.pic}</Avatar>
+										)}
+										// onClick={<Avatar key={avatar.id}>{avatar.pic}</Avatar>}
+										// onChange={handleChange}
 										placeholder='-Select Your Avatar-'>
-										{avatars.map((avatar) => (
-											<option key={avatar.id}>{avatar.pic}</option>
-										))}
-									</Field> */}
+										{/* {avatars.map((avatar) => (
+											<Avatar key={avatar.id}>{avatar.pic}</Avatar>
+										))} */}
+									</Field>
 									<FormErrorMessage>{errors.avatar}</FormErrorMessage>
-								</FormControl>
+								</FormControl>								
 
 								<Field
 									as={Checkbox}

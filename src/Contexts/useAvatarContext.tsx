@@ -5,7 +5,7 @@ const useAvatarContext = () => {
 	const ctx = useContext(AvatarContext)
 
 	if (!ctx) {
-		throw new Error("Missing AuthContext, it's not wrapped in AvatarProvider")
+		throw new Error("Missing AvatarContext, it's not wrapped in AvatarProvider")
 	}
 	return ctx
 }

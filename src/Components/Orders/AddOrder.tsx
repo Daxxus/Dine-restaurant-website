@@ -1,28 +1,4 @@
-// import React from 'react'
-
-// import { Flex, Box } from "@chakra-ui/react"
-
-// const Menu = () => {
-// 	return (
-// 		<Flex
-// 			// backgroundImage={"../Images/restaurant-449952_1920.jpg"}
-// 			bgImg={
-// 				"https://cdn.pixabay.com/photo/2017/08/07/07/06/coffeehouse-2600877_1280.jpg"
-// 			}
-// 			bgPosition={"center"}
-// 			bgSize={"cover"}
-// 			align={"center"}
-// 			justify={"center"}
-// 			h='container.lg'
-// 			filter='grayscale(50%)'>
-// 			{/* <ToastContainer autoClose={3000} /> */}
-// 			<Box bg='white' p={4} rounded='md'></Box>
-// 		</Flex>
-// 	)
-// }
-
-// export default Menu
-
+import Reservation from "./Reservation"
 import {
 	Box,
 	Heading,
@@ -34,11 +10,13 @@ import {
 	RangeSliderFilledTrack,
 	RangeSliderThumb,
 	RangeSliderTrack,
+	// Flex
 } from "@chakra-ui/react"
 
 import BgImg from "../Images/menu-3206749_1280.jpg"
 
 export default function AddOrder() {
+
 	return (
 		<>
 			<Container
@@ -51,6 +29,7 @@ export default function AddOrder() {
 				// bgPosition={"center"}
 				bgSize={"cover"}
 				filter={"grayscale(20%)"}>
+				<Reservation />
 				<Stack
 					as={Box}
 					textAlign={"center"}
@@ -84,6 +63,9 @@ export default function AddOrder() {
 							<RangeSliderThumb boxSize={6} index={1} />
 						</RangeSlider>
 					</Stack>
+					<Box>
+					{/* {secondsLeft > 0 && `(${secondsLeft})`} dds */}
+					</Box>
 
 					{/* <Stack
 						direction={"column"}

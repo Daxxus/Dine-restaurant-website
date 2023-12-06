@@ -18,6 +18,7 @@ import {
 	Input,
 	VStack,
 	FormErrorMessage,
+	useColorMode,
 } from "@chakra-ui/react"
 
 interface Login {
@@ -40,6 +41,7 @@ const yupSchema = object({
 })
 
 const Login = () => {
+	const { colorMode } = useColorMode()
 	const { isAuth, setIsAuth } = useAuthContext()
 	const { setAvatar } = useAvatarContext() //nie ma potrzeby avatar
 	// console.log(avatar)
@@ -108,7 +110,7 @@ const Login = () => {
 			h='container.lg'
 			filter='grayscale(50%)'>
 			<ToastContainer autoClose={3000} />
-			<Box bg='white' p={4} rounded='md'>
+			<Box bg={colorMode === "light" ? "white" : "black"} p={4} rounded='md'>
 				{isAuth ? (
 					<section>
 						<h1>You are logged in!</h1>

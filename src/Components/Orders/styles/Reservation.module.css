@@ -1,0 +1,18 @@
+.box {
+	display: flex;
+    justify-content: space-between;
+	
+}
+
+/* .input {
+	border: none;
+	border-radius: 0;
+	max-width: 90px;
+	border-bottom: solid 1px black;
+} */
+.label {
+	display: flex;
+	justify-content: start;
+	align-self: end;
+	font-weight: bold;
+}

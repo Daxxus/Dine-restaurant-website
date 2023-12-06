@@ -4,6 +4,7 @@ import { FaShoppingCart } from "react-icons/fa"
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
+import useCountdownContext from "../../Contexts/useCountdownContext"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import "./NavCss/Nav.css"
@@ -64,6 +65,10 @@ const Nav = (props: Props) => {
 export default function WithAction() {
 	const { isAuth, setIsAuth } = useAuthContext()
 	const { avatar } = useAvatarContext()
+	const { secondsLeft } = useCountdownContext()
+	console.log("custom", secondsLeft)
+	// console.log(useAvatarContext())
+	// console.log(useCountdownContext())
 
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -107,6 +112,14 @@ export default function WithAction() {
 					</HStack>
 					<Flex alignItems={"center"} id='sidebar'>
 						{/* <ThemeMode /> */}
+
+						<Box mr={"100px"}>
+							{isAuth ? (
+								<p>Your visit is only a {secondsLeft} away</p>
+							) : (
+								<p> {!secondsLeft} </p>
+							)}
+						</Box>
 						<NavLink
 							to='/basket'
 							end
@@ -133,6 +146,7 @@ export default function WithAction() {
 							// leftIcon={<AddIcon />}
 						>
 							LOGOUT
+							{/* {secondsLeft > 0 && `(${secondsLeft})`} */}
 						</Button>
 						<Menu>
 							<MenuButton
