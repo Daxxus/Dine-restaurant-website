@@ -208,7 +208,7 @@ export default function FormRegister() {
 										maxWidth={"420px"}
 										name='avatar'
 										options={avatars}
-										type='string'
+										type='text'
 										variant='filled'
 										formatOptionLabel={(avatar: { pic: string }) => (
 											<Avatar src={avatar.pic} size={"xl"} />

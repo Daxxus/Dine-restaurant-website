@@ -8,6 +8,7 @@ import {
 	QueryCache,
 } from "@tanstack/react-query"
 import ProtectWrapper from "./Contexts/ProtectContext"
+import Headroom from "react-headroom"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 const Contact = lazy(() => import("./Components/Contact/Contact"))
 const AddOrder = lazy(() => import("./Components/Orders/AddOrder"))
@@ -44,7 +45,9 @@ function App() {
 				<ChakraProvider>
 					<BrowserRouter>
 						<Suspense fallback={<Vortex />}>
-							<Navig />
+							<Headroom>
+								<Navig />
+							</Headroom>
 							<Routes>
 								<Route element={<Home />} path='/' />
 								<Route element={<AboutUs />} path='/aboutus' />
@@ -52,14 +55,14 @@ function App() {
 								<Route path='buisness'>
 									{/* <Route index element={<Menu />} /> */}
 									<Route path='orders'>
-										<Route
+										{/* <Route
 											index
 											element={
 												<ProtectWrapper>
 													<Orders />
 												</ProtectWrapper>
 											}
-										/>
+										/> */}
 
 										<Route
 											element={
@@ -83,7 +86,14 @@ function App() {
 
 								<Route element={<Login />} path='/login' />
 								<Route element={<FormRegister />} path='/register' />
-								<Route element={<Basket />} path='/basket' />
+								<Route
+									element={
+										<ProtectWrapper>
+											<Basket />
+										</ProtectWrapper>
+									}
+									path='/basket'
+								/>
 								<Route element={<Error404 />} path='*' />
 							</Routes>
 						</Suspense>

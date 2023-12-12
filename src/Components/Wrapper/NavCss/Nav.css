@@ -7,8 +7,6 @@
 	font-style: italic;
 	border: none;
 	color: crimson;
-	
-	
 
 	/* color: red;
 	font-weight: bold;	
@@ -55,3 +53,6 @@
 	transform: rotate(-45deg);
 	background-color: transparent;
 } */
+.faIcon {
+	font-size: 35px;
+}

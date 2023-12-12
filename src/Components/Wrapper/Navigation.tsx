@@ -37,7 +37,7 @@ const links2 = [
 	{ label: "Home", to: "/" },
 	{ label: "About Us", to: "/aboutus" },
 	{ label: "Contact", to: "/contact" },
-	{ label: "Orders", to: "/buisness/orders" },
+	// { label: "Orders", to: "/buisness/orders" },
 	{ label: "Add order", to: "/buisness/orders/addOrder" },
 	{ label: "Login", to: "/login" },
 	{ label: "Register", to: "/register" },
@@ -47,9 +47,12 @@ const Nav = (props: Props) => {
 	const { children } = props
 	return (
 		<Box
+		
 			// as='a'
+			
 			px={2}
 			py={1}
+			
 			rounded={"md"}
 			_hover={{
 				textDecoration: "none",
@@ -77,8 +80,8 @@ export default function WithAction() {
 
 	return (
 		<>
-			<Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-				<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+			<Box bg={useColorModeValue("gray.100", "gray.900")} px={4}   >
+				<Flex h={16} alignItems={"center"} justifyContent={"space-between"} >
 					<IconButton
 						size={"md"}
 						icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -127,7 +130,7 @@ export default function WithAction() {
 								isPending ? "pending" : isActive ? "active" : ""
 							}>
 							<h1 className='faIcon'>
-								<FaShoppingCart />
+								<FaShoppingCart></FaShoppingCart>
 							</h1>
 						</NavLink>
 						<Button
