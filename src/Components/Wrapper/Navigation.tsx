@@ -27,7 +27,7 @@ import {
 } from "@chakra-ui/react"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
-
+import { useSelector } from "react-redux"
 interface Props {
 	children: React.ReactNode
 }
@@ -47,12 +47,10 @@ const Nav = (props: Props) => {
 	const { children } = props
 	return (
 		<Box
-		
 			// as='a'
-			
+
 			px={2}
 			py={1}
-			
 			rounded={"md"}
 			_hover={{
 				textDecoration: "none",
@@ -72,6 +70,7 @@ export default function WithAction() {
 	console.log("custom", secondsLeft)
 	// console.log(useAvatarContext())
 	// console.log(useCountdownContext())
+	const { value } = useSelector((state) => state.cart)
 
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -80,8 +79,8 @@ export default function WithAction() {
 
 	return (
 		<>
-			<Box bg={useColorModeValue("gray.100", "gray.900")} px={4}   >
-				<Flex h={16} alignItems={"center"} justifyContent={"space-between"} >
+			<Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+				<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
 					<IconButton
 						size={"md"}
 						icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -118,7 +117,10 @@ export default function WithAction() {
 
 						<Box mr={"100px"}>
 							{isAuth ? (
-								<p>Your visit is only a {secondsLeft} away</p>
+								<>
+									<p>Your visit is only a {secondsLeft} away</p>
+									<h3>Basket value  wewn koszyka?? : {value} </h3>
+								</>
 							) : (
 								<p> {!secondsLeft} </p>
 							)}
@@ -130,7 +132,7 @@ export default function WithAction() {
 								isPending ? "pending" : isActive ? "active" : ""
 							}>
 							<h1 className='faIcon'>
-								<FaShoppingCart></FaShoppingCart>
+								<FaShoppingCart />
 							</h1>
 						</NavLink>
 						<Button
@@ -165,7 +167,7 @@ export default function WithAction() {
 								)}
 							</MenuButton>
 							<MenuList>
-								<MenuItem>Link 1</MenuItem>
+								<MenuItem>Order: daj fote z zamówienia</MenuItem>
 								<MenuItem>Link 2</MenuItem>
 								<MenuDivider />
 								<MenuItem>Link 3</MenuItem>
@@ -199,7 +201,6 @@ export default function WithAction() {
 					</Box>
 				) : null}
 			</Box>
-			{/* <Box p={4}>Main Content Here from Navigation</Box> */}
 		</>
 	)
 }

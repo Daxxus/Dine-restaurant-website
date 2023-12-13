@@ -5,6 +5,7 @@ import {
 	RangeSliderThumb,
 } from "@chakra-ui/react"
 import { ChangeEventHandler } from "react"
+import { StyledLabel, StyledInputWrapper } from "./StyleWrapper"
 
 interface RangeProps {
 	select: React.ReactNode
@@ -15,20 +16,25 @@ interface RangeProps {
 const Range = ({ select, target }: RangeProps) => {
 	return (
 		<>
-			<RangeSlider
-				defaultValue={[120, 240]}
-				// min={min}
-				// max={max}
-				onChange={target}
-				maxW={400}
-				step={1}>
-				<RangeSliderTrack bg='red.100'>
-					<RangeSliderFilledTrack bg='crimson' />
-				</RangeSliderTrack>
-				<RangeSliderThumb boxSize={8} index={0}  />
-				<RangeSliderThumb boxSize={8} index={1} />
-				{select}
-			</RangeSlider>
+			{/* <StyledInputWrapper> */}
+				{/* <StyledLabel htmlFor='range'>
+					Price between: ${""} - ${""}
+				</StyledLabel> */}
+				<RangeSlider
+					// defaultValue={[120, 240]}
+					// min={min}
+					// max={max}
+					// onChange={target}
+					maxW={400}
+					step={1}>
+					<RangeSliderTrack bg='red.100'>
+						<RangeSliderFilledTrack bg='crimson' />
+					</RangeSliderTrack>
+					<RangeSliderThumb boxSize={8} index={0} />
+					<RangeSliderThumb boxSize={8} index={1} />
+					{select}
+				</RangeSlider>
+			{/* </StyledInputWrapper> */}
 		</>
 	)
 }

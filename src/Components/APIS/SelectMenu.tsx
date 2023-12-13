@@ -10,17 +10,20 @@ import { StyledWrapper } from "./StyleWrapper"
 import SelectTitle from "./SelectTitle"
 import style from "../Cards/Cards.module.css"
 import { useState } from "react"
+import { toCart } from "../../Redux/SumUp"
+import { useDispatch } from "react-redux"
 interface Order {
 	order: string
 }
 interface OrderDetails {
 	orderId: string
 	date: string
+	price: number
 }
 
 export default function SelectMenu() {
-	const maxus = 200
-	
+	const dispatch = useDispatch()
+
 	const {
 		data: menuItem,
 		isLoading,
@@ -42,6 +45,7 @@ export default function SelectMenu() {
 	}
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
+	const [mealPrice, setMealPrice] = useState(0)
 
 	const handleSearch = (e) => {
 		const findMeal = menuItem.filter((el: { name: string }) => {
@@ -53,6 +57,9 @@ export default function SelectMenu() {
 
 	const handleRange = () => {
 		console.log("das")
+	}
+	const handlePrice = () => {
+		return "$" + Math.trunc(Math.random() * 200)
 	}
 
 	const queryClient = useQueryClient()
@@ -110,7 +117,8 @@ export default function SelectMenu() {
 						))}
 					/>
 					<Range
-						target={handleRange} select={undefined}						
+						target={handleRange}
+						select={undefined}
 						// select={menuItem.map((el) => (
 						// 	<option key={el.id} value={el.name}>
 						// 		{el.name}
@@ -135,16 +143,20 @@ export default function SelectMenu() {
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
+												price: 22,
 											})
 										}}>
 										{({ handleSubmit }) => (
 											<ImageCards
 												onSubmit={handleSubmit}
 												image={el.image}
-												value={el.name}
+												value={setMealPrice(Math.trunc(Math.random() * 200))}
 												heading={el.name}
-												max={maxus}
-												add={handleSubmit}
+												price={Math.trunc(Math.random() * 200)}
+												add={() => {
+													handleSubmit()
+													dispatch(toCart(mealPrice))
+												}}
 											/>
 										)}
 									</Formik>
