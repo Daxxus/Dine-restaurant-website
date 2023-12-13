@@ -63,21 +63,29 @@
       "order": "Mini Chocolate Chip & Flax Banana Muffins",
       "orderId": 651942,
       "date": "13.12.2023",
+      "price": 140,
       "id": 4
     },
     {
-      "order": "Easter Sugar Cookie Bars",
-      "orderId": 1077393,
+      "order": "Shortbread Lemon Bars",
+      "orderId": 1005367,
       "date": "13.12.2023",
-      "price": 22,
+      "price": 192,
       "id": 5
     },
     {
-      "order": "Lemon Or Lime Glaze For Chicken, Fish, Or Vegetables",
-      "orderId": 649703,
+      "order": "Best Soft Ginger Cookies",
+      "orderId": 634931,
       "date": "13.12.2023",
-      "price": 22,
+      "price": 63,
       "id": 6
+    },
+    {
+      "order": "Pumpkin Calvados Cider Cocktail",
+      "orderId": 657262,
+      "date": "13.12.2023",
+      "price": 75,
+      "id": 7
     }
   ],
   "menuItems": [

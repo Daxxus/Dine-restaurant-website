@@ -7,6 +7,7 @@ import useAvatarContext from "../../Contexts/useAvatarContext"
 import useCountdownContext from "../../Contexts/useCountdownContext"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+
 import "./NavCss/Nav.css"
 import {
 	Box,
@@ -15,6 +16,7 @@ import {
 	HStack,
 	IconButton,
 	Button,
+	ButtonGroup,
 	Menu,
 	MenuButton,
 	MenuList,
@@ -119,7 +121,6 @@ export default function WithAction() {
 							{isAuth ? (
 								<>
 									<p>Your visit is only a {secondsLeft} away</p>
-									<h3>Basket value  wewn koszyka?? : {value} </h3>
 								</>
 							) : (
 								<p> {!secondsLeft} </p>
@@ -131,9 +132,17 @@ export default function WithAction() {
 							className={({ isActive, isPending }) =>
 								isPending ? "pending" : isActive ? "active" : ""
 							}>
-							<h1 className='faIcon'>
-								<FaShoppingCart />
-							</h1>
+							{isAuth ? (
+								<Stack direction='row' spacing={4}>
+									<Button
+										leftIcon={<FaShoppingCart />}
+										fontSize={25}
+										colorScheme='teal'
+										variant='outline'>
+										${value}
+									</Button>
+								</Stack>
+							) : null}
 						</NavLink>
 						<Button
 							variant={"solid"}
@@ -261,3 +270,16 @@ export default function WithAction() {
 // 		Register
 // 	</NavLink>,
 // ]
+
+{
+	/* <Stack direction='row' spacing={4}>								
+								<Button
+									leftIcon={<FaShoppingCart />}
+									// rightIcon={<ArrowForwardIcon />}
+									fontSize={25}
+									colorScheme='teal'
+									variant='outline'>
+									${value}
+								</Button>
+							</Stack> */
+}

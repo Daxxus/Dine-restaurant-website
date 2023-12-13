@@ -45,6 +45,7 @@ export default function SelectMenu() {
 	}
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
+	// co zrobić aby na start nie było 0
 	const [mealPrice, setMealPrice] = useState(0)
 
 	const handleSearch = (e) => {
@@ -59,7 +60,8 @@ export default function SelectMenu() {
 		console.log("das")
 	}
 	const handlePrice = () => {
-		return "$" + Math.trunc(Math.random() * 200)
+		setMealPrice(Math.trunc(Math.random() * 200))
+		// return "$" + Math.trunc(Math.random() * 200)
 	}
 
 	const queryClient = useQueryClient()
@@ -139,18 +141,19 @@ export default function SelectMenu() {
 											order: el.name,
 										}}
 										onSubmit={(values: Order) => {
+											handlePrice()
 											handleAdd({
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
-												price: 22,
+												// jak podpiąć price propsa??
+												price: mealPrice,
 											})
 										}}>
 										{({ handleSubmit }) => (
 											<ImageCards
 												onSubmit={handleSubmit}
 												image={el.image}
-												value={setMealPrice(Math.trunc(Math.random() * 200))}
 												heading={el.name}
 												price={Math.trunc(Math.random() * 200)}
 												add={() => {
