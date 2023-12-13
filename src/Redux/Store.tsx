@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { combineReducers } from "redux"
-import billValue from "./SumUp"
+import billReducer from "./SumUp"
 import orderReducer from "./Cart"
+import imageReducer from "./MealImage"
 
 const reducer = combineReducers({
-	cart: billValue,
+	cart: billReducer,
 	order: orderReducer,
+	image: imageReducer,
 })
 export const Store = configureStore({ reducer })
 export type RootState = ReturnType<typeof Store.getState>

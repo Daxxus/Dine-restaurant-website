@@ -44,48 +44,44 @@
     {
       "order": "Plantain Toffee Balls",
       "orderId": 716334,
-      "date": "11.12.2023",
+      "date": "13.12.2023",
+      "price": 0,
       "id": 1
     },
     {
-      "order": "Peanut Butter Button Cookies",
-      "orderId": 655249,
-      "date": "11.12.2023",
+      "order": "Anticuchos Of White Seabass With Aji Chile Honey Marinade & Semilla Salsa",
+      "orderId": 632426,
+      "date": "13.12.2023",
+      "price": 8,
       "id": 2
     },
     {
-      "order": "Croustillant",
-      "orderId": 9442066,
-      "date": "11.12.2023",
+      "order": "Whole Wheat Apple Orange Muffins",
+      "orderId": 665269,
+      "date": "13.12.2023",
+      "price": 0,
       "id": 3
     },
     {
-      "order": "Mini Chocolate Chip & Flax Banana Muffins",
-      "orderId": 651942,
+      "order": "Anticuchos Of White Seabass With Aji Chile Honey Marinade & Semilla Salsa",
+      "orderId": 632426,
       "date": "13.12.2023",
-      "price": 140,
+      "price": 51,
       "id": 4
     },
     {
-      "order": "Shortbread Lemon Bars",
-      "orderId": 1005367,
+      "order": "Plantain Toffee Balls",
+      "orderId": 716334,
       "date": "13.12.2023",
-      "price": 192,
+      "price": 0,
       "id": 5
     },
     {
-      "order": "Best Soft Ginger Cookies",
-      "orderId": 634931,
+      "order": "Chocolate Explosion Cookies",
+      "orderId": 639020,
       "date": "13.12.2023",
-      "price": 63,
+      "price": 29,
       "id": 6
-    },
-    {
-      "order": "Pumpkin Calvados Cider Cocktail",
-      "orderId": 657262,
-      "date": "13.12.2023",
-      "price": 75,
-      "id": 7
     }
   ],
   "menuItems": [

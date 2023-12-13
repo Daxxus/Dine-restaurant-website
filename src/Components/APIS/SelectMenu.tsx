@@ -10,7 +10,8 @@ import { StyledWrapper } from "./StyleWrapper"
 import SelectTitle from "./SelectTitle"
 import style from "../Cards/Cards.module.css"
 import { useState } from "react"
-import { toCart } from "../../Redux/SumUp"
+import { outOfCart, toCart } from "../../Redux/SumUp"
+import { addImage, removeImageById } from "../../Redux/MealImage"
 import { useDispatch } from "react-redux"
 interface Order {
 	order: string
@@ -79,7 +80,10 @@ export default function SelectMenu() {
 	const handleAdd = (newOrder: OrderDetails) => {
 		mutation.mutate(newOrder)
 	}
-
+	const handleRedux = (image: { id: string; image: string }) => {
+		dispatch(toCart(mealPrice))
+		dispatch(addImage(image))
+	}
 	// const clearInput = (e) => {
 	// 	if (!menuTitle) {
 	// 		e.target.value = ""
@@ -103,7 +107,7 @@ export default function SelectMenu() {
 	return (
 		// <>
 		<Flex>
-			<Box>
+			<Box width={"100%"}>
 				{/* <StyledWrapper> */}
 				<Box className={style.gridBox}>
 					<SearchTitle
@@ -158,7 +162,9 @@ export default function SelectMenu() {
 												price={Math.trunc(Math.random() * 200)}
 												add={() => {
 													handleSubmit()
-													dispatch(toCart(mealPrice))
+													handleRedux(el.image)
+													// dispatch(toCart(mealPrice))
+													// dispatch(addImage(el.image))
 												}}
 											/>
 										)}

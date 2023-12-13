@@ -7,7 +7,6 @@ import useAvatarContext from "../../Contexts/useAvatarContext"
 import useCountdownContext from "../../Contexts/useCountdownContext"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-
 import "./NavCss/Nav.css"
 import {
 	Box,
@@ -16,7 +15,6 @@ import {
 	HStack,
 	IconButton,
 	Button,
-	ButtonGroup,
 	Menu,
 	MenuButton,
 	MenuList,
@@ -50,7 +48,6 @@ const Nav = (props: Props) => {
 	return (
 		<Box
 			// as='a'
-
 			px={2}
 			py={1}
 			rounded={"md"}
@@ -73,7 +70,8 @@ export default function WithAction() {
 	// console.log(useAvatarContext())
 	// console.log(useCountdownContext())
 	const { value } = useSelector((state) => state.cart)
-
+	const { orderMealImage } = useSelector((state) => state.image)
+	console.log(orderMealImage)
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
@@ -156,15 +154,14 @@ export default function WithAction() {
 									notify()
 									navigation("/login")
 								}
-							}}
-							// leftIcon={<AddIcon />}
-						>
+							}}>
 							LOGOUT
 							{/* {secondsLeft > 0 && `(${secondsLeft})`} */}
 						</Button>
 						<Menu>
 							<MenuButton
 								as={Button}
+								mr={3}
 								rounded={"full"}
 								variant={"link"}
 								cursor={"pointer"}
@@ -176,7 +173,7 @@ export default function WithAction() {
 								)}
 							</MenuButton>
 							<MenuList>
-								<MenuItem>Order: daj fote z zamówienia</MenuItem>
+								<MenuItem>Order:{orderMealImage} </MenuItem>
 								<MenuItem>Link 2</MenuItem>
 								<MenuDivider />
 								<MenuItem>Link 3</MenuItem>
