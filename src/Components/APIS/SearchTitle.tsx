@@ -16,7 +16,7 @@ const SearchTitle = ({ search }: SearchProps) => {
 				border={"1px"}
 				maxW={400}
 				borderRadius={50}
-				placeholder='Search by letters'
+				placeholder='Search by name'
 				required>
 				{/* <Search2Icon/> */}
 			</Input>

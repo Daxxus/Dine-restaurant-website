@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa"
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
-import useCountdownContext from "../../Contexts/useCountdownContext"
+import Counting from "../Counting/Counting"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import "./NavCss/Nav.css"
@@ -23,7 +23,7 @@ import {
 	useDisclosure,
 	useColorModeValue,
 	Stack,
-	useColorMode,
+	useColorMode,	
 } from "@chakra-ui/react"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
@@ -65,10 +65,6 @@ const Nav = (props: Props) => {
 export default function WithAction() {
 	const { isAuth, setIsAuth } = useAuthContext()
 	const { avatar } = useAvatarContext()
-	const { secondsLeft } = useCountdownContext()
-	console.log("custom", secondsLeft)
-	// console.log(useAvatarContext())
-	// console.log(useCountdownContext())
 	const { value } = useSelector((state) => state.cart)
 	const { orderMealImage } = useSelector((state) => state.image)
 	console.log(orderMealImage)
@@ -115,15 +111,7 @@ export default function WithAction() {
 					<Flex alignItems={"center"} id='sidebar'>
 						{/* <ThemeMode /> */}
 
-						<Box mr={"100px"}>
-							{isAuth ? (
-								<>
-									<p>Your visit is only a {secondsLeft} away</p>
-								</>
-							) : (
-								<p> {!secondsLeft} </p>
-							)}
-						</Box>
+						<Box mr={"100px"}>{isAuth ? <Counting /> : null}</Box>
 						<NavLink
 							to='/basket'
 							end
@@ -156,7 +144,7 @@ export default function WithAction() {
 								}
 							}}>
 							LOGOUT
-							{/* {secondsLeft > 0 && `(${secondsLeft})`} */}
+							
 						</Button>
 						<Menu>
 							<MenuButton

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import useCountdown from "./Countdown"
+// import useCountdown from "./Countdown"
 import useCountdownContext from "../../Contexts/useCountdownContext"
 import { Formik, Field } from "formik"
 import {
@@ -26,7 +26,7 @@ import * as yup from "yup"
 import { object } from "yup"
 interface Reservation {
 	date: Date | undefined
-	people: string
+	people: string | number
 }
 const yupSchema = object({
 	date: yup.date().required("hmmmmmm!!!!!"),
@@ -39,16 +39,15 @@ const Reservation = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const firstField = React.useRef()
 
-	const { setSecondsLeft } = useCountdownContext()
-	const { secondsLeft, start } = useCountdown()
-	console.log("secondsLeft", secondsLeft)
-
+	const { secondsLeft, setSecondsLeft } = useCountdownContext()
+	// const { secondsLeft, start } = useCountdown()
+	
 	const countdown = () => {
 		const currentTime = new Date().getTime()
 		const finalTime = new Date(datetime)
 		let timeDiffrence = (finalTime - currentTime) / 1000
 		timeDiffrence = parseInt(timeDiffrence)
-		start(timeDiffrence)
+		// start(timeDiffrence)
 		setSecondsLeft(timeDiffrence)
 
 		// ilość osób do rezerwacji do koszyka przekazać
@@ -78,7 +77,12 @@ const Reservation = () => {
 
 	return (
 		<>
-			<Button colorScheme='teal' onClick={onOpen}m={15} display={ 'flex' } minW={150 }>
+			<Button
+				colorScheme='teal'
+				onClick={onOpen}
+				m={15}
+				display={"flex"}
+				minW={150}>
 				Make the reservation
 			</Button>
 			<Drawer
@@ -169,7 +173,6 @@ const Reservation = () => {
 							</Button>
 							<Button colorScheme='blue' onClick={() => countdown()} w={100}>
 								Confirm
-								{secondsLeft > 0 && `(${secondsLeft})`}
 							</Button>
 						</DrawerFooter>
 					</DrawerBody>

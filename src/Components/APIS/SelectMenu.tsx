@@ -9,6 +9,7 @@ import Range from "./RangePrice"
 import { StyledWrapper } from "./StyleWrapper"
 import SelectTitle from "./SelectTitle"
 import style from "../Cards/Cards.module.css"
+import useClients from "../Clients/Clients"
 import { useState } from "react"
 import { outOfCart, toCart } from "../../Redux/SumUp"
 import { addImage, removeImageById } from "../../Redux/MealImage"
@@ -20,11 +21,13 @@ interface OrderDetails {
 	orderId: string
 	date: string
 	price: number
+	clientId: string | number
 }
 
 export default function SelectMenu() {
 	const dispatch = useDispatch()
-
+	const clientId = useClients()
+	console.log(clientId)
 	const {
 		data: menuItem,
 		isLoading,
@@ -145,6 +148,8 @@ export default function SelectMenu() {
 											order: el.name,
 										}}
 										onSubmit={(values: Order) => {
+											console.log(values.order)
+
 											handlePrice()
 											handleAdd({
 												...values,
@@ -152,6 +157,10 @@ export default function SelectMenu() {
 												date: new Date().toLocaleDateString(),
 												// jak podpiąć price propsa??
 												price: mealPrice,
+												clientId:
+													clientId.find(
+														(elem: { id: string }) => elem.id === values.order
+													)?.id || "",
 											})
 										}}>
 										{({ handleSubmit }) => (

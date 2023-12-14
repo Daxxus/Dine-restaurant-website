@@ -18,9 +18,7 @@ import {
 	Input,
 	VStack,
 	useColorMode,
-	// Select,
 } from "@chakra-ui/react"
-
 import { Select } from "chakra-react-select"
 
 import "react-toastify/dist/ReactToastify.css"
@@ -144,7 +142,7 @@ export default function FormRegister() {
 							resetForm()
 						}
 					}}>
-					{({ handleSubmit, errors, touched, handleChange }) => (
+					{({ handleSubmit, errors, touched, setFieldValue }) => (
 						<form onSubmit={handleSubmit}>
 							<VStack spacing={4} align='flex-start'>
 								<FormControl isInvalid={!!errors.email && touched.email}>
@@ -187,48 +185,23 @@ export default function FormRegister() {
 									/>
 									<FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
 								</FormControl>
-
-								{/* <Select
-									id='avatar'
-									name='avatar'
-									variant='filled'
-									placeholder='-Select Your Avatar-'
-									options={avatars}
-									formatOptionLabel={(avatar: { pic: string }) => (
-										<Avatar src={avatar.pic} size={"xl"} />
-									)}
-									value={""}
-									onChange={handleChange}
-								/> */}
 								<FormControl isInvalid={!!errors.avatar && touched.avatar}>
 									<FormLabel htmlFor='avatar'></FormLabel>
-									<Field
-										as={Select}
+									<Select
 										id='avatar'
-										maxWidth={"420px"}
 										name='avatar'
-										options={avatars}
-										type='text'
 										variant='filled'
+										placeholder='-Select Your Avatar-'
+										options={avatars}
 										formatOptionLabel={(avatar: { pic: string }) => (
 											<Avatar src={avatar.pic} size={"xl"} />
 										)}
-										// onClick={(avatar: { pic: string }) =>
-										// 	formik.setFieldValue("avatar", avatar.pic)
-										// }
-										onClick={(avatar: { pic: string }) => (
-											<Avatar src={avatar.pic} size={"xl"} />
-											// <Avatar key={avatar.pic}>{avatar.pic}</Avatar>
-										)}
-										// onClick={<Avatar key={avatar.id}>{avatar.pic}</Avatar>}
-										// onChange={handleChange}
-										placeholder='-Select Your Avatar-'>
-										{/* {avatars.map((avatar) => (
-											<Avatar key={avatar.id}>{avatar.pic}</Avatar>
-										))} */}
-									</Field>
+										onChange={(e) => {
+											setFieldValue("avatar", e.pic)
+										}}
+									/>
 									<FormErrorMessage>{errors.avatar}</FormErrorMessage>
-								</FormControl>								
+								</FormControl>
 
 								<Field
 									as={Checkbox}

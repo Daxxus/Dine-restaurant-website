@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+// ta opcja z customowym hookiem tylko do konkretnego komponentu nie Contextu globalnego
 const useCountdown = () => {
 	const [secondsLeft, setSecondsLeft] = useState(0)
 
@@ -10,14 +10,7 @@ const useCountdown = () => {
 		}, 1000)
 
 		return () => clearTimeout(timeout)
-	}, [secondsLeft])
-
-	// }
-	// const secs = 1000
-	// const mins = secs * 60
-	// const hour = mins * 60
-	// const day = hour * 24
-	// }
+	}, [secondsLeft])	
 
 	const start = (seconds: number) => {
 		setSecondsLeft(seconds)

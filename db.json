@@ -23,6 +23,14 @@
       "avatar": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
       "rememberMe": true,
       "id": 3
+    },
+    {
+      "email": "ada@wp.pl",
+      "password": "Qazxsw",
+      "confirmPassword": "Qazxsw",
+      "avatar": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
+      "rememberMe": true,
+      "id": 4
     }
   ],
   "avatars": [
@@ -42,46 +50,42 @@
   "reservations": [],
   "orders": [
     {
-      "order": "Plantain Toffee Balls",
-      "orderId": 716334,
-      "date": "13.12.2023",
-      "price": 0,
+      "order": "Shortbread Lemon Bars",
+      "orderId": 1005367,
+      "date": "14.12.2023",
+      "clientId": "",
       "id": 1
     },
     {
-      "order": "Anticuchos Of White Seabass With Aji Chile Honey Marinade & Semilla Salsa",
-      "orderId": 632426,
-      "date": "13.12.2023",
-      "price": 8,
+      "order": "Fettuccine Alla Carbonara, With No Cream Necessary",
+      "orderId": 642712,
+      "date": "14.12.2023",
+      "price": 82,
+      "clientId": "",
       "id": 2
     },
     {
-      "order": "Whole Wheat Apple Orange Muffins",
-      "orderId": 665269,
-      "date": "13.12.2023",
-      "price": 0,
+      "order": "Mini Chocolate Chip & Flax Banana Muffins",
+      "orderId": 651942,
+      "date": "14.12.2023",
+      "clientId": "",
       "id": 3
     },
     {
-      "order": "Anticuchos Of White Seabass With Aji Chile Honey Marinade & Semilla Salsa",
-      "orderId": 632426,
-      "date": "13.12.2023",
-      "price": 51,
+      "order": "Ginger Cookies- gluten free, soy free, vegan",
+      "orderId": 644570,
+      "date": "14.12.2023",
+      "price": 0,
+      "clientId": "",
       "id": 4
     },
     {
-      "order": "Plantain Toffee Balls",
-      "orderId": 716334,
-      "date": "13.12.2023",
-      "price": 0,
+      "order": "Best Soft Ginger Cookies",
+      "orderId": 634931,
+      "date": "14.12.2023",
+      "price": 75,
+      "clientId": "",
       "id": 5
-    },
-    {
-      "order": "Chocolate Explosion Cookies",
-      "orderId": 639020,
-      "date": "13.12.2023",
-      "price": 29,
-      "id": 6
     }
   ],
   "menuItems": [
