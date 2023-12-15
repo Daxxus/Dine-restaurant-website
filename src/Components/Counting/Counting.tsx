@@ -25,7 +25,7 @@ const Counting = () => {
 					</Text>
 				</Flex>
 			) : (
-				<Text as='b' fontSize={"2xl"} color={"lime"}>
+				<Text as='b' fontSize={"xl"} color={"teal"}>
 					Time's up to Your visit!
 				</Text>
 			)}

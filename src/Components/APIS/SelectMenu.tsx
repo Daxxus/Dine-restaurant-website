@@ -27,7 +27,7 @@ interface OrderDetails {
 export default function SelectMenu() {
 	const dispatch = useDispatch()
 	const clientId = useClients()
-	console.log(clientId)
+	
 	const {
 		data: menuItem,
 		isLoading,
@@ -50,7 +50,7 @@ export default function SelectMenu() {
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
 	// co zrobić aby na start nie było 0
-	const [mealPrice, setMealPrice] = useState(0)
+	// const [mealPrice, setMealPrice] = useState(0)
 
 	const handleSearch = (e) => {
 		const findMeal = menuItem.filter((el: { name: string }) => {
@@ -63,10 +63,10 @@ export default function SelectMenu() {
 	const handleRange = () => {
 		console.log("das")
 	}
-	const handlePrice = () => {
-		setMealPrice(Math.trunc(Math.random() * 200))
-		// return "$" + Math.trunc(Math.random() * 200)
-	}
+	// const handlePrice = () => {
+	// 	setMealPrice(Math.trunc(Math.random() * 200))
+	// 	// return "$" + Math.trunc(Math.random() * 200)
+	// }
 
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
@@ -77,13 +77,13 @@ export default function SelectMenu() {
 			queryClient.invalidateQueries()
 		},
 		onError: () => {
-			console.log("Lipa!!!!!")
+			console.log("Error !!!!!")
 		},
 	})
 	const handleAdd = (newOrder: OrderDetails) => {
 		mutation.mutate(newOrder)
 	}
-	const handleRedux = (image: { id: string; image: string }) => {
+	const handleRedux = (image:string,mealPrice:number) => {
 		dispatch(toCart(mealPrice))
 		dispatch(addImage(image))
 	}
@@ -146,32 +146,35 @@ export default function SelectMenu() {
 										// children={[]}
 										initialValues={{
 											order: el.name,
+											mealPrice: 0,
 										}}
 										onSubmit={(values: Order) => {
-											console.log(values.order)
+											console.log("values", values)
 
-											handlePrice()
+											//handlePrice()
 											handleAdd({
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
 												// jak podpiąć price propsa??
-												price: mealPrice,
+												price: values.mealPrice,
 												clientId:
 													clientId.find(
 														(elem: { id: string }) => elem.id === values.order
 													)?.id || "",
 											})
 										}}>
-										{({ handleSubmit }) => (
+										{({ handleSubmit,setFieldValue }) => (
 											<ImageCards
 												onSubmit={handleSubmit}
 												image={el.image}
 												heading={el.name}
 												price={Math.trunc(Math.random() * 200)}
-												add={() => {
+												add={(mealPrice:number) => {
+													console.log("el.image", el.image)
+													setFieldValue("mealPrice",mealPrice)
 													handleSubmit()
-													handleRedux(el.image)
+													handleRedux(el.image,mealPrice)
 													// dispatch(toCart(mealPrice))
 													// dispatch(addImage(el.image))
 												}}

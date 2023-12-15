@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react"
-import Map from "./Map"
+import Maps from "./Map"
 
 const Home = () => {
 	return (
@@ -8,7 +8,7 @@ const Home = () => {
 				<h1>Home Component</h1>
 				<div >
 					<p>Lorem ipsum dolor sit amet consectetur adipisdfdsfsdfsdfdsdsffdfsfdsfsddfsdsicing elit. Dol.</p>
-					<Map />
+					<Maps />
 				</div>
 			</main>
 		</Box>

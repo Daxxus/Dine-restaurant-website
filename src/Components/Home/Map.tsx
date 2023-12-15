@@ -1,13 +1,25 @@
-import { AspectRatio } from "@chakra-ui/react"
-import style from "./Style/Map.module.css"
-const Map = () => {
+import { useState } from "react"
+import { Map, Marker } from "pigeon-maps"
+
+export default function Maps() {
+	const [hue, setHue] = useState(0)
+	const color = `hsl(${hue % 360}deg 39% 70%)`
+
 	return (
-		<AspectRatio ratio={16 / 9} className={style.frame}>
-			<iframe src='https://www.google.com/maps/embed?' title='adress' />
-		</AspectRatio>
+		<Map height={400} defaultCenter={[51.0361, 16.9677]} defaultZoom={16}>
+			<Marker
+				width={50}
+				anchor={[51.0361, 16.9677]}
+				color={color}
+				onClick={() => setHue(hue + 20)}
+			/>
+			<Marker
+				width={50}
+				anchor={[51.0361, 16.9677]}
+				color={color}
+				onClick={() => setHue(hue + 20)}>
+				{/* <CustomIcon /> */}
+			</Marker>
+		</Map>
 	)
 }
-
-export default Map
-
-// https://www.google.pl/maps/@53.4525348,14.5467741,15z?hl=pl&entry=ttu

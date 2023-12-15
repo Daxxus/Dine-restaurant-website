@@ -24,13 +24,21 @@ import {
 import styles from "./styles/Reservation.module.css"
 import * as yup from "yup"
 import { object } from "yup"
+// import axios from "axios"
 interface Reservation {
 	date: Date | undefined
-	people: string | number
+	people: number
+}
+interface ReservationDetails {
+	orderDate: string
+	clientId: string | number
 }
 const yupSchema = object({
-	date: yup.date().required("hmmmmmm!!!!!"),
-	people: yup.string(),
+	date: yup
+		.date()
+		.default(() => new Date())
+		.required("Booking date is required!!!"),
+	people: yup.number().required(),
 })
 
 const Reservation = () => {
@@ -39,9 +47,9 @@ const Reservation = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const firstField = React.useRef()
 
-	const { secondsLeft, setSecondsLeft } = useCountdownContext()
+	const { setSecondsLeft } = useCountdownContext()
 	// const { secondsLeft, start } = useCountdown()
-	
+
 	const countdown = () => {
 		const currentTime = new Date().getTime()
 		const finalTime = new Date(datetime)
@@ -57,8 +65,17 @@ const Reservation = () => {
 	const pickerTime = (val: React.SetStateAction<string>) => {
 		setDatetime(val)
 	}
+	// const addReservation = (newReservation: Reservation) => {
+	// 	console.log(newReservation)
+	// 	axios
+	// 		.post(` http://localhost:3000/reservations`, newReservation)
+	// 		.then((resp) => {
+	// 			const { data: reservation } = resp
+	// 			return reservation
+	// 		})
+	// }
 
-	const addReservation = async (newReservation: Reservation) => {
+	const addReservation = async (newReservation: ReservationDetails) => {
 		console.log(newReservation)
 		const Url = "http://localhost:3000/reservations"
 		const resp = await fetch(Url, {
@@ -71,7 +88,6 @@ const Reservation = () => {
 			return {}
 		}
 		const data = await resp.json()
-		console.log(data)
 		return data
 	}
 
@@ -103,11 +119,15 @@ const Reservation = () => {
 							<Formik
 								initialValues={{
 									date: undefined,
-									people: "",
+									people: 0,
 								}}
 								validationSchema={yupSchema}
-								onSubmit={async (values) => {
-									addReservation(values)
+								onSubmit={(values) => {
+									addReservation({
+										...values,
+										orderDate: new Date().toLocaleDateString(),
+										clientId: 5,
+									})
 								}}>
 								{({ handleSubmit, errors, values }) => (
 									<form onSubmit={handleSubmit}>
@@ -140,17 +160,20 @@ const Reservation = () => {
 										</Box>
 										<Box borderBottomWidth={"1px"} p={"20px 0"}>
 											<FormLabel htmlFor='date' className={styles.label}>
-												Select the number of people
+												{/* Select the number of people */}
 											</FormLabel>
 											<FormControl isInvalid={!!errors.people}>
 												<FormLabel htmlFor='people'></FormLabel>
 												<Field
 													as={Select}
 													id='people'
-													type='text'
+													// type='number'
 													variant='filled'
 													value={values.people}
 													bg={colorMode === "light" ? "gray.400" : "gray.800"}>
+													<option value='0'>
+														-Select the number of people-
+													</option>
 													<option value='1'>1</option>
 													<option value='2'>2</option>
 													<option value='3'>3</option>
@@ -160,21 +183,30 @@ const Reservation = () => {
 												<FormErrorMessage>{errors.people}</FormErrorMessage>
 											</FormControl>
 										</Box>
+
+										<DrawerFooter
+											p={"20px 0"}
+											justifyContent={"space-between"}
+											borderBottomWidth={"1px"}>
+											<Button
+												variant='outline'
+												mr={3}
+												onClick={onClose}
+												w={100}>
+												Cancel
+											</Button>
+											<Button
+												colorScheme='blue'
+												onClick={() => countdown()}
+												w={100}
+												type='submit'>
+												Confirm
+											</Button>
+										</DrawerFooter>
 									</form>
 								)}
 							</Formik>
 						</Stack>
-						<DrawerFooter
-							p={"20px 0"}
-							justifyContent={"space-between"}
-							borderBottomWidth={"1px"}>
-							<Button variant='outline' mr={3} onClick={onClose} w={100}>
-								Cancel
-							</Button>
-							<Button colorScheme='blue' onClick={() => countdown()} w={100}>
-								Confirm
-							</Button>
-						</DrawerFooter>
 					</DrawerBody>
 				</DrawerContent>
 			</Drawer>

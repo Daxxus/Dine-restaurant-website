@@ -43,7 +43,7 @@ const ImageCards = ({ image, heading, add, price }: Props) => {
 					variant='ghost'
 					colorScheme='blue'
 					width={"full"}
-					onClick={add}
+					onClick={()=>add(price)}
 					type='submit'>
 					Add to cart
 				</Button>

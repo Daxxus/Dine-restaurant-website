@@ -7,7 +7,8 @@ interface SumUp {
 const initialState: SumUp = {
 	value: 0,
 }
-
+// [{ orderMealText: "", id: 1, price: "", image: "" }]
+// -> suma
 export const sumUp = createSlice({
 	name: "cart",
 	initialState,

@@ -1,6 +1,6 @@
-import { Formik, Field, useFormik } from "formik"
+import { Formik, Field } from "formik"
 import { ToastContainer, toast } from "react-toastify"
-import { InferType, object } from "yup"
+import {  object } from "yup"
 import * as yup from "yup"
 import { useNavigate } from "react-router-dom"
 import { useAvatar } from "../SelectAvatar/Avatar"
@@ -56,23 +56,8 @@ const yupSchema = object({
 const notify = () => toast("Great job, You've just beeing signed up")
 const notify2 = () => toast("The email address provided already exists")
 
-export default function FormRegister() {
-	// const formik = useFormik<FormValues>({
-	// 	initialValues: {
-	// 		email: "",
-	// 		password: "",
-	// 		confirmPassword: "",
-	// 		avatar: "",
-	// 		// createdOn:yup.DateSchema<Date | undefined, yup.AnyObject, Date, "d">
-	// 	},
-	// 	validationSchema: yupSchema, //wpięcie schematu walidacji
-	// 	onSubmit: (values: FormValues) => {
-	// 		console.log(values)
-	// 		alert(JSON.stringify(values, null, 2))
-	// 	},
-	// })
+export default function FormRegister() {	
 	const { colorMode } = useColorMode()
-
 	const { verifyMailAvilable } = useEmailDataCheck() //array
 	const [isError, setIsError] = useState(false)
 
@@ -142,7 +127,7 @@ export default function FormRegister() {
 							resetForm()
 						}
 					}}>
-					{({ handleSubmit, errors, touched, setFieldValue }) => (
+					{({ handleSubmit, errors, touched, values, setFieldValue }) => (
 						<form onSubmit={handleSubmit}>
 							<VStack spacing={4} align='flex-start'>
 								<FormControl isInvalid={!!errors.email && touched.email}>
@@ -186,12 +171,13 @@ export default function FormRegister() {
 									<FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
 								</FormControl>
 								<FormControl isInvalid={!!errors.avatar && touched.avatar}>
-									<FormLabel htmlFor='avatar'></FormLabel>
+									<FormLabel htmlFor='avatar' pl={5}>Select Your Avatar</FormLabel>
 									<Select
 										id='avatar'
 										name='avatar'
 										variant='filled'
-										placeholder='-Select Your Avatar-'
+										// placeholder='-Select Your Avatar-'
+										value={{ pic: values.avatar }}
 										options={avatars}
 										formatOptionLabel={(avatar: { pic: string }) => (
 											<Avatar src={avatar.pic} size={"xl"} />
