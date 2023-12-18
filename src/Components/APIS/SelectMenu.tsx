@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { Box, Flex } from "@chakra-ui/react"
 import axios from "axios"
 import { Formik } from "formik"
@@ -5,29 +6,29 @@ import { Hourglass } from "react-loader-spinner"
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query"
 import ImageCards from "../Cards/ImageCards"
 import SearchTitle from "./SearchTitle"
-import Range from "./RangePrice"
-import { StyledWrapper } from "./StyleWrapper"
+import Ranges from "./RangePrice"
 import SelectTitle from "./SelectTitle"
 import style from "../Cards/Cards.module.css"
 import useClients from "../Clients/Clients"
 import { useState } from "react"
-import { outOfCart, toCart } from "../../Redux/SumUp"
-import { addImage, removeImageById } from "../../Redux/MealImage"
+import { toCart } from "../../Redux/SumUp"
+import { addImage } from "../../Redux/MealImage"
 import { useDispatch } from "react-redux"
 interface Order {
+	mealPrice: number
 	order: string
 }
 interface OrderDetails {
 	orderId: string
 	date: string
-	price: number
+	// price: number
 	clientId: string | number
 }
 
 export default function SelectMenu() {
 	const dispatch = useDispatch()
 	const clientId = useClients()
-	
+
 	const {
 		data: menuItem,
 		isLoading,
@@ -49,7 +50,8 @@ export default function SelectMenu() {
 	}
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
-	// co zrobić aby na start nie było 0
+	const [sliderValue, setSliderValue] = useState(200)
+	// zamiastszego daj setFieldValue w propsach
 	// const [mealPrice, setMealPrice] = useState(0)
 
 	const handleSearch = (e) => {
@@ -59,14 +61,6 @@ export default function SelectMenu() {
 		setMenuTitle(e.target.value)
 		setMenu(findMeal)
 	}
-
-	const handleRange = () => {
-		console.log("das")
-	}
-	// const handlePrice = () => {
-	// 	setMealPrice(Math.trunc(Math.random() * 200))
-	// 	// return "$" + Math.trunc(Math.random() * 200)
-	// }
 
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
@@ -83,15 +77,25 @@ export default function SelectMenu() {
 	const handleAdd = (newOrder: OrderDetails) => {
 		mutation.mutate(newOrder)
 	}
-	const handleRedux = (image:string,mealPrice:number) => {
+	const handleRedux = (image: string, mealPrice: number) => {
 		dispatch(toCart(mealPrice))
 		dispatch(addImage(image))
 	}
-	// const clearInput = (e) => {
-	// 	if (!menuTitle) {
-	// 		e.target.value = ""
+	// const clearInput = () => {
+	// 	if (menuTitle) {
+	// 		console.log(menuTitle)
+	// 		setMenuTitle("d")
 	// 	}
 	// }
+
+	const handleRange = (e) => {
+		setSliderValue(e.target.value)
+		const findMeal = menuItem.filter((el) => {
+			return el.price <= e.target.value
+		})
+		setMenuTitle(e.target.value)
+		setMenu(findMeal)
+	}
 
 	if (error) {
 		return <p>Can not get orders</p>
@@ -106,17 +110,12 @@ export default function SelectMenu() {
 	if (!menuItem) {
 		return <p>No data...</p>
 	}
-
 	return (
-		// <>
 		<Flex>
 			<Box width={"100%"}>
-				{/* <StyledWrapper> */}
-				<Box className={style.gridBox}>
-					<SearchTitle
-						search={handleSearch}
-						// value={clearInput}
-					/>
+				<Box className={style.gridBox} alignItems={"center"}>
+					<SearchTitle search={handleSearch} />
+					<Ranges target={handleRange} value={sliderValue} />
 					<SelectTitle
 						target={handleSearch}
 						select={menuItem.map((el) => (
@@ -125,17 +124,7 @@ export default function SelectMenu() {
 							</option>
 						))}
 					/>
-					<Range
-						target={handleRange}
-						select={undefined}
-						// select={menuItem.map((el) => (
-						// 	<option key={el.id} value={el.name}>
-						// 		{el.name}
-						// 	</option>
-						// ))}
-					/>
 				</Box>
-				{/* </StyledWrapper> */}
 
 				<Box py={{ base: 20, md: 20 }} className={style.grid}>
 					{menuTitle
@@ -149,58 +138,79 @@ export default function SelectMenu() {
 											mealPrice: 0,
 										}}
 										onSubmit={(values: Order) => {
-											console.log("values", values)
-
-											//handlePrice()
+											// console.log(values.mealPrice)
 											handleAdd({
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
-												// jak podpiąć price propsa??
-												price: values.mealPrice,
+
+												// price: values.mealPrice,
 												clientId:
 													clientId.find(
 														(elem: { id: string }) => elem.id === values.order
 													)?.id || "",
 											})
 										}}>
-										{({ handleSubmit,setFieldValue }) => (
+										{({ handleSubmit, setFieldValue }) => (
 											<ImageCards
 												onSubmit={handleSubmit}
 												image={el.image}
 												heading={el.name}
-												price={Math.trunc(Math.random() * 200)}
-												add={(mealPrice:number) => {
+												price={el.price}
+												// mealePrice to param price z Image cart
+												add={(mealPrice: number) => {
 													console.log("el.image", el.image)
-													setFieldValue("mealPrice",mealPrice)
+													setFieldValue("mealPrice", mealPrice) //do orders
+													// clearInput()
 													handleSubmit()
-													handleRedux(el.image,mealPrice)
-													// dispatch(toCart(mealPrice))
-													// dispatch(addImage(el.image))
+													handleRedux(el.image, mealPrice) // do global
 												}}
 											/>
 										)}
 									</Formik>
 								)
+								// eslint-disable-next-line no-mixed-spaces-and-tabs
 						  })
-						: null}
+						: menuItem.map((el) => {
+								return (
+									<Formik
+										key={el.id}
+										initialValues={{
+											order: el.name,
+											mealPrice: 0,
+										}}
+										onSubmit={(values: Order) => {
+											handleAdd({
+												...values,
+												orderId: el.id,
+												date: new Date().toLocaleDateString(),
+												clientId:
+													clientId.find(
+														(elem: { id: string }) => elem.id === values.order
+													)?.id || "",
+											})
+										}}>
+										{({ handleSubmit, setFieldValue }) => (
+											<ImageCards
+												onSubmit={handleSubmit}
+												image={el.image}
+												heading={el.name}
+												price={el.price}
+												// mealePrice to param price z Image cart
+												add={(mealPrice: number) => {
+													console.log("el.image", el.image)
+													setFieldValue("mealPrice", mealPrice) //do orders
+													// clearInput()
+													handleSubmit()
+													handleRedux(el.image, mealPrice) // do global
+												}}
+											/>
+										)}
+									</Formik>
+								)
+						  })}
 				</Box>
 			</Box>
 		</Flex>
 	)
-}
-
-{
-	/* <Flex py={{ base: 20, md: 15 }} className={style.grid}>
-	{menuItem.map((el) => {
-		return (
-			<ImageCards
-				key={el.id}
-				image={el.image}
-				heading={el.name}
-				add={handleSubmit}
-			/>
-		)
-	})}
-</Flex> */
 }

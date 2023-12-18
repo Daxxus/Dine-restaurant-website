@@ -7,7 +7,7 @@ import SelectMenu from "../APIS/SelectMenu"
 export default function AddOrder() {
 	return (
 		<Flex
-			backgroundImage={BgImg}
+			bgImg={BgImg}
 			bgPos={"bottom"}
 			height={"container.lg"}
 			bgSize={"cover"}

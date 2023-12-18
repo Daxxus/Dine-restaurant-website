@@ -1,89 +1,25 @@
-import {
-	RangeSlider,
-	RangeSliderTrack,
-	RangeSliderFilledTrack,
-	RangeSliderThumb,
-} from "@chakra-ui/react"
-import { ChangeEventHandler } from "react"
-import { StyledLabel, StyledInputWrapper } from "./StyleWrapper"
-
+import styles from "./Styles/RangeStyle.module.css"
+import { Input, Box } from "@chakra-ui/react"
 interface RangeProps {
-	select: React.ReactNode
-	target: ChangeEventHandler<HTMLSelectElement> | undefined
-	// min: number
-	// max: number
+	target: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	value: number
 }
-const Range = ({ select, target }: RangeProps) => {
+const Ranges = ({ target, value }: RangeProps) => {
 	return (
-		<>
-			{/* <StyledInputWrapper> */}
-				{/* <StyledLabel htmlFor='range'>
-					Price between: ${""} - ${""}
-				</StyledLabel> */}
-				<RangeSlider
-					// defaultValue={[120, 240]}
-					// min={min}
-					// max={max}
-					// onChange={target}
-					maxW={400}
-					step={1}>
-					<RangeSliderTrack bg='red.100'>
-						<RangeSliderFilledTrack bg='crimson' />
-					</RangeSliderTrack>
-					<RangeSliderThumb boxSize={8} index={0} />
-					<RangeSliderThumb boxSize={8} index={1} />
-					{select}
-				</RangeSlider>
-			{/* </StyledInputWrapper> */}
-		</>
+		<Box fontSize={22} color={"white"}>
+			Price between: $2 - ${value}
+			<Input
+				className={styles.input}
+				maxW={400}
+				value={value}
+				type='range'
+				min={0}
+				max={200}
+				step={1}
+				onChange={target}
+			/>
+		</Box>
 	)
 }
 
-export default Range
-
-// import { memo } from "react"
-// import {
-// 	StyledInputWrapper,
-// 	StyledLabel,
-// 	StyledInput,
-// } from "./RangeInputStyles"
-
-// type RangeInputProps = {
-// 	readonly name?: string
-// 	readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-// 	readonly minPrice: number
-// 	readonly maxPrice: number
-// 	readonly price: number
-// 	readonly step?: number
-// }
-
-// const Range = memo<RangeInputProps>(
-// 	({
-// 		name = "range",
-// 		minPrice = 0,
-// 		maxPrice = 2000,
-// 		price = 350,
-// 		step = 1,
-// 		onChange,
-// 	}) => {
-// 		return (
-// 			<StyledInputWrapper>
-// 				<StyledLabel htmlFor='range'>
-// 					Price between: ${minPrice} - ${price}
-// 				</StyledLabel>
-// 				<StyledInput
-// 					id='range'
-// 					name={name}
-// 					value={price}
-// 					min={minPrice}
-// 					max={maxPrice}
-// 					step={step}
-// 					onChange={onChange}
-// 					type='range'
-// 				/>
-// 			</StyledInputWrapper>
-// 		)
-// 	}
-// )
-// export default Range
-// Range.displayName = "RangeInput"
+export default Ranges

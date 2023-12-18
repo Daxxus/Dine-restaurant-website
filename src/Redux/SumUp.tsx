@@ -10,7 +10,8 @@ const initialState: SumUp = {
 // [{ orderMealText: "", id: 1, price: "", image: "" }]
 // -> suma
 export const sumUp = createSlice({
-	name: "cart",
+	// ważne name poniżej musi być  zgodne z nazwą slice powyżej czyli sumUp
+	name: "sumUp",
 	initialState,
 	reducers: {
 		toCart: (state, action: PayloadAction<number>) => {

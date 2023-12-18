@@ -5,9 +5,9 @@ import orderReducer from "./Cart"
 import imageReducer from "./MealImage"
 
 const reducer = combineReducers({
-	cart: billReducer,
+	sumUp: billReducer,
 	order: orderReducer,
-	image: imageReducer,
+	mealImg: imageReducer,
 })
 export const Store = configureStore({ reducer })
 export type RootState = ReturnType<typeof Store.getState>

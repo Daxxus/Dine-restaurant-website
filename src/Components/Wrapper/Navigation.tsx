@@ -7,6 +7,8 @@ import useAvatarContext from "../../Contexts/useAvatarContext"
 import Counting from "../Counting/Counting"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { outOfCart } from "../../Redux/SumUp"
+import { removeImageById } from "../../Redux/MealImage"
 import "./NavCss/Nav.css"
 import {
 	Box,
@@ -23,7 +25,8 @@ import {
 	useDisclosure,
 	useColorModeValue,
 	Stack,
-	useColorMode,	
+	useColorMode,
+	Image,
 } from "@chakra-ui/react"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
@@ -65,9 +68,10 @@ const Nav = (props: Props) => {
 export default function WithAction() {
 	const { isAuth, setIsAuth } = useAuthContext()
 	const { avatar } = useAvatarContext()
-	const { value } = useSelector((state) => state.cart)
-	const { orderMealImage } = useSelector((state) => state.image)
+	const { value } = useSelector((state) => state.sumUp)
+	const orderMealImage = useSelector((state) => state.mealImg)
 	console.log(orderMealImage)
+
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
@@ -77,14 +81,14 @@ export default function WithAction() {
 		<>
 			<Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
 				<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-					<IconButton
-						size={"md"}
-						icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-						aria-label={"Open Menu"}
-						display={{ md: "none" }}
-						onClick={isOpen ? onClose : onOpen}
-					/>
 					<HStack spacing={8} alignItems={"center"}>
+						<IconButton
+							size={"md"}
+							icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+							aria-label={"Open Menu"}
+							display={{ md: "none" }}
+							onClick={isOpen ? onClose : onOpen}
+						/>
 						<Box fontSize={50}>
 							<GiCook />
 						</Box>
@@ -144,7 +148,6 @@ export default function WithAction() {
 								}
 							}}>
 							LOGOUT
-							
 						</Button>
 						<Menu>
 							<MenuButton
@@ -155,17 +158,36 @@ export default function WithAction() {
 								cursor={"pointer"}
 								minW={0}>
 								{isAuth ? (
-									<Avatar size={"md"} src={avatar} />
+									<div>
+										<Avatar size={"md"} src={avatar} />
+										<MenuList>
+											Orders
+											<MenuDivider />
+											<MenuItem>
+												<Stack direction='column'>
+													{orderMealImage.map(
+														(el: { orderMealImage: string | undefined }) => {
+															return el.orderMealImage === "" ? null : (
+																<Image
+																	borderRadius='full'
+																	boxSize='100px'
+																	src={el.orderMealImage}
+																	// alt='Meals'
+																/>
+															)
+														}
+													)}
+												</Stack>
+											</MenuItem>
+											{/* <MenuItem>Link 2</MenuItem>
+											<MenuDivider />
+											<MenuItem>Link 3</MenuItem> */}
+										</MenuList>
+									</div>
 								) : (
 									<Avatar size={"md"} src={""} />
 								)}
 							</MenuButton>
-							<MenuList>
-								<MenuItem>Order:{orderMealImage} </MenuItem>
-								<MenuItem>Link 2</MenuItem>
-								<MenuDivider />
-								<MenuItem>Link 3</MenuItem>
-							</MenuList>
 						</Menu>
 						<Button onClick={toggleColorMode} fontSize={25}>
 							{colorMode === "light" ? <MoonIcon /> : <SunIcon />}

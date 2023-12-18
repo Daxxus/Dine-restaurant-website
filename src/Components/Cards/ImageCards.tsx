@@ -6,34 +6,27 @@ import {
 	Divider,
 	CardFooter,
 	Button,
-	Text,
-	Input,
 	Image,
+	Text,
 } from "@chakra-ui/react"
-// import { ChangeEventHandler } from "react"
-// import { FormEventHandler } from "react"
 
 interface Props {
 	image: string
 	heading: React.ReactNode
-	add: React.MouseEventHandler<HTMLButtonElement> | undefined
-	price:number
-	// max: ChangeEventHandler<HTMLInputElement>
-
-	// max: FormEventHandler<HTMLParagraphElement>
+	add: any
+	price: number
 }
 const ImageCards = ({ image, heading, add, price }: Props) => {
-	// const price = Math.trunc(Math.random() * max)
 	return (
-		<Card maxW='2xs'>
+		<Card maxW='2xs' >
 			<CardBody>
 				<Image src={image} alt='Tasty some meals' borderRadius='lg'></Image>
 				<Stack mt='6' spacing='1'>
 					<Heading size='sm'> {heading} </Heading>
-					<Input color='blue.600' fontSize='xl' defaultValue={price}>
-					
-						{/* {"$" + Math.trunc(Math.random() * max)} */}
-					</Input>
+
+					<Text color='blue.600' fontSize='2xl'>
+						${price}
+					</Text>
 				</Stack>
 			</CardBody>
 			<Divider />
@@ -43,11 +36,10 @@ const ImageCards = ({ image, heading, add, price }: Props) => {
 					variant='ghost'
 					colorScheme='blue'
 					width={"full"}
-					onClick={()=>add(price)}
+					onClick={() => add(price)}
 					type='submit'>
 					Add to cart
 				</Button>
-				{/* </ButtonGroup> */}
 			</CardFooter>
 		</Card>
 	)
