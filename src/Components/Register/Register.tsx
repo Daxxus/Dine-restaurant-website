@@ -1,10 +1,11 @@
 import { Formik, Field } from "formik"
 import { ToastContainer, toast } from "react-toastify"
-import {  object } from "yup"
+import { object } from "yup"
 import * as yup from "yup"
 import { useNavigate } from "react-router-dom"
 import { useAvatar } from "../SelectAvatar/Avatar"
 import useEmailDataCheck from "../Email/useEmailDataCheck"
+import { useDispatch, useSelector } from "react-redux"
 
 import {
 	Avatar,
@@ -24,6 +25,7 @@ import { Select } from "chakra-react-select"
 import "react-toastify/dist/ReactToastify.css"
 import { useState } from "react"
 import BgImg from "../Images/restaurant-1837150_1920.jpg"
+import { addId } from "../../Redux/ClientId"
 
 interface Register {
 	email: string
@@ -31,6 +33,7 @@ interface Register {
 	confirmPassword: string
 	avatar: string
 	rememberMe: boolean
+	clientId: number
 }
 // type FormValues = InferType<typeof yupSchema>
 const yupSchema = object({
@@ -56,7 +59,10 @@ const yupSchema = object({
 const notify = () => toast("Great job, You've just beeing signed up")
 const notify2 = () => toast("The email address provided already exists")
 
-export default function FormRegister() {	
+export default function FormRegister() {
+	const dispatch = useDispatch()
+	const { id: clientId } = useSelector((state) => state.clientId)
+
 	const { colorMode } = useColorMode()
 	const { verifyMailAvilable } = useEmailDataCheck() //array
 	const [isError, setIsError] = useState(false)
@@ -84,7 +90,7 @@ export default function FormRegister() {
 	}
 
 	if (!avatars) <p>No data...</p>
-
+	console.log(clientId)
 	return (
 		<Flex
 			align='center'
@@ -93,7 +99,7 @@ export default function FormRegister() {
 			filter='grayscale(50%)'
 			bgImg={BgImg}
 			bgSize='cover'>
-			<ToastContainer autoClose={3000} />
+			<ToastContainer autoClose={2500} />
 			<Box
 				rounded='md'
 				w={64}
@@ -116,11 +122,14 @@ export default function FormRegister() {
 							// nie zajęty
 							setIsError(false)
 							notify()
-							addClient(values)
+							addClient({
+								...values,
+								clientId: clientId,
+							})
 							resetForm()
 							setTimeout(() => {
 								jumpToSignInPage()
-							}, 4500)
+							}, 3000)
 						} else {
 							setIsError(true)
 							notify2()
@@ -171,7 +180,9 @@ export default function FormRegister() {
 									<FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
 								</FormControl>
 								<FormControl isInvalid={!!errors.avatar && touched.avatar}>
-									<FormLabel htmlFor='avatar' pl={5}>Select Your Avatar</FormLabel>
+									<FormLabel htmlFor='avatar' pl={5}>
+										Select Your Avatar
+									</FormLabel>
 									<Select
 										id='avatar'
 										name='avatar'
@@ -196,7 +207,11 @@ export default function FormRegister() {
 									colorScheme='blue'>
 									Remember me?
 								</Field>
-								<Button type='submit' colorScheme='green' width='full'>
+								<Button
+									type='submit'
+									colorScheme='green'
+									width='full'
+									onClick={() => dispatch(addId(clientId))}>
 									Sign Up
 								</Button>
 							</VStack>

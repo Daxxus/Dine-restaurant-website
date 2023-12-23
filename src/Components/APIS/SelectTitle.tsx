@@ -1,4 +1,4 @@
-import { Select, Flex } from "@chakra-ui/react"
+import { Select, Flex, Box, Input } from "@chakra-ui/react"
 import { ChangeEventHandler } from "react"
 
 interface SearchProps {
@@ -8,7 +8,7 @@ interface SearchProps {
 }
 const SelectTitle = ({ select, target }: SearchProps) => {
 	return (
-		<Flex>
+		<Box>
 			<Select
 				placeholder='Search meals'
 				border={"1px"}
@@ -20,7 +20,7 @@ const SelectTitle = ({ select, target }: SearchProps) => {
 				variant='filled'>				
 				{select}
 			</Select>
-		</Flex>
+		</Box>
 	)
 }
 

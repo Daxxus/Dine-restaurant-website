@@ -15,9 +15,22 @@ const Counting = () => {
 	return (
 		<Box>
 			{secondsLeft > 0 ? (
-				<Flex flexFlow={"column "} textAlign={"center"} minW={100}>
-					<Text as={"cite"}>Your visit is only</Text>
-					<Text as={"cite"}>
+				<Flex
+					// flexFlow={"column "}
+					// textAlign={"center"}
+					// minW={100}
+					// fontSize={{ base: "small", lg: "lg" }}
+				>
+					<Text
+						as={"cite"}
+					
+						>
+						Your visit is only
+					</Text>
+					<Text
+						as={"cite"}
+						
+						>
 						<b className={style.font}>{days} </b> days
 						<b className={style.font}> {hrs}</b> hrs
 						<b className={style.font}> {mins}</b> mins
@@ -25,7 +38,10 @@ const Counting = () => {
 					</Text>
 				</Flex>
 			) : (
-				<Text as='b' fontSize={"xl"} color={"teal"}>
+				<Text
+					as='b'
+					// fontSize={{ base: "small", sm: "sm", md: "md", lg: "lg" }}
+					color={"teal"}>
 					Time's up to Your visit!
 				</Text>
 			)}

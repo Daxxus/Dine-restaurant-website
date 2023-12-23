@@ -13,21 +13,27 @@ import useClients from "../Clients/Clients"
 import { useState } from "react"
 import { toCart } from "../../Redux/SumUp"
 import { addImage } from "../../Redux/MealImage"
-import { useDispatch } from "react-redux"
+import { addOrder } from "../../Redux/Cart"
+import { useDispatch, useSelector } from "react-redux"
 interface Order {
 	mealPrice: number
-	order: string
+	orderTitle: string
 }
 interface OrderDetails {
 	orderId: string
 	date: string
-	// price: number
 	clientId: string | number
+	// totalPrice: number
+	image: string
+	name: string
 }
 
 export default function SelectMenu() {
 	const dispatch = useDispatch()
-	const clientId = useClients()
+	const { clientEmail } = useSelector((state) => state.emailSlice)
+
+	const clients = useClients()
+	const { value } = useSelector((state) => state.sumUp)
 
 	const {
 		data: menuItem,
@@ -51,7 +57,7 @@ export default function SelectMenu() {
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
 	const [sliderValue, setSliderValue] = useState(200)
-	// zamiastszego daj setFieldValue w propsach
+	// zamiast tego daj setFieldValue w propsach
 	// const [mealPrice, setMealPrice] = useState(0)
 
 	const handleSearch = (e) => {
@@ -78,9 +84,23 @@ export default function SelectMenu() {
 		mutation.mutate(newOrder)
 	}
 	const handleRedux = (image: string, mealPrice: number) => {
+		// problem podział na userów
 		dispatch(toCart(mealPrice))
 		dispatch(addImage(image))
+		// dispatch(addOrder(name))
 	}
+
+	// const handleUpdate = (image: string, mealPrice: number, name: string) => {
+	// 	axios
+	// 		.patch(`http://localhost:3000/orders/${name}`, {
+	// 			image,
+	// 			mealPrice,
+	// 		})
+	// 		.then((
+	// 			return data
+	// 		})
+	// }
+
 	// const clearInput = () => {
 	// 	if (menuTitle) {
 	// 		console.log(menuTitle)
@@ -134,20 +154,20 @@ export default function SelectMenu() {
 										key={el.id}
 										// children={[]}
 										initialValues={{
-											order: el.name,
+											orderTitle: el.name,
 											mealPrice: 0,
 										}}
 										onSubmit={(values: Order) => {
-											// console.log(values.mealPrice)
 											handleAdd({
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
-
-												// price: values.mealPrice,
+												
+												image: el.image,
+												name: clientEmail,
 												clientId:
-													clientId.find(
-														(elem: { id: string }) => elem.id === values.order
+													clients.find(
+														(el: { email: string }) => el.email === clientEmail
 													)?.id || "",
 											})
 										}}>
@@ -159,7 +179,7 @@ export default function SelectMenu() {
 												price={el.price}
 												// mealePrice to param price z Image cart
 												add={(mealPrice: number) => {
-													console.log("el.image", el.image)
+													// console.log("el.image", el.image)
 													setFieldValue("mealPrice", mealPrice) //do orders
 													// clearInput()
 													handleSubmit()
@@ -176,7 +196,7 @@ export default function SelectMenu() {
 									<Formik
 										key={el.id}
 										initialValues={{
-											order: el.name,
+											orderTitle: el.name,
 											mealPrice: 0,
 										}}
 										onSubmit={(values: Order) => {
@@ -184,9 +204,12 @@ export default function SelectMenu() {
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
+												// totalPrice: value,
+												image: el.image,
+												name: clientEmail,
 												clientId:
-													clientId.find(
-														(elem: { id: string }) => elem.id === values.order
+													clients.find(
+														(el: { email: string }) => el.email === clientEmail
 													)?.id || "",
 											})
 										}}>

@@ -3,13 +3,13 @@ import type { PayloadAction } from "@reduxjs/toolkit"
 
 export const mealImg = createSlice({
 	name: "mealImg",
-	initialState: [{ orderMealImage: "", id: 1}],
+	initialState: [{ orderMealImage: "", id: 1 }],
 	reducers: {
-		addImage: (
-			state,
-			action: PayloadAction<{ image: string; id: string }>
-		) => {
-			return state=[...state, {orderMealImage: action.payload, id: state.length}];
+		addImage: (state, action: PayloadAction<{ image: string; id: string }>) => {
+			return (state = [
+				...state,
+				{ orderMealImage: action.payload, id: state.length },
+			])
 			// state.push(action.payload)
 		},
 		removeImageById: (state, action) => {

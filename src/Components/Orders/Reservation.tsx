@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import useClients from "../Clients/Clients"
 // import useCountdown from "./Countdown"
 import useCountdownContext from "../../Contexts/useCountdownContext"
 import { Formik, Field } from "formik"
@@ -21,17 +22,19 @@ import {
 	FormControl,
 	FormErrorMessage,
 } from "@chakra-ui/react"
+import { useSelector } from "react-redux"
 import styles from "./styles/Reservation.module.css"
 import * as yup from "yup"
 import { object } from "yup"
-// import axios from "axios"
+
 interface Reservation {
-	date: Date | undefined
 	people: number
 }
 interface ReservationDetails {
 	orderDate: string
+	date: string
 	clientId: string | number
+	user: string
 }
 const yupSchema = object({
 	date: yup
@@ -42,6 +45,9 @@ const yupSchema = object({
 })
 
 const Reservation = () => {
+	const clients = useClients()
+
+	const { clientEmail } = useSelector((state) => state.emailSlice)
 	const [datetime, setDatetime] = useState("")
 	const { colorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -52,8 +58,8 @@ const Reservation = () => {
 
 	const countdown = () => {
 		const currentTime = new Date().getTime()
-		const finalTime = new Date(datetime)
-		let timeDiffrence = (finalTime - currentTime) / 1000
+		const finalTime: any = new Date(datetime)
+		let timeDiffrence: any = (finalTime - currentTime) / 1000
 		timeDiffrence = parseInt(timeDiffrence)
 		// start(timeDiffrence)
 		setSecondsLeft(timeDiffrence)
@@ -95,10 +101,14 @@ const Reservation = () => {
 		<>
 			<Button
 				colorScheme='teal'
+				p={5}
+				// w={  'auto'}
+				maxW={ '200px'}
 				onClick={onOpen}
-				m={15}
-				display={"flex"}
-				minW={150}>
+				// m={10}
+				// display={"flex"}
+				minW={150}
+				>
 				Make the reservation
 			</Button>
 			<Drawer
@@ -118,15 +128,20 @@ const Reservation = () => {
 						<Stack spacing='25px'>
 							<Formik
 								initialValues={{
-									date: undefined,
-									people: 0,
+									date: "",
+									people: undefined,
 								}}
 								validationSchema={yupSchema}
 								onSubmit={(values) => {
 									addReservation({
 										...values,
+										date: datetime,
 										orderDate: new Date().toLocaleDateString(),
-										clientId: 5,
+										clientId:
+											clients.find(
+												(el: { email: string }) => el.email === clientEmail
+											)?.id || "",
+										user: clientEmail,
 									})
 								}}>
 								{({ handleSubmit, errors, values }) => (
@@ -167,7 +182,7 @@ const Reservation = () => {
 												<Field
 													as={Select}
 													id='people'
-													// type='number'
+													type='number'
 													variant='filled'
 													value={values.people}
 													bg={colorMode === "light" ? "gray.400" : "gray.800"}>

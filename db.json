@@ -6,6 +6,7 @@
       "confirmPassword": "Qazxsw",
       "avatar": "https://i.pinimg.com/236x/80/73/70/8073708198bf9dace0f6369aba0df0a2.jpg",
       "rememberMe": true,
+      "clientId": 1,
       "id": 1
     },
     {
@@ -14,31 +15,17 @@
       "confirmPassword": "Wsxzaq",
       "avatar": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1744695785.1701196934&semt=sph",
       "rememberMe": true,
+      "clientId": 2,
       "id": 2
     },
     {
-      "email": "antek@onet.pl",
+      "email": "anna@wp.pl",
       "password": "Qazxsw",
       "confirmPassword": "Qazxsw",
       "avatar": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
       "rememberMe": true,
+      "clientId": 3,
       "id": 3
-    },
-    {
-      "email": "ada@wp.pl",
-      "password": "Qazxsw",
-      "confirmPassword": "Qazxsw",
-      "avatar": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
-      "rememberMe": true,
-      "id": 4
-    },
-    {
-      "email": "ag@wp.pl",
-      "password": "Qazxsw",
-      "confirmPassword": "Qazxsw",
-      "avatar": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1744695785.1701196934&semt=sph",
-      "rememberMe": true,
-      "id": 5
     }
   ],
   "avatars": [
@@ -57,84 +44,40 @@
   ],
   "reservations": [
     {
-      "people": "3",
-      "orderDate": "16.12.2023",
-      "clientId": 5,
+      "date": "2023-12-23T18:02",
+      "people": "1",
+      "orderDate": "23.12.2023",
+      "clientId": 1,
+      "user": "dariuszcudny@wp.pl",
       "id": 1
+    },
+    {
+      "date": "2023-12-23T18:03",
+      "people": "2",
+      "orderDate": "23.12.2023",
+      "clientId": 1,
+      "user": "dariuszcudny@wp.pl",
+      "id": 2
+    },
+    {
+      "date": "2023-12-23T18:04",
+      "people": "1",
+      "orderDate": "23.12.2023",
+      "clientId": 1,
+      "user": "dariuszcudny@wp.pl",
+      "id": 3
     }
   ],
   "orders": [
     {
-      "order": "Anticuchos Of White Seabass With Aji Chile Honey Marinade & Semilla Salsa",
-      "mealPrice": 34,
-      "orderId": 632426,
-      "date": "18.12.2023",
-      "clientId": "",
+      "orderTitle": "Shortbread Lemon Bars",
+      "mealPrice": 2,
+      "orderId": 1005367,
+      "date": "23.12.2023",
+      "image": "https://spoonacular.com/recipeImages/1005367-312x231.jpg",
+      "name": "dariuszcudny@wp.pl",
+      "clientId": 1,
       "id": 1
-    },
-    {
-      "order": "Asian Chickpea Lettuce Wraps",
-      "mealPrice": 73,
-      "orderId": 632819,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 2
-    },
-    {
-      "order": "Fettuccine Alla Carbonara, With No Cream Necessary",
-      "mealPrice": 51,
-      "orderId": 642712,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 3
-    },
-    {
-      "order": "Lemon Or Lime Glaze For Chicken, Fish, Or Vegetables",
-      "mealPrice": 61,
-      "orderId": 649703,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 4
-    },
-    {
-      "order": "Best Soft Ginger Cookies",
-      "mealPrice": 49,
-      "orderId": 634931,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 5
-    },
-    {
-      "order": "Fettuccine Alla Carbonara, With No Cream Necessary",
-      "mealPrice": 51,
-      "orderId": 642712,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 6
-    },
-    {
-      "order": "Fisherman’s Catch Pasta",
-      "mealPrice": 155,
-      "orderId": 642998,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 7
-    },
-    {
-      "order": "Carrot Cucumber Salad (Asian Style)",
-      "mealPrice": 53,
-      "orderId": 637194,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 8
-    },
-    {
-      "order": "Pancake Cupcakes With Maple Frosting and Candied Bacon",
-      "mealPrice": 21,
-      "orderId": 654487,
-      "date": "18.12.2023",
-      "clientId": "",
-      "id": 9
     }
   ],
   "menuItems": [

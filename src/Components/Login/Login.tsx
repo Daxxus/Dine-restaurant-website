@@ -2,13 +2,15 @@ import { Formik, Field } from "formik"
 import axios from "axios"
 import * as yup from "yup"
 import { object } from "yup"
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { Hourglass } from "react-loader-spinner"
+// import { Hourglass } from "react-loader-spinner"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
 import BgImg from "../Images/brick-wall-1834784_1280.jpg"
+import { useDispatch } from "react-redux"
+
 import {
 	Box,
 	Button,
@@ -20,6 +22,7 @@ import {
 	FormErrorMessage,
 	useColorMode,
 } from "@chakra-ui/react"
+import { addEmail } from "../../Redux/ClientsEmail"
 
 interface Login {
 	email: string
@@ -30,7 +33,6 @@ const yupSchema = object({
 		.string()
 		.email("Invalid email format")
 		.required("Mail is required"),
-
 	password: yup
 		.string()
 		.min(6, "min 6")
@@ -41,23 +43,24 @@ const yupSchema = object({
 })
 
 const Login = () => {
+	const dispatch = useDispatch()
 	const { colorMode } = useColorMode()
 	const { isAuth, setIsAuth } = useAuthContext()
 	const { setAvatar } = useAvatarContext() //nie ma potrzeby avatar
-	// console.log(avatar)
+
 	const logged = "Grats!!! successfully signed in"
 	const error = "Data errors"
 	const notify1 = () => toast(`${logged}`)
 	const notify2 = () => toast(`${error}`)
 
-	const { data: client, isLoading } = useQuery({
-		queryKey: ["clients"],
-		queryFn: () =>
-			fetch("http://localhost:3000/clients").then((response) =>
-				response.json()
-			),
-	})
-	// console.log(client)
+	// const { data: cli, isLoading } = useQuery({
+	// 	queryKey: ["clients"],
+	// 	queryFn: () =>
+	// 		fetch("http://localhost:3000/clients").then((response) =>
+	// 			response.json()
+	// 		),
+	// })
+	// console.log(cli)
 
 	const logUser = (client: Login) => {
 		axios
@@ -66,6 +69,7 @@ const Login = () => {
 				const { data } = resp
 
 				if (data[0].password === client.password) {
+					console.log(data)
 					setIsAuth(true)
 					setAvatar(data[0].avatar)
 					notify1()
@@ -75,14 +79,12 @@ const Login = () => {
 			})
 	}
 
-	// mutacja do aktualizacji stanu po kluczach
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: Login) => {
 			return logUser(values)
 		},
 		onSuccess: () => {
-			// rewalidacja i pobranie ponownie zapytania pod kluczem orders
 			queryClient.invalidateQueries()
 		},
 		onError: () => {
@@ -94,11 +96,11 @@ const Login = () => {
 		mutation.mutate(client)
 	}
 
-	if (isLoading)
-		<h3>
-			<Hourglass />
-		</h3>
-	if (!client) <p>No data...</p>
+	// if (isLoading)
+	// 	<h3>
+	// 		<Hourglass />
+	// 	</h3>
+	// if (!cli) <p>No data...</p>
 
 	return (
 		<Flex
@@ -126,7 +128,10 @@ const Login = () => {
 							onSubmit={(values: Login, { resetForm }) => {
 								resetForm({ values: "" || undefined })
 								// logUser(values)
-								handleLogin(values)
+								dispatch(addEmail(values.email))
+								handleLogin({
+									...values,
+								})
 							}}>
 							{({ handleSubmit, errors, touched }) => (
 								<form onSubmit={handleSubmit}>
