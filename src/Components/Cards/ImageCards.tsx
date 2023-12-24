@@ -18,13 +18,15 @@ interface Props {
 }
 const ImageCards = ({ image, heading, add, price }: Props) => {
 	return (
-		<Card maxW='2xs' >
+		<Card maxW='2xs'>
 			<CardBody>
 				<Image src={image} alt='Tasty some meals' borderRadius='lg'></Image>
 				<Stack mt='6' spacing='1'>
 					<Heading size='sm'> {heading} </Heading>
 
-					<Text color='blue.600' fontSize='2xl'>
+					<Text color='blue.600' fontSize='2xl'
+					textAlign={ 'center'}
+					>
 						${price}
 					</Text>
 				</Stack>

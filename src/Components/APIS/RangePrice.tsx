@@ -1,12 +1,12 @@
 import styles from "./Styles/RangeStyle.module.css"
 import { Input, Box } from "@chakra-ui/react"
 interface RangeProps {
-	target: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	target: (e: React.ChangeEvent<HTMLInputElement>) => void
 	value: number
 }
 const Ranges = ({ target, value }: RangeProps) => {
 	return (
-		<Box fontSize={22} color={"white"}>
+		<Box fontSize={{ base: "sm", md: "md", lg: "lg" }} color={"white"} textAlign={ 'center'}>
 			Price between: $2 - ${value}
 			<Input
 				className={styles.input}

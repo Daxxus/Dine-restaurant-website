@@ -7,13 +7,11 @@ import SelectMenu from "../APIS/SelectMenu"
 export default function AddOrder() {
 	return (
 		<Flex
-			justify={"center"}
-			// align={ 'top'}
+			justify={"center"}		
 			bgImg={BgImg}
 			bgPos={"bottom"}
-			height={"100vh"}
-			bgSize={"cover"}
-			textAlign={"center"}
+			height={"100%"}//patrz 100vh lepszy ale lipa
+			bgSize={"cover"}			
 			filter={"grayscale(10%)"}>
 			<Stack
 				// margin={" auto"}
@@ -24,21 +22,23 @@ export default function AddOrder() {
 				<Reservation />
 				<Box
 					className={style.box}
+					textAlign={"center"}
 					// py={{ base: 20, md: 350 }}
-					fontSize={{ base: "2xl", sm: "4xl", md: "8xl" }}
-					>
+					fontSize={{ base: "2xl", sm: "4xl", md: "8xl" }}>
 					<h1>Welcome to the World of flavour!!!</h1>
 				</Box>
 				<Heading
 					className={style.heading}
+					textAlign={"center"}
 					fontWeight={300}
 					fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
 					lineHeight={"110%"}>
 					Order the dishes from <br />
 					<Text as={"span"}>your heart</Text>
 				</Heading>
-
-				<SelectMenu />
+				<Box className={style.flex}>
+					<SelectMenu />
+				</Box>
 			</Stack>
 		</Flex>
 	)
