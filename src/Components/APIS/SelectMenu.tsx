@@ -133,9 +133,10 @@ export default function SelectMenu() {
 	return (
 		<Flex>
 			<Box width={"100%"}>
-				<Box 
-				className={style.gridBox} alignItems={"center"}
-				// justifyContent={ 'center'}
+				<Box
+					className={style.gridBox}
+					alignItems={"center"}
+					// justifyContent={ 'center'}
 				>
 					<SearchTitle search={handleSearch} />
 					<Ranges target={handleRange} value={sliderValue} />
@@ -165,7 +166,7 @@ export default function SelectMenu() {
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
-												
+
 												image: el.image,
 												name: clientEmail,
 												clientId:

@@ -103,12 +103,11 @@ const Reservation = () => {
 				colorScheme='teal'
 				p={5}
 				// w={  'auto'}
-				maxW={ '200px'}
+				maxW={"200px"}
 				onClick={onOpen}
 				// m={10}
 				// display={"flex"}
-				minW={150}
-				>
+				minW={150}>
 				Make the reservation
 			</Button>
 			<Drawer
@@ -151,7 +150,7 @@ const Reservation = () => {
 											borderBottomWidth={"1px"}
 											p={"20px 0"}>
 											<FormLabel htmlFor='date' className={styles.label}>
-												Pic a date and time
+												Reservation picker
 											</FormLabel>
 											<Box>
 												<FormControl isInvalid={!!errors.date}>

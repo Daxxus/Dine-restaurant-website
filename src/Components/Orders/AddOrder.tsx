@@ -7,26 +7,28 @@ import SelectMenu from "../APIS/SelectMenu"
 export default function AddOrder() {
 	return (
 		<Flex
-			justify={"center"}		
+			justify={"center"}
 			bgImg={BgImg}
-			bgPos={"bottom"}
-			height={"100%"}//patrz 100vh lepszy ale lipa
-			bgSize={"cover"}			
+			w={'full'}
+			h={'full'}
+			backgroundPosition={"bottom "}
+			// height={"100%"} //patrz 100vh lepszy ale lipa
+			backgroundSize={"cover"}
 			filter={"grayscale(10%)"}>
 			<Stack
 				// margin={" auto"}
-
-				as={Box}
+				// direction={'column'}
+				// as={Box}
 				spacing={{ base: 5, md: 50 }}
 				py={{ base: 5, md: 50 }}>
 				<Reservation />
-				<Box
+				<Text
 					className={style.box}
 					textAlign={"center"}
 					// py={{ base: 20, md: 350 }}
 					fontSize={{ base: "2xl", sm: "4xl", md: "8xl" }}>
 					<h1>Welcome to the World of flavour!!!</h1>
-				</Box>
+				</Text>
 				<Heading
 					className={style.heading}
 					textAlign={"center"}

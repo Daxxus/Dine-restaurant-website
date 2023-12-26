@@ -161,7 +161,7 @@ export default function WithAction() {
 					LOGOUT
 				</Button>
 			),
-			to: "  ",
+			to: "/login  ",
 		},
 		{
 			label: (
@@ -202,10 +202,7 @@ export default function WithAction() {
 	return (
 		<>
 			<Box bg={useColorModeValue("gray.100", "gray.900")} px={2}>
-				<Flex
-					h={16}
-					alignItems={"bottom"}					
-					justifyContent={"space-around"}>
+				<Flex h={16} alignItems={"bottom"} justifyContent={"space-around"}>
 					<HStack
 						spacing={{ base: 10, md: 18, lg: 6 }}
 
