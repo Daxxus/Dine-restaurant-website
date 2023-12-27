@@ -13,7 +13,7 @@ import useClients from "../Clients/Clients"
 import { useState } from "react"
 import { toCart } from "../../Redux/SumUp"
 import { addImage } from "../../Redux/MealImage"
-import { addOrder } from "../../Redux/Cart"
+// import { addOrder } from "../../Redux/Cart"
 import { useDispatch, useSelector } from "react-redux"
 interface Order {
 	mealPrice: number
@@ -33,7 +33,7 @@ export default function SelectMenu() {
 	const { clientEmail } = useSelector((state) => state.emailSlice)
 
 	const clients = useClients()
-	const { value } = useSelector((state) => state.sumUp)
+	// const { value } = useSelector((state) => state.sumUp)
 
 	const {
 		data: menuItem,
@@ -110,7 +110,7 @@ export default function SelectMenu() {
 
 	const handleRange = (e) => {
 		setSliderValue(e.target.value)
-		const findMeal = menuItem.filter((el) => {
+		const findMeal = menuItem.filter((el: { price: number }) => {
 			return el.price <= e.target.value
 		})
 		setMenuTitle(e.target.value)
@@ -142,7 +142,7 @@ export default function SelectMenu() {
 					<Ranges target={handleRange} value={sliderValue} />
 					<SelectTitle
 						target={handleSearch}
-						select={menuItem.map((el) => (
+						select={menuItem?.map((el) => (
 							<option key={el.id} value={el.name}>
 								{el.name}
 							</option>
@@ -152,7 +152,7 @@ export default function SelectMenu() {
 
 				<Box py={{ base: 20, md: 20 }} className={style.grid}>
 					{menuTitle
-						? menu.map((el) => {
+						? menu?.map((el) => {
 								return (
 									<Formik
 										key={el.id}
@@ -170,7 +170,7 @@ export default function SelectMenu() {
 												image: el.image,
 												name: clientEmail,
 												clientId:
-													clients.find(
+													clients?.find(
 														(el: { email: string }) => el.email === clientEmail
 													)?.id || "",
 											})
@@ -195,7 +195,7 @@ export default function SelectMenu() {
 								)
 								// eslint-disable-next-line no-mixed-spaces-and-tabs
 						  })
-						: menuItem.map((el) => {
+						: menuItem?.map((el) => {
 								return (
 									<Formik
 										key={el.id}
@@ -212,7 +212,7 @@ export default function SelectMenu() {
 												image: el.image,
 												name: clientEmail,
 												clientId:
-													clients.find(
+													clients?.find(
 														(el: { email: string }) => el.email === clientEmail
 													)?.id || "",
 											})

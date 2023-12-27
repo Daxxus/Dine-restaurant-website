@@ -1,32 +1,48 @@
-
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
-import { Avatar, Card, Input } from "antd"
+import { Avatar, Card, Modal } from "antd"
+
 interface MealcardProps {
 	orderTitle: string
 	image: string
 	price: number | string
-	reservDate: any
-	meal: number
+	reservDate: React.ReactNode
+	mealNbr: number
+	delOrder: any
 }
 const { Meta } = Card
-
 const MealCard = ({
 	orderTitle,
 	image,
 	price,
 	reservDate,
-	meal,
+	mealNbr,
+	delOrder,
 }: MealcardProps) => (
 	<Card
 		style={{ width: 300 }}
 		cover={<img alt='meal' src={image} />}
 		actions={[
-			<p>{meal} </p>,
-			<p> {price} </p>,
-			// <Input defaultValue={meal} placeholder='meals 1' />,
-			// <Input defaultValue={reservDate} placeholder='reservDate' />,
+			<div>{mealNbr} </div>,
+			<div> {price} </div>,			
 			<EditOutlined key='edit' />,
-			<DeleteOutlined />,
+			// <DeleteOutlined  style={{fontSize:18}} onClick={del} />,
+
+			<DeleteOutlined
+				type='button'
+				onClick={() => {
+					Modal.confirm({
+						onOk: delOrder,
+						title: "Delete?",
+						content: "Please confirm",
+						footer: (_, { OkBtn, CancelBtn }) => (
+							<>
+								<CancelBtn />
+								<OkBtn />
+							</>
+						),
+					})
+				}}
+			/>,
 		]}>
 		<Meta
 			avatar={

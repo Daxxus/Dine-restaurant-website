@@ -1,4 +1,4 @@
-import { Select, Flex, Box, Input } from "@chakra-ui/react"
+import { Select, Box } from "@chakra-ui/react"
 import { ChangeEventHandler } from "react"
 
 interface SearchProps {
@@ -11,8 +11,7 @@ const SelectTitle = ({ select, target }: SearchProps) => {
 		<Box>
 			<Select
 				placeholder='Search meals'
-				border={"1px"}
-				// maxW={450}
+				border={"1px"}				
 				maxW={400}
 				id='search'
 				onChange={target}

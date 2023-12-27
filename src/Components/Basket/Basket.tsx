@@ -3,17 +3,22 @@ import MealCard from "./MealCards"
 import useOrders from "../Clients/allOrders"
 import useReservations from "../Clients/Reservations"
 import { useSelector } from "react-redux"
-import {
-	useBreakpointValue,
-	Flex,
-	HStack,
-} from "@chakra-ui/react"
-import { Key } from "react"
+import { useBreakpointValue, Flex, HStack } from "@chakra-ui/react"
+// import ModalConfirm from "./Modal"
 
 export default function Basket() {
 	const { clientEmail } = useSelector((state) => state.emailSlice)
 	const orders = useOrders()
 	const reservations = useReservations()
+	const deleteOrder = async (id: string | number) => {
+		console.log(id)
+		const response = await fetch(`http://localhost:3000/orders/${id}`, {
+			method: "DELETE",
+		})
+		const data = await response.json()
+		return data
+	}
+
 	return (
 		<Flex
 			w={"full"}
@@ -28,19 +33,20 @@ export default function Basket() {
 				spacing={{ base: 5, md: 50 }}
 				py={{ base: 5, md: 50 }}
 				px={useBreakpointValue({ base: 4, md: 8 })}>
-				{orders.map(
+				{orders?.map(
 					(order: {
 						name: string
-						id: Key | null | undefined
+						id: string | number
 						orderTitle: string
 						image: string
 						mealPrice: number
 					}) => {
-						if (order.name === clientEmail) {						
+						if (order.name === clientEmail) {
 							return (
 								<MealCard
 									key={order.id}
 									orderTitle={order.orderTitle}
+									delOrder={() => deleteOrder(order.id)}
 									image={order.image}
 									price={"$" + `${order.mealPrice}`}
 									reservDate={
@@ -50,9 +56,10 @@ export default function Basket() {
 												.find((el: { user: string }) => el.user === clientEmail)
 												?.date.split("T") || null
 									}
-									meal={1}
+									mealNbr={1}
+									// edit={console.log("dd")}
 								/>
-							)						
+							)
 						}
 					}
 				)}

@@ -1,19 +1,18 @@
 import { NavLink } from "react-router-dom"
 import { GiCook } from "react-icons/gi"
 import { FaShoppingCart } from "react-icons/fa"
-import { useQuery } from "@tanstack/react-query"
 
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
 import useReservations from "../Clients/Reservations"
-import useClients from "../Clients/Clients"
+// import useClients from "../Clients/Clients"
 import Counting from "../Counting/Counting"
 import useOrders from "../Clients/allOrders"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-import { outOfCart } from "../../Redux/SumUp"
-import { removeImageById } from "../../Redux/MealImage"
+// import { outOfCart } from "../../Redux/SumUp"
+// import { removeImageById } from "../../Redux/MealImage"
 import "./NavCss/Nav.css"
 
 import {
@@ -33,10 +32,12 @@ import {
 	Stack,
 	useColorMode,
 	Image,
+	VStack,
 } from "@chakra-ui/react"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
+import { Key } from "react"
 interface Props {
 	children: React.ReactNode
 }
@@ -81,21 +82,13 @@ export default function WithAction() {
 	const { avatar } = useAvatarContext()
 	const { clientEmail } = useSelector((state) => state.emailSlice)
 
-	const { value } = useSelector((state) => state.sumUp)
-	const orderMealImage = useSelector((state) => state.mealImg)
+	// const { value } = useSelector((state) => state.sumUp)
+	// const orderMealImage = useSelector((state) => state.mealImg)
 
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
 	const notify = () => toast(`Successfully logged out`)
-
-	// const dispatch = useDispatch() //do deleteMeal
-	const deleteMeal = (id: number) => {
-		console.log(id)
-		// usuwamy z servera a nie by redux!!!!!
-		// dispatch(removeImageById(id))
-		// dispatch(outOfCart(value))
-	}
 
 	const links2 = [
 		{ label: "Home", to: "/" },
@@ -107,43 +100,31 @@ export default function WithAction() {
 		{ label: "Register", to: "/register" },
 		{
 			label: isAuth
-				? orders.map((elem) => {
-						if (elem.name === clientEmail) {
-							totalPrice.push(elem.mealPrice)
-							return (
-								<Stack direction='row' spacing={4} key={elem.id}>
-									<Button
-										leftIcon={<FaShoppingCart />}
-										fontSize={{ base: "small", lg: "large" }}
-										colorScheme='teal'
-										variant='outline'>
-										${totalPrice.reduce((acc, curr) => acc + curr, 0)}
-									</Button>
-								</Stack>
-							)
+				? orders?.map(
+						(elem: {
+							name: string
+							mealPrice: number
+							id: number | string
+						}) => {
+							if (elem.name === clientEmail) {
+								totalPrice.push(elem.mealPrice)
+								return (
+									<Stack spacing={4} key={elem.id}>
+										<Button
+											leftIcon={<FaShoppingCart />}
+											fontSize={{ base: "small", lg: "large" }}
+											colorScheme='teal'
+											variant='outline'>
+											${totalPrice.reduce((acc, curr) => acc + curr, 0)}
+										</Button>
+									</Stack>
+								)
+							}
 						}
 						// eslint-disable-next-line no-mixed-spaces-and-tabs
-				  })
+				  )
 				: null,
 			to: "/basket",
-			/* {isAuth
-								? orders
-										.find((elem) => elem.name === clientEmail)
-										.map((el) => {
-											totalPrice.push(el.mealPrice)
-											return (
-												<Stack direction='row' spacing={4} key={elem.id}>
-													<Button
-														leftIcon={<FaShoppingCart />}
-														fontSize={25}
-														colorScheme='teal'
-														variant='outline'>
-														${totalPrice.reduce((acc, curr) => acc + curr, 0)}
-													</Button>
-												</Stack>
-											)
-										})
-								: null} */
 		},
 		{
 			label: (
@@ -171,11 +152,12 @@ export default function WithAction() {
 				>
 					{/* {isAuth ? <Counting /> : null} */}
 
-					{isAuth &&
-					reservation.find(
-						(el: { user: string }) => el.user === clientEmail
-					) ? (
-						<Counting />
+					{isAuth ? (
+						reservation?.find(
+							(el: { user: string }) => el.user === clientEmail
+						) ? (
+							<Counting />
+						) : null
 					) : null}
 				</Box>
 			),
@@ -193,21 +175,11 @@ export default function WithAction() {
 		},
 	]
 
-	console.log(reservation)
-	console.log(clientEmail)
-
-	// const compareEmail = orders.find(
-	// 	(elem: { name: string }) => elem.name === clientEmail
-	// )
 	return (
 		<>
 			<Box bg={useColorModeValue("gray.100", "gray.900")} px={2}>
 				<Flex h={16} alignItems={"bottom"} justifyContent={"space-around"}>
-					<HStack
-						spacing={{ base: 10, md: 18, lg: 6 }}
-
-						// alignItems={"center"}
-					>
+					<HStack spacing={{ base: 10, md: 18, lg: 6 }}>
 						<IconButton
 							// size={"md"}
 							fontSize={{ base: "small", lg: "lg" }}
@@ -261,38 +233,47 @@ export default function WithAction() {
 								</MenuButton>
 								<div>
 									<MenuList textAlign={"center"}>
-										Orders
+										Current orders
 										<MenuDivider />
 										<MenuItem>
-											<Stack direction='column'>
-												{orderMealImage.map(
-													(el: { orderMealImage: string }) => {
-														return el.orderMealImage === "" ? null : (
-															<Box key={el.id}>
-																<Box className='flex'>
-																	<Image
-																		borderRadius='full'
-																		boxSize='80px'
-																		src={el.orderMealImage}
-																		alt='Meals'
-																	/>
-
-																	<CloseIcon
-																		h={8}
-																		w={8}
-																		type='button'
-																		onClick={() => deleteMeal(el.id)}
-																		ml={20}
-																		color='crimson'
-																		// cursor={"pointer"}
-																	/>
-																</Box>
+											<VStack width={200}>
+												{/* {orders?.map
+													.find((el) => el.name === clientEmail)
+													.map((elem) => {
+														return (
+															<Box key={elem.id}>
+																<Image
+																	borderRadius='full'
+																	boxSize='80px'
+																	src={elem.image}
+																	alt='Meals'
+																/>
 																<MenuDivider />
 															</Box>
 														)
+													})} */}
+												{orders?.map(
+													(el: {
+														name: string
+														image: string | undefined
+														id: Key | null | undefined
+													}) => {
+														if (el.name === clientEmail) {
+															return el.image === "" ? null : (
+																<Box key={el.id}>
+																	<Image
+																		borderRadius='full'
+																		boxSize='80px'
+																		src={el.image}
+																		alt='Meals'
+																	/>
+																	<MenuDivider />
+																</Box>
+															)
+														}
 													}
 												)}
-											</Stack>
+											</VStack>
 										</MenuItem>
 									</MenuList>
 								</div>
@@ -301,11 +282,7 @@ export default function WithAction() {
 					</HStack>
 				</Flex>
 				{isOpen ? (
-					<Box
-						pb={3}
-						display={{ md: "none" }}
-						// justifyContent={"flex-end"}
-					>
+					<Box pb={3} display={{ md: "none" }}>
 						<Stack as={"nav"}>
 							{links2.map((link, ind) => (
 								<Nav key={ind}>
@@ -387,16 +364,3 @@ export default function WithAction() {
 // 		Register
 // 	</NavLink>,
 // ]
-
-{
-	/* <Stack direction='row' spacing={4}>								
-								<Button
-									leftIcon={<FaShoppingCart />}
-									// rightIcon={<ArrowForwardIcon />}
-									fontSize={25}
-									colorScheme='teal'
-									variant='outline'>
-									${value}
-								</Button>
-							</Stack> */
-}
