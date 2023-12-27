@@ -90,9 +90,158 @@
       "clientId": 3,
       "user": "anna@wp.pl",
       "id": 6
+    },
+    {
+      "date": "2023-12-27T20:33",
+      "people": "3",
+      "orderDate": "27.12.2023",
+      "clientId": 3,
+      "user": "anna@wp.pl",
+      "id": 7
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "orderTitle": "Fisherman’s Catch Pasta",
+      "mealPrice": 155,
+      "orderId": 642998,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/642998-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 1
+    },
+    {
+      "orderTitle": "Delicious Rhubarb Custard Pie",
+      "mealPrice": 139,
+      "orderId": 641410,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/641410-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 2
+    },
+    {
+      "orderTitle": "Zucchini Pizza Boats",
+      "mealPrice": 200,
+      "orderId": 665769,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/665769-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 3
+    },
+    {
+      "orderTitle": "Farmer's Scrambler w/ Fresh Fruit Medley",
+      "mealPrice": 167,
+      "orderId": 234951,
+      "date": "27.12.2023",
+      "image": "https://images.spoonacular.com/file/wximages/234951-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 4
+    },
+    {
+      "orderTitle": "Easiest Breakfast Ever: Sunny Fruit Parfait",
+      "mealPrice": 88,
+      "orderId": 716433,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/716433-312x231.jpg",
+      "name": "anna@wp.pl",
+      "clientId": 3,
+      "id": 5
+    },
+    {
+      "orderTitle": "Apricot Glazed Apple Tart",
+      "mealPrice": 64,
+      "orderId": 632660,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/632660-312x231.jpg",
+      "name": "anna@wp.pl",
+      "clientId": 3,
+      "id": 6
+    },
+    {
+      "orderTitle": "Dutch Oven Danish Cake",
+      "mealPrice": 70,
+      "orderId": 641767,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/641767-312x231.jpg",
+      "name": "anna@wp.pl",
+      "clientId": 3,
+      "id": 7
+    },
+    {
+      "orderTitle": "Irish Soda Bread with Raisins",
+      "mealPrice": 37,
+      "orderId": 648004,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/648004-312x231.jpg",
+      "name": "anna@wp.pl",
+      "clientId": 3,
+      "id": 8
+    },
+    {
+      "orderTitle": "Healthier Southern-Style Green Beans",
+      "mealPrice": 66,
+      "orderId": 646424,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/646424-312x231.jpg",
+      "name": "anna@wp.pl",
+      "clientId": 3,
+      "id": 9
+    },
+    {
+      "orderTitle": "Cheese Tortellini Alfredo",
+      "mealPrice": 148,
+      "orderId": 637591,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/637591-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 10
+    },
+    {
+      "orderTitle": "Lebanese Sweet Tahini Swirls",
+      "mealPrice": 174,
+      "orderId": 649413,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/649413-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 11
+    },
+    {
+      "orderTitle": "Slow Cooker Apple Pork Tenderloin",
+      "mealPrice": 173,
+      "orderId": 673463,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/673463-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 12
+    },
+    {
+      "orderTitle": "Fruit and Nut Brittle",
+      "mealPrice": 120,
+      "orderId": 643939,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/643939-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 13
+    },
+    {
+      "orderTitle": "Best Soft Ginger Cookies",
+      "mealPrice": 49,
+      "orderId": 634931,
+      "date": "27.12.2023",
+      "image": "https://spoonacular.com/recipeImages/634931-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 14
+    }
+  ],
   "menuItems": [
     {
       "id": 632426,

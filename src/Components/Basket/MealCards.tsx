@@ -1,5 +1,6 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
 import { Avatar, Card, Modal } from "antd"
+import { MouseEventHandler } from "react"
 
 interface MealcardProps {
 	orderTitle: string
@@ -7,7 +8,8 @@ interface MealcardProps {
 	price: number | string
 	reservDate: React.ReactNode
 	mealNbr: number
-	delOrder: any
+	delOrder: MouseEventHandler<HTMLSpanElement> | undefined
+	edit: MouseEventHandler<HTMLSpanElement> | undefined
 }
 const { Meta } = Card
 const MealCard = ({
@@ -17,14 +19,15 @@ const MealCard = ({
 	reservDate,
 	mealNbr,
 	delOrder,
+	edit,
 }: MealcardProps) => (
 	<Card
 		style={{ width: 300 }}
-		cover={<img alt='meal' src={image} />}
+		cover={<img alt='meal' src={image} style={{height:250}}/>}
 		actions={[
 			<div>{mealNbr} </div>,
-			<div> {price} </div>,			
-			<EditOutlined key='edit' />,
+			<div> {price} </div>,
+			<EditOutlined key='edit' type='button' onClick={edit} />,
 			// <DeleteOutlined  style={{fontSize:18}} onClick={del} />,
 
 			<DeleteOutlined

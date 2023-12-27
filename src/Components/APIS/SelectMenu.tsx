@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { Box, Flex } from "@chakra-ui/react"
+import { Box, Flex, VStack } from "@chakra-ui/react"
 import axios from "axios"
 import { Formik } from "formik"
 import { Hourglass } from "react-loader-spinner"
@@ -132,7 +132,7 @@ export default function SelectMenu() {
 	}
 	return (
 		<Flex>
-			<Box width={"100%"}>
+			<VStack width={"100%"}>
 				<Box
 					className={style.gridBox}
 					alignItems={"center"}
@@ -237,7 +237,7 @@ export default function SelectMenu() {
 								)
 						  })}
 				</Box>
-			</Box>
+			</VStack>
 		</Flex>
 	)
 }

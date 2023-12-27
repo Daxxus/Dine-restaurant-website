@@ -4,12 +4,18 @@ import useOrders from "../Clients/allOrders"
 import useReservations from "../Clients/Reservations"
 import { useSelector } from "react-redux"
 import { useBreakpointValue, Flex, HStack } from "@chakra-ui/react"
-// import ModalConfirm from "./Modal"
+import { useNavigate } from "react-router-dom"
+import style from "../Orders/styles/OrderDeatails.module.css"
 
 export default function Basket() {
 	const { clientEmail } = useSelector((state) => state.emailSlice)
 	const orders = useOrders()
 	const reservations = useReservations()
+	const navigate = useNavigate()
+
+	const jumpToOrderDetails = (id: string | number) => {
+		navigate(`/buisness/orders/${id}`)
+	}
 	const deleteOrder = async (id: string | number) => {
 		console.log(id)
 		const response = await fetch(`http://localhost:3000/orders/${id}`, {
@@ -21,6 +27,7 @@ export default function Basket() {
 
 	return (
 		<Flex
+			justify={"center"}
 			w={"full"}
 			h={"100vh"}
 			backgroundImage={BgImage}
@@ -29,6 +36,7 @@ export default function Basket() {
 			backgroundSize={"cover"}
 			backgroundPosition={"center center"}>
 			<HStack
+				className={style.grid}
 				// filter='grayscale(0%)'
 				spacing={{ base: 5, md: 50 }}
 				py={{ base: 5, md: 50 }}
@@ -46,18 +54,20 @@ export default function Basket() {
 								<MealCard
 									key={order.id}
 									orderTitle={order.orderTitle}
-									delOrder={() => deleteOrder(order.id)}
 									image={order.image}
 									price={"$" + `${order.mealPrice}`}
 									reservDate={
 										"Reservation" +
 											" : " +
 											reservations
-												.find((el: { user: string }) => el.user === clientEmail)
+												?.find(
+													(el: { user: string }) => el.user === clientEmail
+												)
 												?.date.split("T") || null
 									}
+									delOrder={() => deleteOrder(order.id)}
 									mealNbr={1}
-									// edit={console.log("dd")}
+									edit={() => jumpToOrderDetails(order.id)}
 								/>
 							)
 						}
