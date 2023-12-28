@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom"
 import { GiCook } from "react-icons/gi"
 import { FaShoppingCart } from "react-icons/fa"
+import { useEffect, useState } from "react"
 
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
@@ -74,13 +75,14 @@ const Nav = (props: Props) => {
 }
 
 export default function WithAction() {
-	const totalPrice: number[] = []
-	const orders = useOrders()
+	const { orders, isLoading } = useOrders()
+	console.log("orders", orders)
 	const reservation = useReservations()
 	// const clients = useClients()
 	const { isAuth, setIsAuth } = useAuthContext()
 	const { avatar } = useAvatarContext()
 	const { clientEmail } = useSelector((state) => state.emailSlice)
+	const [totalPrice, setTotalPrice] = useState(0)
 
 	// const { value } = useSelector((state) => state.sumUp)
 	// const orderMealImage = useSelector((state) => state.mealImg)
@@ -89,6 +91,13 @@ export default function WithAction() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
 	const notify = () => toast(`Successfully logged out`)
+
+	useEffect(() => {
+		if (orders) {
+			const totalPrice = orders.reduce((acc, cur) => acc + cur.mealPrice, 0)
+			setTotalPrice(totalPrice)
+		}
+	}, [orders])
 
 	const links2 = [
 		{ label: "Home", to: "/" },
@@ -99,31 +108,21 @@ export default function WithAction() {
 		{ label: "Login", to: "/login" },
 		{ label: "Register", to: "/register" },
 		{
-			label: isAuth
-				? orders?.map(
-						(elem: {
-							name: string
-							mealPrice: number
-							id: number | string
-						}) => {
-							if (elem.name === clientEmail) {
-								totalPrice.push(elem.mealPrice)
-								return (
-									<Stack spacing={4} key={elem.id}>
-										<Button
-											leftIcon={<FaShoppingCart />}
-											fontSize={{ base: "small", lg: "large" }}
-											colorScheme='teal'
-											variant='outline'>
-											${totalPrice.reduce((acc, curr) => acc + curr, 0)}
-										</Button>
-									</Stack>
-								)
-							}
-						}
-						// eslint-disable-next-line no-mixed-spaces-and-tabs
-				  )
-				: null,
+			label: isAuth ? (
+				!isLoading ? (
+					<Stack spacing={4}>
+						<Button
+							leftIcon={<FaShoppingCart />}
+							fontSize={{ base: "small", lg: "large" }}
+							colorScheme='teal'
+							variant='outline'>
+							${totalPrice}
+						</Button>
+					</Stack>
+				) : (
+					<p>Loading...</p>
+				)
+			) : null,
 			to: "/basket",
 		},
 		{

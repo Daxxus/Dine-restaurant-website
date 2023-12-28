@@ -10,7 +10,7 @@ export default function AddOrder() {
 			justify={"center"}
 			bgImg={BgImg}
 			w={'full'}
-			h={'full'}
+			h={'100vh'}
 			backgroundPosition={"bottom "}
 			// height={"100%"} //patrz 100vh lepszy ale lipa
 			backgroundSize={"cover"}
@@ -27,7 +27,7 @@ export default function AddOrder() {
 					textAlign={"center"}
 					// py={{ base: 20, md: 350 }}
 					fontSize={{ base: "2xl", sm: "4xl", md: "8xl" }}>
-					<h1>Welcome to the World of flavour!!!</h1>
+					Welcome to the World of flavour!!!
 				</Text>
 				<Heading
 					className={style.heading}

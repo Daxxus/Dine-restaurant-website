@@ -45,7 +45,7 @@ const yupSchema = object({
 const Login = () => {
 	const dispatch = useDispatch()
 	const { colorMode } = useColorMode()
-	const { isAuth, setIsAuth } = useAuthContext()
+	const { isAuth, setIsAuth,setClientId } = useAuthContext()
 	const { setAvatar } = useAvatarContext() //nie ma potrzeby avatar
 
 	const logged = "Grats!!! successfully signed in"
@@ -72,6 +72,7 @@ const Login = () => {
 					console.log(data)
 					setIsAuth(true)
 					setAvatar(data[0].avatar)
+					setClientId(data[0].clientId)
 					notify1()
 				} else {
 					notify2()

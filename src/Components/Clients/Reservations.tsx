@@ -11,6 +11,7 @@ const useReservations = () => {
 			fetch("http://localhost:3000/reservations").then((res) => res.json()),
 	})
 
+	//TODO: remove it
 	if (isLoading) <p>Loading...</p>
 	if (error) <p>Can not get reservations </p>
 	if (!reservations) <p>No data...</p>

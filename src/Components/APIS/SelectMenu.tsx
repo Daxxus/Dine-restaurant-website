@@ -15,6 +15,7 @@ import { toCart } from "../../Redux/SumUp"
 import { addImage } from "../../Redux/MealImage"
 // import { addOrder } from "../../Redux/Cart"
 import { useDispatch, useSelector } from "react-redux"
+import { useAuthContext } from "../../Contexts/useAuthContext"
 interface Order {
 	mealPrice: number
 	orderTitle: string
@@ -74,7 +75,7 @@ export default function SelectMenu() {
 			return addOrder(values)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries()
+			queryClient.invalidateQueries({ queryKey: ["orders",clientId] })
 		},
 		onError: () => {
 			console.log("Error !!!!!")
@@ -116,6 +117,8 @@ export default function SelectMenu() {
 		setMenuTitle(e.target.value)
 		setMenu(findMeal)
 	}
+
+	const { clientId } = useAuthContext()
 
 	if (error) {
 		return <p>Can not get orders</p>
@@ -169,10 +172,7 @@ export default function SelectMenu() {
 
 												image: el.image,
 												name: clientEmail,
-												clientId:
-													clients?.find(
-														(el: { email: string }) => el.email === clientEmail
-													)?.id || "",
+												clientId: clientId,
 											})
 										}}>
 										{({ handleSubmit, setFieldValue }) => (
@@ -211,10 +211,7 @@ export default function SelectMenu() {
 												// totalPrice: value,
 												image: el.image,
 												name: clientEmail,
-												clientId:
-													clients?.find(
-														(el: { email: string }) => el.email === clientEmail
-													)?.id || "",
+												clientId: clientId,
 											})
 										}}>
 										{({ handleSubmit, setFieldValue }) => (

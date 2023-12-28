@@ -81,6 +81,7 @@ const Reservation = () => {
 	// 		})
 	// }
 
+	//TODO: use mutation to do this
 	const addReservation = async (newReservation: ReservationDetails) => {
 		console.log(newReservation)
 		const Url = "http://localhost:3000/reservations"

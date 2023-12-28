@@ -9,7 +9,7 @@ import style from "../Orders/styles/OrderDeatails.module.css"
 
 export default function Basket() {
 	const { clientEmail } = useSelector((state) => state.emailSlice)
-	const orders = useOrders()
+	const  { orders } = useOrders()
 	const reservations = useReservations()
 	const navigate = useNavigate()
 
@@ -19,6 +19,7 @@ export default function Basket() {
 	const deleteOrder = async (id: string | number) => {
 		console.log(id)
 		const response = await fetch(`http://localhost:3000/orders/${id}`, {
+			headers: {"Content-type": "application/json;charset=UTF-8"},
 			method: "DELETE",
 		})
 		const data = await response.json()
