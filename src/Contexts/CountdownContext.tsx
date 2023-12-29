@@ -1,9 +1,14 @@
-import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react"
+import {
+	Dispatch,
+	SetStateAction,
+	createContext,
+	useEffect,
+	useState,
+} from "react"
 
 interface CountdownContextProps {
 	secondsLeft: number
 	setSecondsLeft: Dispatch<SetStateAction<number>>
-	// start: any
 }
 
 const CountdownContext = createContext<CountdownContextProps | null>(null)
@@ -20,11 +25,8 @@ export const CountdownProvider = ({
 		}, 1000)
 
 		return () => clearTimeout(timeout)
-	}, [secondsLeft])	
+	}, [secondsLeft])
 
-	// const start = (seconds: number) => {
-	// 	setSecondsLeft(seconds)
-	// }
 	return (
 		<CountdownContext.Provider value={{ secondsLeft, setSecondsLeft }}>
 			{children}

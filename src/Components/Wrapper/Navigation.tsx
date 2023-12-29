@@ -6,14 +6,12 @@ import { useEffect, useState } from "react"
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
-import useReservations from "../Clients/Reservations"
+import useReservations from "../Clients/useReservations"
 // import useClients from "../Clients/Clients"
 import Counting from "../Counting/Counting"
-import useOrders from "../Clients/allOrders"
+import useOrders from "../Clients/useOrders"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-// import { outOfCart } from "../../Redux/SumUp"
-// import { removeImageById } from "../../Redux/MealImage"
 import "./NavCss/Nav.css"
 
 import {
@@ -76,28 +74,27 @@ const Nav = (props: Props) => {
 
 export default function WithAction() {
 	const { orders, isLoading } = useOrders()
-	console.log("orders", orders)
-	const reservation = useReservations()
-	// const clients = useClients()
+	const { reservations, loading } = useReservations()
 	const { isAuth, setIsAuth } = useAuthContext()
 	const { avatar } = useAvatarContext()
-	const { clientEmail } = useSelector((state) => state.emailSlice)
+	const { clientEmail } = useSelector(
+		(state: Record<string, never>) => state.emailSlice
+	)
 	const [totalPrice, setTotalPrice] = useState(0)
-
-	// const { value } = useSelector((state) => state.sumUp)
-	// const orderMealImage = useSelector((state) => state.mealImg)
-
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
 	const notify = () => toast(`Successfully logged out`)
-
+	// console.log(orders, reservations)
 	useEffect(() => {
-		if (orders) {
-			const totalPrice = orders.reduce((acc, cur) => acc + cur.mealPrice, 0)
+		if (orders && reservations) {
+			const totalPrice = orders.reduce(
+				(acc: number, cur: { mealPrice: number }) => acc + cur.mealPrice,
+				0
+			)
 			setTotalPrice(totalPrice)
 		}
-	}, [orders])
+	}, [orders, reservations])
 
 	const links2 = [
 		{ label: "Home", to: "/" },
@@ -120,7 +117,7 @@ export default function WithAction() {
 						</Button>
 					</Stack>
 				) : (
-					<p>Loading...</p>
+					loading
 				)
 			) : null,
 			to: "/basket",
@@ -144,23 +141,16 @@ export default function WithAction() {
 			to: "/login  ",
 		},
 		{
-			label: (
-				<Box
-					fontSize={{ base: "small", lg: "md" }}
-					// mr={{ base: 5, md: 10, lg: 15 }} p={2}
-				>
-					{/* {isAuth ? <Counting /> : null} */}
-
-					{isAuth ? (
-						reservation?.find(
-							(el: { user: string }) => el.user === clientEmail
-						) ? (
-							<Counting />
-						) : null
-					) : null}
-				</Box>
-			),
-			to: "/login",
+			label: isAuth ? (
+				!loading ? (
+					<Box fontSize={{ base: "small", lg: "md" }}>
+						<Counting />
+					</Box>
+				) : (
+					<p>loading...</p>
+				)
+			) : null,
+			to: "/basket  ",
 		},
 		{
 			label: (
@@ -212,7 +202,6 @@ export default function WithAction() {
 						</HStack>
 
 						<HStack>
-							{/* <ThemeMode /> */}
 							<Menu>
 								<MenuButton
 									// as={Button}
@@ -236,21 +225,6 @@ export default function WithAction() {
 										<MenuDivider />
 										<MenuItem>
 											<VStack width={200}>
-												{/* {orders?.map
-													.find((el) => el.name === clientEmail)
-													.map((elem) => {
-														return (
-															<Box key={elem.id}>
-																<Image
-																	borderRadius='full'
-																	boxSize='80px'
-																	src={elem.image}
-																	alt='Meals'
-																/>
-																<MenuDivider />
-															</Box>
-														)
-													})} */}
 												{orders?.map(
 													(el: {
 														name: string

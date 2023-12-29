@@ -10,7 +10,7 @@ export default function AddOrder() {
 			justify={"center"}
 			bgImg={BgImg}
 			w={'full'}
-			h={'100vh'}
+			h={'full'}
 			backgroundPosition={"bottom "}
 			// height={"100%"} //patrz 100vh lepszy ale lipa
 			backgroundSize={"cover"}

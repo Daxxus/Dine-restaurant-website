@@ -9,8 +9,7 @@ import SearchTitle from "./SearchTitle"
 import Ranges from "./RangePrice"
 import SelectTitle from "./SelectTitle"
 import style from "../Cards/Cards.module.css"
-import useClients from "../Clients/Clients"
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
 import { toCart } from "../../Redux/SumUp"
 import { addImage } from "../../Redux/MealImage"
 // import { addOrder } from "../../Redux/Cart"
@@ -24,16 +23,16 @@ interface OrderDetails {
 	orderId: string
 	date: string
 	clientId: string | number
-	// totalPrice: number
 	image: string
 	name: string
 }
 
 export default function SelectMenu() {
 	const dispatch = useDispatch()
-	const { clientEmail } = useSelector((state) => state.emailSlice)
+	const { clientEmail } = useSelector(
+		(state: Record<string, never>) => state.emailSlice
+	)
 
-	const clients = useClients()
 	// const { value } = useSelector((state) => state.sumUp)
 
 	const {
@@ -61,7 +60,7 @@ export default function SelectMenu() {
 	// zamiast tego daj setFieldValue w propsach
 	// const [mealPrice, setMealPrice] = useState(0)
 
-	const handleSearch = (e) => {
+	const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
 		const findMeal = menuItem.filter((el: { name: string }) => {
 			return el.name.toLowerCase().includes(e.target.value.toLowerCase().trim())
 		})
@@ -75,7 +74,7 @@ export default function SelectMenu() {
 			return addOrder(values)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["orders",clientId] })
+			queryClient.invalidateQueries({ queryKey: ["orders", clientId] })
 		},
 		onError: () => {
 			console.log("Error !!!!!")
@@ -90,17 +89,6 @@ export default function SelectMenu() {
 		dispatch(addImage(image))
 		// dispatch(addOrder(name))
 	}
-
-	// const handleUpdate = (image: string, mealPrice: number, name: string) => {
-	// 	axios
-	// 		.patch(`http://localhost:3000/orders/${name}`, {
-	// 			image,
-	// 			mealPrice,
-	// 		})
-	// 		.then((
-	// 			return data
-	// 		})
-	// }
 
 	// const clearInput = () => {
 	// 	if (menuTitle) {
@@ -136,11 +124,7 @@ export default function SelectMenu() {
 	return (
 		<Flex>
 			<VStack width={"100%"}>
-				<Box
-					className={style.gridBox}
-					alignItems={"center"}
-					// justifyContent={ 'center'}
-				>
+				<Box className={style.gridBox} alignItems={"center"}>
 					<SearchTitle search={handleSearch} />
 					<Ranges target={handleRange} value={sliderValue} />
 					<SelectTitle
@@ -169,7 +153,6 @@ export default function SelectMenu() {
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
-
 												image: el.image,
 												name: clientEmail,
 												clientId: clientId,
@@ -193,7 +176,6 @@ export default function SelectMenu() {
 										)}
 									</Formik>
 								)
-								// eslint-disable-next-line no-mixed-spaces-and-tabs
 						  })
 						: menuItem?.map((el) => {
 								return (
@@ -208,7 +190,6 @@ export default function SelectMenu() {
 												...values,
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
-												// totalPrice: value,
 												image: el.image,
 												name: clientEmail,
 												clientId: clientId,
@@ -222,7 +203,7 @@ export default function SelectMenu() {
 												price={el.price}
 												// mealePrice to param price z Image cart
 												add={(mealPrice: number) => {
-													console.log("el.image", el.image)
+													// console.log("el.image", el.image)
 													setFieldValue("mealPrice", mealPrice) //do orders
 													// clearInput()
 													handleSubmit()

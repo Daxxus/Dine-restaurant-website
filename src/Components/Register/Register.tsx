@@ -61,7 +61,7 @@ const notify2 = () => toast("The email address provided already exists")
 
 export default function FormRegister() {
 	const dispatch = useDispatch()
-	const { id: clientId } = useSelector((state) => state.clientId)
+	const { id: clientId } = useSelector((state:Record<string, never>) => state.clientId)
 
 	const { colorMode } = useColorMode()
 	const { verifyMailAvilable } = useEmailDataCheck() //array
@@ -99,7 +99,7 @@ export default function FormRegister() {
 			filter='grayscale(50%)'
 			bgImg={BgImg}
 			bgSize='cover'>
-			<ToastContainer autoClose={2500} />
+			<ToastContainer autoClose={2000} />
 			<Box
 				rounded='md'
 				w={64}
@@ -129,7 +129,7 @@ export default function FormRegister() {
 							resetForm()
 							setTimeout(() => {
 								jumpToSignInPage()
-							}, 3000)
+							}, 2000)
 						} else {
 							setIsError(true)
 							notify2()

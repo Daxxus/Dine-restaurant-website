@@ -1,16 +1,18 @@
 import BgImage from "../Images/restaurant-449952_1920.jpg"
 import MealCard from "./MealCards"
-import useOrders from "../Clients/allOrders"
-import useReservations from "../Clients/Reservations"
+import useOrders from "../Clients/useOrders"
+import useReservations from "../Clients/useReservations"
 import { useSelector } from "react-redux"
 import { useBreakpointValue, Flex, HStack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import style from "../Orders/styles/OrderDeatails.module.css"
 
 export default function Basket() {
-	const { clientEmail } = useSelector((state) => state.emailSlice)
-	const  { orders } = useOrders()
-	const reservations = useReservations()
+	const { clientEmail } = useSelector(
+		(state: Record<string, never>) => state.emailSlice
+	)
+	const { orders } = useOrders()
+	const { reservations } = useReservations()
 	const navigate = useNavigate()
 
 	const jumpToOrderDetails = (id: string | number) => {
@@ -19,7 +21,7 @@ export default function Basket() {
 	const deleteOrder = async (id: string | number) => {
 		console.log(id)
 		const response = await fetch(`http://localhost:3000/orders/${id}`, {
-			headers: {"Content-type": "application/json;charset=UTF-8"},
+			headers: { "Content-type": "application/json;charset=UTF-8" },
 			method: "DELETE",
 		})
 		const data = await response.json()
@@ -30,15 +32,13 @@ export default function Basket() {
 		<Flex
 			justify={"center"}
 			w={"full"}
-			h={"100vh"}
+			h={{ base: "full", lg: "100vh" }}
 			backgroundImage={BgImage}
-			// opacity={.8}
-			// filter='grayscale(90%)'
 			backgroundSize={"cover"}
 			backgroundPosition={"center center"}>
 			<HStack
+				// style.grid nie odpala sie należycie check out
 				className={style.grid}
-				// filter='grayscale(0%)'
 				spacing={{ base: 5, md: 50 }}
 				py={{ base: 5, md: 50 }}
 				px={useBreakpointValue({ base: 4, md: 8 })}>
@@ -58,13 +58,12 @@ export default function Basket() {
 									image={order.image}
 									price={"$" + `${order.mealPrice}`}
 									reservDate={
-										"Reservation" +
-											" : " +
-											reservations
-												?.find(
-													(el: { user: string }) => el.user === clientEmail
-												)
-												?.date.split("T") || null
+										reservations
+											? "Reservation: " +
+													reservations[reservations.length - 1]?.date.split(
+														"T"
+													) || "No reservation"
+											: "No reservation"
 									}
 									delOrder={() => deleteOrder(order.id)}
 									mealNbr={1}
@@ -78,6 +77,11 @@ export default function Basket() {
 		</Flex>
 	)
 }
+// reservations
+// 	?.find(
+// 		(el: { user: string }) => el.user === clientEmail
+// 	)
+// 	?.date.split("T") || null
 
 {
 	/* <VStack

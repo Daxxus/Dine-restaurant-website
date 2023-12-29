@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import useClients from "../Clients/Clients"
-// import useCountdown from "./Countdown"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useAuthContext } from "../../Contexts/useAuthContext"
+
 import useCountdownContext from "../../Contexts/useCountdownContext"
 import { Formik, Field } from "formik"
 import {
@@ -26,6 +27,7 @@ import { useSelector } from "react-redux"
 import styles from "./styles/Reservation.module.css"
 import * as yup from "yup"
 import { object } from "yup"
+import axios from "axios"
 
 interface Reservation {
 	people: number
@@ -45,57 +47,72 @@ const yupSchema = object({
 })
 
 const Reservation = () => {
-	const clients = useClients()
-
-	const { clientEmail } = useSelector((state) => state.emailSlice)
+	// const clients = useClients()
+	// const { clientId } = useAuthContext()
+	const { clientId } = useAuthContext()	
+	const { clientEmail } = useSelector(
+		(state: Record<string, never>) => state.emailSlice
+	)
 	const [datetime, setDatetime] = useState("")
 	const { colorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const firstField = React.useRef()
 
 	const { setSecondsLeft } = useCountdownContext()
-	// const { secondsLeft, start } = useCountdown()
-
-	const countdown = () => {
-		const currentTime = new Date().getTime()
-		const finalTime: any = new Date(datetime)
-		let timeDiffrence: any = (finalTime - currentTime) / 1000
-		timeDiffrence = parseInt(timeDiffrence)
-		// start(timeDiffrence)
-		setSecondsLeft(timeDiffrence)
-
-		// ilość osób do rezerwacji do koszyka przekazać
-		onClose()
-	}
 
 	const pickerTime = (val: React.SetStateAction<string>) => {
 		setDatetime(val)
 	}
-	// const addReservation = (newReservation: Reservation) => {
-	// 	console.log(newReservation)
-	// 	axios
-	// 		.post(` http://localhost:3000/reservations`, newReservation)
-	// 		.then((resp) => {
-	// 			const { data: reservation } = resp
-	// 			return reservation
-	// 		})
-	// }
+	const addReservation = (newReservation: ReservationDetails) => {
+		axios
+			.post(` http://localhost:3000/reservations`, newReservation)
+			.then((resp) => {
+				const { data: reservation } = resp
+				if (reservation.clientId === clientId) {
+					const currentTime = new Date().getTime()
+					const finalTime: any = new Date(datetime)
+					let timeDiffrence: any = (finalTime - currentTime) / 1000
+					timeDiffrence = parseInt(timeDiffrence)
+					setSecondsLeft(timeDiffrence)
+					onClose()
+
+					return reservation
+				}
+			})
+	}
 
 	//TODO: use mutation to do this
-	const addReservation = async (newReservation: ReservationDetails) => {
-		console.log(newReservation)
-		const Url = "http://localhost:3000/reservations"
-		const resp = await fetch(Url, {
-			method: "POST",
-			headers: { "Content-type": "application/json;charset=UTF-8" },
-			body: JSON.stringify(newReservation),
-		})
+	// const addReservation = async (newReservation: ReservationDetails) => {
+	// 	console.log(newReservation)
+	// 	const Url = "http://localhost:3000/reservations"
+	// 	const resp = await fetch(Url, {
+	// 		method: "POST",
+	// 		headers: { "Content-type": "application/json;charset=UTF-8" },
+	// 		body: JSON.stringify(newReservation),
+	// 	})
 
-		if (!resp.ok) {
-			return {}
-		}
-		const data = await resp.json()
-		return data
+	// 	if (!resp.ok) {
+	// 		return {}
+	// 	}
+	// 	const data = await resp.json()
+	// 	return data
+	// }
+	const queryClient = useQueryClient()
+	const mutation = useMutation({
+		mutationFn: async (values: ReservationDetails) => {
+			return addReservation(values)
+		},
+		onSuccess: () => {
+			// ważne te queryKey takie nasłuchiwanie na zmiany id clienta w reservations
+			queryClient.invalidateQueries({ queryKey: ["reservations", clientId] })
+		},
+		onError: () => {
+			console.log("Error !!!")
+		},
+	})
+
+	const handleAddReservation = (newReservation: ReservationDetails) => {
+		mutation.mutate(newReservation)
 	}
 
 	return (
@@ -103,11 +120,8 @@ const Reservation = () => {
 			<Button
 				colorScheme='teal'
 				p={5}
-				// w={  'auto'}
 				maxW={"200px"}
 				onClick={onOpen}
-				// m={10}
-				// display={"flex"}
 				minW={150}>
 				Make the reservation
 			</Button>
@@ -129,18 +143,15 @@ const Reservation = () => {
 							<Formik
 								initialValues={{
 									date: "",
-									people: undefined,
+									people: 0,
 								}}
 								validationSchema={yupSchema}
 								onSubmit={(values) => {
-									addReservation({
+									handleAddReservation({
 										...values,
 										date: datetime,
 										orderDate: new Date().toLocaleDateString(),
-										clientId:
-											clients.find(
-												(el: { email: string }) => el.email === clientEmail
-											)?.id || "",
+										clientId: clientId,
 										user: clientEmail,
 									})
 								}}>
@@ -210,11 +221,7 @@ const Reservation = () => {
 												w={100}>
 												Cancel
 											</Button>
-											<Button
-												colorScheme='blue'
-												onClick={() => countdown()}
-												w={100}
-												type='submit'>
+											<Button colorScheme='blue' w={100} type='submit'>
 												Confirm
 											</Button>
 										</DrawerFooter>

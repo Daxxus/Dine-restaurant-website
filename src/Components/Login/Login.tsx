@@ -5,7 +5,6 @@ import { object } from "yup"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-// import { Hourglass } from "react-loader-spinner"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
 import BgImg from "../Images/brick-wall-1834784_1280.jpg"
@@ -45,22 +44,13 @@ const yupSchema = object({
 const Login = () => {
 	const dispatch = useDispatch()
 	const { colorMode } = useColorMode()
-	const { isAuth, setIsAuth,setClientId } = useAuthContext()
-	const { setAvatar } = useAvatarContext() //nie ma potrzeby avatar
+	const { isAuth, setIsAuth, setClientId } = useAuthContext()
+	const { setAvatar } = useAvatarContext() 
 
 	const logged = "Grats!!! successfully signed in"
 	const error = "Data errors"
 	const notify1 = () => toast(`${logged}`)
-	const notify2 = () => toast(`${error}`)
-
-	// const { data: cli, isLoading } = useQuery({
-	// 	queryKey: ["clients"],
-	// 	queryFn: () =>
-	// 		fetch("http://localhost:3000/clients").then((response) =>
-	// 			response.json()
-	// 		),
-	// })
-	// console.log(cli)
+	const notify2 = () => toast(`${error}`)	
 
 	const logUser = (client: Login) => {
 		axios
@@ -70,6 +60,7 @@ const Login = () => {
 
 				if (data[0].password === client.password) {
 					console.log(data)
+
 					setIsAuth(true)
 					setAvatar(data[0].avatar)
 					setClientId(data[0].clientId)
@@ -97,12 +88,6 @@ const Login = () => {
 		mutation.mutate(client)
 	}
 
-	// if (isLoading)
-	// 	<h3>
-	// 		<Hourglass />
-	// 	</h3>
-	// if (!cli) <p>No data...</p>
-
 	return (
 		<Flex
 			bgImg={BgImg}
@@ -112,7 +97,7 @@ const Login = () => {
 			justify={"center"}
 			h='container.lg'
 			filter='grayscale(50%)'>
-			<ToastContainer autoClose={3000} />
+			<ToastContainer autoClose={2000} />
 			<Box bg={colorMode === "light" ? "white" : "black"} p={4} rounded='md'>
 				{isAuth ? (
 					<section>

@@ -15,10 +15,6 @@ const useOrders = () => {
 			),
 	})
 
-	// if (isLoading) <p>Loading...</p>
-	// if (error) <p>Can not get reservations </p>
-	// if (!orders) <p>No data...</p>
-
 	return { orders, isLoading, error }
 }
 

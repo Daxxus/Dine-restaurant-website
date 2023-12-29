@@ -44,23 +44,36 @@
   ],
   "reservations": [
     {
-      "date": "2023-12-28T18:26",
-      "people": "2",
-      "orderDate": "28.12.2023",
+      "date": "2023-12-29T21:21",
+      "people": "3",
+      "orderDate": "29.12.2023",
       "clientId": 1,
       "user": "dariuszcudny@wp.pl",
       "id": 1
+    }
+  ],
+  "orders": [
+    {
+      "orderTitle": "Asian Chickpea Lettuce Wraps",
+      "mealPrice": 73,
+      "orderId": 632819,
+      "date": "29.12.2023",
+      "image": "https://spoonacular.com/recipeImages/632819-312x231.jpg",
+      "name": "dariuszcudny@wp.pl",
+      "clientId": 1,
+      "id": 1
     },
     {
-      "date": "2023-12-28T20:35",
-      "people": "4",
-      "orderDate": "28.12.2023",
-      "clientId": 2,
-      "user": "jacek@interia.pl",
+      "orderTitle": "Cinnamon Nut Squares",
+      "mealPrice": 188,
+      "orderId": 715389,
+      "date": "29.12.2023",
+      "image": "https://spoonacular.com/recipeImages/715389-312x231.jpg",
+      "name": "dariuszcudny@wp.pl",
+      "clientId": 1,
       "id": 2
     }
   ],
-  "orders": [],
   "menuItems": [
     {
       "id": 632426,
