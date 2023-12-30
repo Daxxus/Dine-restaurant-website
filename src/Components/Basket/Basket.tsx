@@ -6,7 +6,14 @@ import { useSelector } from "react-redux"
 import { useBreakpointValue, Flex, HStack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import style from "../Orders/styles/OrderDeatails.module.css"
-
+interface MealProps {
+	mealNumber: number
+	name: string
+	id: string | number
+	orderTitle: string
+	image: string
+	mealPrice: number
+}
 export default function Basket() {
 	const { clientEmail } = useSelector(
 		(state: Record<string, never>) => state.emailSlice
@@ -42,37 +49,29 @@ export default function Basket() {
 				spacing={{ base: 5, md: 50 }}
 				py={{ base: 5, md: 50 }}
 				px={useBreakpointValue({ base: 4, md: 8 })}>
-				{orders?.map(
-					(order: {
-						name: string
-						id: string | number
-						orderTitle: string
-						image: string
-						mealPrice: number
-					}) => {
-						if (order.name === clientEmail) {
-							return (
-								<MealCard
-									key={order.id}
-									orderTitle={order.orderTitle}
-									image={order.image}
-									price={"$" + `${order.mealPrice}`}
-									reservDate={
-										reservations
-											? "Reservation: " +
-													reservations[reservations.length - 1]?.date.split(
-														"T"
-													) || "No reservation"
-											: "No reservation"
-									}
-									delOrder={() => deleteOrder(order.id)}
-									mealNbr={1}
-									edit={() => jumpToOrderDetails(order.id)}
-								/>
-							)
-						}
+				{orders?.map((order: MealProps) => {
+					if (order.name === clientEmail) {
+						return (
+							<MealCard
+								key={order.id}
+								orderTitle={order.orderTitle}
+								image={order.image}
+								price={"$" + `${order.mealPrice}`}
+								reservDate={
+									reservations
+										? "Reservation: " +
+												reservations[reservations.length - 1]?.date.split(
+													"T"
+												) || "No reservation"
+										: "No reservation"
+								}
+								delOrder={() => deleteOrder(order.id)}
+								mealNbr={order.mealNumber}
+								edit={() => jumpToOrderDetails(order.id)}
+							/>
+						)
 					}
-				)}
+				})}
 			</HStack>
 		</Flex>
 	)

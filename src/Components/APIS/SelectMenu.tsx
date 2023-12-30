@@ -25,6 +25,7 @@ interface OrderDetails {
 	clientId: string | number
 	image: string
 	name: string
+	mealNumber: number
 }
 
 export default function SelectMenu() {
@@ -154,6 +155,7 @@ export default function SelectMenu() {
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
 												image: el.image,
+												mealNumber: 1,
 												name: clientEmail,
 												clientId: clientId,
 											})
@@ -166,11 +168,10 @@ export default function SelectMenu() {
 												price={el.price}
 												// mealePrice to param price z Image cart
 												add={(mealPrice: number) => {
-													// console.log("el.image", el.image)
 													setFieldValue("mealPrice", mealPrice) //do orders
 													// clearInput()
 													handleSubmit()
-													handleRedux(el.image, mealPrice) // do global
+													handleRedux(el.image, mealPrice)
 												}}
 											/>
 										)}
@@ -191,6 +192,7 @@ export default function SelectMenu() {
 												orderId: el.id,
 												date: new Date().toLocaleDateString(),
 												image: el.image,
+												mealNumber: 1,
 												name: clientEmail,
 												clientId: clientId,
 											})

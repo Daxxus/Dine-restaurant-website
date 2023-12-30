@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
 import { GiCook } from "react-icons/gi"
 import { FaShoppingCart } from "react-icons/fa"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
@@ -75,26 +75,24 @@ const Nav = (props: Props) => {
 export default function WithAction() {
 	const { orders, isLoading } = useOrders()
 	const { reservations, loading } = useReservations()
-	const { isAuth, setIsAuth } = useAuthContext()
+	const { isAuth, setIsAuth, totalPrice, setTotalPrice } = useAuthContext()
 	const { avatar } = useAvatarContext()
 	const { clientEmail } = useSelector(
-		(state: Record<string, never>) => state.emailSlice
-	)
-	const [totalPrice, setTotalPrice] = useState(0)
+		(state: Record<string, never>) => state.emailSlice	)
+	
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
-	const notify = () => toast(`Successfully logged out`)
-	// console.log(orders, reservations)
+	const notify = () => toast(`Successfully logged out`)	
 	useEffect(() => {
 		if (orders && reservations) {
-			const totalPrice = orders.reduce(
+			const sumUp = orders.reduce(
 				(acc: number, cur: { mealPrice: number }) => acc + cur.mealPrice,
 				0
 			)
-			setTotalPrice(totalPrice)
+			setTotalPrice(sumUp)
 		}
-	}, [orders, reservations])
+	}, [orders, reservations, setTotalPrice])
 
 	const links2 = [
 		{ label: "Home", to: "/" },
@@ -268,11 +266,7 @@ export default function WithAction() {
 										{link.label}
 									</NavLink>
 								</Nav>
-							))}
-							{/* or */}
-							{/* {Links.map((link, ind) => (
-								<Nav key={ind}>{link}</Nav>
-							))} */}
+							))}							
 						</Stack>
 					</Box>
 				) : null}
@@ -281,59 +275,4 @@ export default function WithAction() {
 	)
 }
 
-// const Links = [
-// 	<NavLink
-// 		to='/'
-// 		end
-// 		className={({ isActive, isPending }) =>
-// 			isPending ? "pending" : isActive ? "active" : ""
-// 		}>
-// 		Home
-// 	</NavLink>,
-// 	<NavLink
-// 		to='/aboutus'
-// 		className={({ isActive, isPending }) =>
-// 			isPending ? "pending" : isActive ? "active" : ""
-// 		}>
-// 		About Us
-// 	</NavLink>,
-// 	<NavLink
-// 		to='contact'
-// 		className={({ isActive, isPending }) =>
-// 			isPending ? "pending" : isActive ? "active" : ""
-// 		}>
-// 		Contact
-// 	</NavLink>,
 
-// 	<NavLink
-// 		to='/buisness/orders'
-// 		end
-// 		className={({ isActive, isPending }) =>
-// 			isPending ? "pending" : isActive ? "active" : ""
-// 		}>
-// 		Orders
-// 	</NavLink>,
-// 	<NavLink
-// 		to='/buisness/orders/addOrder'
-// 		end
-// 		className={({ isActive, isPending }) =>
-// 			isPending ? "pending" : isActive ? "active" : ""
-// 		}>
-// 		Add order
-// 	</NavLink>,
-// 	<NavLink
-// 		to='/login'
-// 		end
-// 		className={({ isActive, isPending }) =>
-// 			isPending ? "pending" : isActive ? "active" : ""
-// 		}>
-// 		Login
-// 	</NavLink>,
-// 	<NavLink
-// 		to='/register'
-// 		className={({ isActive, isPending }) =>
-// 			isPending ? "pending" : isActive ? "active" : ""
-// 		}>
-// 		Register
-// 	</NavLink>,
-// ]
