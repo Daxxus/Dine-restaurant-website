@@ -7,7 +7,7 @@ interface MealcardProps {
 	image: string
 	price: number | string
 	reservDate: React.ReactNode
-	mealNbr: number
+	mealNumber: number
 	delOrder: MouseEventHandler<HTMLSpanElement> | undefined
 	edit: MouseEventHandler<HTMLSpanElement> | undefined
 }
@@ -17,7 +17,7 @@ const MealCard = ({
 	image,
 	price,
 	reservDate,
-	mealNbr,
+	mealNumber,
 	delOrder,
 	edit,
 }: MealcardProps) => (
@@ -25,7 +25,7 @@ const MealCard = ({
 		style={{ width: 300 }}
 		cover={<img alt='meal' src={image} style={{height:250}}/>}
 		actions={[
-			<div>{mealNbr} </div>,
+			<div>{mealNumber} </div>,
 			<div> {price} </div>,
 			<EditOutlined key='edit' type='button' onClick={edit} />,
 			// <DeleteOutlined  style={{fontSize:18}} onClick={del} />,

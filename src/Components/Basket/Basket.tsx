@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { useBreakpointValue, Flex, HStack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import style from "../Orders/styles/OrderDeatails.module.css"
+import { useAuthContext } from "../../Contexts/useAuthContext"
 interface MealProps {
 	mealNumber: number
 	name: string
@@ -15,6 +16,7 @@ interface MealProps {
 	mealPrice: number
 }
 export default function Basket() {
+	const {mealNumber} = useAuthContext()
 	const { clientEmail } = useSelector(
 		(state: Record<string, never>) => state.emailSlice
 	)
@@ -66,7 +68,8 @@ export default function Basket() {
 										: "No reservation"
 								}
 								delOrder={() => deleteOrder(order.id)}
-								mealNbr={order.mealNumber}
+								// warunek bo daje na wszystkie carty
+								mealNumber={mealNumber}
 								edit={() => jumpToOrderDetails(order.id)}
 							/>
 						)

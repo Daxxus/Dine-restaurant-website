@@ -1,33 +1,31 @@
 import {
 	// CloseButton,
 	Flex,
-	// Link,
 	Select,
 	SelectProps,
-	useColorModeValue,
+	useColorModeValue as mode,
 } from "@chakra-ui/react"
 import { PriceTag } from "./PriceTag"
 import { CartProductMeta } from "./CartProductMeta"
+import { useAuthContext } from "../../../Contexts/useAuthContext"
 
 type CartItemProps = {
-	// isGiftWrapping?: boolean
 	orderTitle: string
-	// description: string
-	mealNumber: number
+	// mealNumber: number
 	mealPrice: number
 	currency: string
 	image: string
 	onChangeQuantity?: (quantity: number) => void
-	// onClickGiftWrapping?: () => void
-	onClickDelete?: () => void
+	
+	// onClickDelete?: () => void
 }
 
-const QuantitySelect = (props: SelectProps) => {
+export const QuantitySelect = (props: SelectProps) => {
 	return (
 		<Select
 			maxW='64px'
 			aria-label='Select quantity'
-			focusBorderColor={useColorModeValue("blue.200", "blue.800")}
+			focusBorderColor={mode("blue.200", "blue.800")}
 			{...props}>
 			<option value='1'>1</option>
 			<option value='2'>2</option>
@@ -38,22 +36,22 @@ const QuantitySelect = (props: SelectProps) => {
 }
 
 export const CartItem = (props: CartItemProps) => {
+	const { totalPrice, setTotalPrice, setMealNumber } = useAuthContext()
+	
 	const {
-		// isGiftWrapping,
 		orderTitle,
-		// description,
-		mealNumber,
+		// mealNumber,
 		image,
 		currency,
 		mealPrice,
 		onChangeQuantity,
 		// onClickDelete,
 	} = props
+	console.log(typeof totalPrice)
 
 	return (
 		<Flex
-			// bg={ 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)'}
-      bg={useColorModeValue(`white`, `gray.600`)}
+			bg={mode(`white`, `gray.600`)}
 			direction={{ base: "column", md: "row" }}
 			justify='space-between'
 			align='center'>
@@ -62,20 +60,24 @@ export const CartItem = (props: CartItemProps) => {
 			{/* Desktop */}
 			<Flex
 				width='full'
-        ml={50}
+				ml={50}
 				justify='space-around'
 				display={{ base: "none", md: "flex" }}>
 				<QuantitySelect
-					value={mealNumber}
 					onChange={(e) => {
-						onChangeQuantity?.(+e.currentTarget.value)
+						// jak ustawić cenę na reduce
+						const sumUp = totalPrice + (+e.target.value - 1) * mealPrice
+						
+						setTotalPrice(sumUp)
+						setMealNumber(+e.target.value)
+						
 					}}
+					// value={mealNumber}
+					// onChange={(e) => {
+					// 	onChangeQuantity?.(+e.currentTarget.value)
+					// }}
 				/>
 				<PriceTag price={mealPrice} currency={currency} />
-				{/* <CloseButton
-					aria-label={`Delete ${orderTitle} from cart`}
-					onClick={onClickDelete}
-				/> */}
 			</Flex>
 
 			{/* Mobile */}
@@ -89,7 +91,7 @@ export const CartItem = (props: CartItemProps) => {
 					Delete
 				</Link> */}
 				<QuantitySelect
-					value={mealPrice}
+					// value={mealPrice}
 					onChange={(e) => {
 						onChangeQuantity?.(+e.currentTarget.value)
 					}}

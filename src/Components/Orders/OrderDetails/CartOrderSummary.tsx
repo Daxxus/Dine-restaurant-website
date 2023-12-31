@@ -1,5 +1,5 @@
 import {
-	Button,
+	// Button,
 	Flex,
 	Heading,
 	// Link,
@@ -7,7 +7,7 @@ import {
 	Text,
 	// useColorModeValue as mode,
 } from "@chakra-ui/react"
-import { FaArrowRight } from "react-icons/fa"
+// import { FaArrowRight } from "react-icons/fa"
 import { formatPrice } from "./PriceTag"
 import { useAuthContext } from "../../../Contexts/useAuthContext"
 
@@ -17,6 +17,7 @@ export const CartOrderSummary = () => {
 		<Stack
 			spacing='8'
 			borderWidth='1px'
+			
 			rounded='lg'
 			padding='8'
 			width='full'
@@ -40,13 +41,13 @@ export const CartOrderSummary = () => {
 					</Text>
 				</Flex>
 			</Stack>
-			<Button
+			{/* <Button
 				colorScheme='blue'
 				size='lg'
 				fontSize='md'
 				rightIcon={<FaArrowRight />}>
 				Add changes
-			</Button>
+			</Button> */}
 		</Stack>
 	)
 }

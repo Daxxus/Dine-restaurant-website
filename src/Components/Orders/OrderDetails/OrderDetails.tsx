@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom"
 import BgImage from "../../Images/a-restaurant-4857484.jpg"
 import { useNavigate } from "react-router-dom"
+// import { useAuthContext } from "../../../Contexts/useAuthContext"
 import {
 	Box,
 	Flex,
 	Heading,
 	HStack,
 	Link,
-	Stack,	
+	Stack,
 	useColorModeValue as mode,
 } from "@chakra-ui/react"
 import { Formik } from "formik"
@@ -32,6 +33,7 @@ const updateMealOrderById = async (
 }
 
 const OrderDetails = () => {
+	// const {mealNumber}= useAuthContext()
 	const navigate = useNavigate()
 	const param = useParams()
 	const queryClient = useQueryClient()
@@ -109,6 +111,7 @@ const OrderDetails = () => {
 									<Stack spacing='6'>
 										{meal?.map((el) => {
 											if (el.id === Number(param.id))
+											// console.log(el.mealNumber)
 												return <CartItem key={el.id} {...el} />
 										})}
 										{/* {meal?.map((item) => (
