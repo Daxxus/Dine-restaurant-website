@@ -45,12 +45,12 @@ const Login = () => {
 	const dispatch = useDispatch()
 	const { colorMode } = useColorMode()
 	const { isAuth, setIsAuth, setClientId } = useAuthContext()
-	const { setAvatar } = useAvatarContext() 
-
+	const { setAvatar } = useAvatarContext()
+	
 	const logged = "Grats!!! successfully signed in"
 	const error = "Data errors"
 	const notify1 = () => toast(`${logged}`)
-	const notify2 = () => toast(`${error}`)	
+	const notify2 = () => toast(`${error}`)
 
 	const logUser = (client: Login) => {
 		axios
@@ -58,8 +58,7 @@ const Login = () => {
 			.then((resp) => {
 				const { data } = resp
 
-				if (data[0].password === client.password) {
-					console.log(data)
+				if (data[0].password === client.password) {				
 
 					setIsAuth(true)
 					setAvatar(data[0].avatar)

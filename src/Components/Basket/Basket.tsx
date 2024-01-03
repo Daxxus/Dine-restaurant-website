@@ -6,17 +6,17 @@ import { useSelector } from "react-redux"
 import { useBreakpointValue, Flex, HStack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import style from "../Orders/styles/OrderDeatails.module.css"
-import { useAuthContext } from "../../Contexts/useAuthContext"
+// import { useAuthContext } from "../../Contexts/useAuthContext"
+import axios from "axios"
 interface MealProps {
 	mealNumber: number
 	name: string
-	id: string | number
+	id: number
 	orderTitle: string
 	image: string
 	mealPrice: number
 }
-export default function Basket() {
-	const {mealNumber} = useAuthContext()
+export default function Basket() {	
 	const { clientEmail } = useSelector(
 		(state: Record<string, never>) => state.emailSlice
 	)
@@ -27,14 +27,13 @@ export default function Basket() {
 	const jumpToOrderDetails = (id: string | number) => {
 		navigate(`/buisness/orders/${id}`)
 	}
-	const deleteOrder = async (id: string | number) => {
-		console.log(id)
-		const response = await fetch(`http://localhost:3000/orders/${id}`, {
-			headers: { "Content-type": "application/json;charset=UTF-8" },
-			method: "DELETE",
-		})
-		const data = await response.json()
-		return data
+	const deleteOrder = async (id: number) => {
+		await axios
+			.delete(`http://localhost:3000/clientOrders/${id}`)
+			.then((response) => {
+				const { data: order } = response
+				return order
+			})
 	}
 
 	return (
@@ -68,8 +67,7 @@ export default function Basket() {
 										: "No reservation"
 								}
 								delOrder={() => deleteOrder(order.id)}
-								// warunek bo daje na wszystkie carty
-								mealNumber={mealNumber}
+								mealNumber={order.mealNumber}
 								edit={() => jumpToOrderDetails(order.id)}
 							/>
 						)
@@ -84,38 +82,3 @@ export default function Basket() {
 // 		(el: { user: string }) => el.user === clientEmail
 // 	)
 // 	?.date.split("T") || null
-
-{
-	/* <VStack
-  w={'full'}
-  bgGradient={'linear(to-r, blackAlpha.600, transparent)'}
-  justify={'center'}
-  px={useBreakpointValue({ base: 4, md: 8 })}
-  >
-  <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
-    <Text
-      color={'white'}
-      fontWeight={700}
-      lineHeight={1.2}
-      fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-      Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
-    </Text>
-    <Stack direction={'row'}>
-      <Button
-        bg={'blue.400'}
-        rounded={'full'}
-        color={'white'}
-        _hover={{ bg: 'blue.500' }}>
-        Show me more
-      </Button>
-      <Button
-        bg={'whiteAlpha.300'}
-        rounded={'full'}
-        color={'white'}
-        _hover={{ bg: 'whiteAlpha.500' }}>
-        Show me more
-      </Button>
-    </Stack>
-  </Stack>
-</VStack> */
-}

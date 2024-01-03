@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom"
 import BgImage from "../../Images/a-restaurant-4857484.jpg"
 import { useNavigate } from "react-router-dom"
-// import { useAuthContext } from "../../../Contexts/useAuthContext"
 import {
 	Box,
 	Flex,
@@ -15,7 +14,7 @@ import { Formik } from "formik"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { CartItem } from "./CartItem"
 import { CartOrderSummary } from "./CartOrderSummary"
-// import { cartData } from "./CartData"
+
 interface SingleMeal {
 	mealNumber: number
 }
@@ -33,9 +32,8 @@ const updateMealOrderById = async (
 }
 
 const OrderDetails = () => {
-	// const {mealNumber}= useAuthContext()
-	const navigate = useNavigate()
 	const param = useParams()
+	const navigate = useNavigate()
 	const queryClient = useQueryClient()
 
 	const {
@@ -43,9 +41,9 @@ const OrderDetails = () => {
 		isLoading,
 		error,
 	} = useQuery({
-		queryKey: ["orders"],
+		queryKey: ["clientOrders"],
 		queryFn: () =>
-			fetch(`http://localhost:3000/orders/`).then((res) => res.json()),
+			fetch(`http://localhost:3000/clientOrders/`).then((res) => res.json()),
 	})
 
 	const mutation = useMutation({
@@ -53,7 +51,7 @@ const OrderDetails = () => {
 			return updateMealOrderById(values, param.id)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["orders", param.id] })
+			queryClient.invalidateQueries({ queryKey: ["clientOrders", param.id] })
 		},
 		onError: () => {
 			console.log("Error !!!")
@@ -69,8 +67,7 @@ const OrderDetails = () => {
 	if (error) <p>Can not get Order</p>
 	if (isLoading) <p>Loading...</p>
 	if (!meal) <p>No data!!!</p>
-	// console.log(cartData)
-	// console.log(meal)
+
 	return (
 		<Flex
 			bgImage={BgImage}
@@ -111,8 +108,14 @@ const OrderDetails = () => {
 									<Stack spacing='6'>
 										{meal?.map((el) => {
 											if (el.id === Number(param.id))
-											// console.log(el.mealNumber)
-												return <CartItem key={el.id} {...el} />
+												return (
+													<CartItem
+														key={el.id}
+														{...el}
+														// onClickDelete={() => deleteOrder(Number(param.id))}
+														// onChangeQuantity={2}
+													/>
+												)
 										})}
 										{/* {meal?.map((item) => (
 											

@@ -90,7 +90,7 @@ export default function FormRegister() {
 	}
 
 	if (!avatars) <p>No data...</p>
-	console.log(clientId)
+	
 	return (
 		<Flex
 			align='center'

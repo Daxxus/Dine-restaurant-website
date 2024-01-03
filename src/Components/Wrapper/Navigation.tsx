@@ -6,7 +6,7 @@ import { useEffect } from "react"
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
-import useReservations from "../Clients/useReservations"
+// import useReservations from "../Clients/useReservations"
 // import useClients from "../Clients/Clients"
 import Counting from "../Counting/Counting"
 import useOrders from "../Clients/useOrders"
@@ -74,25 +74,27 @@ const Nav = (props: Props) => {
 
 export default function WithAction() {
 	const { orders, isLoading } = useOrders()
-	const { reservations, loading } = useReservations()
+	// const { reservations, loading } = useReservations()
 	const { isAuth, setIsAuth, totalPrice, setTotalPrice } = useAuthContext()
 	const { avatar } = useAvatarContext()
 	const { clientEmail } = useSelector(
-		(state: Record<string, never>) => state.emailSlice	)
-	
+		(state: Record<string, never>) => state.emailSlice
+	)
+
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
-	const notify = () => toast(`Successfully logged out`)	
-	useEffect(() => {
-		if (orders && reservations) {
+	const notify = () => toast(`Successfully logged out`)
+	useEffect(() => {		
+		if (orders) {
 			const sumUp = orders.reduce(
-				(acc: number, cur: { mealPrice: number }) => acc + cur.mealPrice,
+				(acc: number, cur: { mealPrice: number; mealNumber: number }) =>
+					acc + cur.mealPrice * cur.mealNumber,
 				0
 			)
 			setTotalPrice(sumUp)
 		}
-	}, [orders, reservations, setTotalPrice])
+	}, [orders, setTotalPrice])
 
 	const links2 = [
 		{ label: "Home", to: "/" },
@@ -103,21 +105,20 @@ export default function WithAction() {
 		{ label: "Login", to: "/login" },
 		{ label: "Register", to: "/register" },
 		{
-			label: isAuth ? (
-				!isLoading ? (
-					<Stack spacing={4}>
-						<Button
-							leftIcon={<FaShoppingCart />}
-							fontSize={{ base: "small", lg: "large" }}
-							colorScheme='teal'
-							variant='outline'>
-							${totalPrice}
-						</Button>
-					</Stack>
-				) : (
-					loading
-				)
-			) : null,
+			label: isAuth
+				? !isLoading && (
+						<Stack spacing={4}>
+							<Button
+								leftIcon={<FaShoppingCart />}
+								fontSize={{ base: "small", lg: "large" }}
+								colorScheme='teal'
+								variant='outline'>
+								${totalPrice}
+							</Button>
+						</Stack>
+						// eslint-disable-next-line no-mixed-spaces-and-tabs
+				  )
+				: null,
 			to: "/basket",
 		},
 		{
@@ -139,15 +140,11 @@ export default function WithAction() {
 			to: "/login  ",
 		},
 		{
-			label: isAuth ? (
-				!loading ? (
-					<Box fontSize={{ base: "small", lg: "md" }}>
-						<Counting />
-					</Box>
-				) : (
-					<p>loading...</p>
-				)
-			) : null,
+			label: isAuth && (
+				<Box fontSize={{ base: "small", lg: "md" }}>
+					<Counting />
+				</Box>
+			),
 			to: "/basket  ",
 		},
 		{
@@ -205,10 +202,7 @@ export default function WithAction() {
 									// as={Button}
 									mr={3}
 									rounded={"full"}
-									// variant={"link"}
-									cursor={"pointer"}
-									// minW={0}
-								>
+									cursor={"pointer"}>
 									{isAuth ? (
 										<Box>
 											<Avatar size={"md"} src={avatar} />
@@ -266,7 +260,7 @@ export default function WithAction() {
 										{link.label}
 									</NavLink>
 								</Nav>
-							))}							
+							))}
 						</Stack>
 					</Box>
 				) : null}
@@ -274,5 +268,3 @@ export default function WithAction() {
 		</>
 	)
 }
-
-

@@ -8,9 +8,9 @@ const useOrders = () => {
 		isLoading,
 		error,
 	} = useQuery({
-		queryKey: ["orders", clientId],
+		queryKey: ["clientOrders", clientId],
 		queryFn: () =>
-			fetch(`http://localhost:3000/orders?clientId=${clientId}`).then(
+			fetch(`http://localhost:3000/clientOrders?clientId=${clientId}`).then(
 				(response) => response.json()
 			),
 	})
