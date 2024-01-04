@@ -1,7 +1,5 @@
 import {
-	// CloseButton,
 	Flex,
-	// Link,
 	Select,
 	SelectProps,
 	useColorModeValue as mode,
@@ -9,15 +7,12 @@ import {
 import axios from "axios"
 import { PriceTag } from "./PriceTag"
 import { CartProductMeta } from "./CartProductMeta"
-// import { useAuthContext } from "../../../Contexts/useAuthContext"
-// import useOrders from "../../Clients/useOrders"
 import { Formik } from "formik"
 import { useParams } from "react-router-dom"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 type CartItemProps = {
 	orderTitle: string
-	// mealNumber: number
 	mealPrice: number
 	currency: string
 	image: string
@@ -35,6 +30,7 @@ export const QuantitySelect = (props: SelectProps) => {
 			aria-label='Select quantity'
 			focusBorderColor={mode("blue.200", "blue.800")}
 			{...props}>
+			<option value='0'>0</option>
 			<option value='1'>1</option>
 			<option value='2'>2</option>
 			<option value='3'>3</option>
@@ -43,17 +39,12 @@ export const QuantitySelect = (props: SelectProps) => {
 	)
 }
 
-
 export const CartItem = (props: CartItemProps) => {
-	// const { totalPrice, setTotalPrice, setMealNumber } = useAuthContext()
-	// const { orders } = useOrders()
 	const param = useParams()
-	// console.log(orders)
-
-	const newMealNumber = (newNbr: mealNbr) => {
+	const newMealNumber = (newNbr: mealNbr, id: string | number | undefined) => {
 		console.log(newNbr)
 		axios
-			.put(`http://localhost:3000/clientOrders/${param.id}`, newNbr)
+			.patch(`http://localhost:3000/clientOrders/${id}`, newNbr)
 			.then((resp) => {
 				const { data } = resp
 				return data
@@ -62,7 +53,7 @@ export const CartItem = (props: CartItemProps) => {
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: mealNbr) => {
-			return newMealNumber(values)
+			return newMealNumber(values, param.id)
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
@@ -75,37 +66,10 @@ export const CartItem = (props: CartItemProps) => {
 	})
 
 	const handleAddNewMealNbr = (mealNumb: mealNbr) => {
-		console.log(mealNumb)
 		mutation.mutate(mealNumb)
 	}
 
-	// const updateTotalPrice = (e: { target: { value: string | number } }) => {
-	// 	console.log(e.target.value)
-
-	// 	// if (orders) {
-	// 	// 	const total = orders.reduce(
-	// 	// 		(acc: number, cur: { mealPrice: number; mealNumber:number }) =>
-	// 	// 			acc + (+e.target.value - 1) * cur.mealPrice,
-	// 	// 		0
-	// 	// 	)
-	// 	// 	console.log(total)
-	// 	// 	const sumUp = totalPrice + (+e.target.value - 1) * mealPrice
-	// 	// 	console.log(sumUp)
-	// 	// 	setTotalPrice(sumUp)
-
-	// 	// 	setMealNumber(+e.target.value)
-	// 	// }
-	// }
-
-	const {
-		orderTitle,
-		// mealNumber,
-		image,
-		currency,
-		mealPrice,
-		// onChangeQuantity,
-		// onClickDelete,
-	} = props
+	const { orderTitle, image, currency, mealPrice } = props
 
 	return (
 		<Flex
@@ -125,24 +89,17 @@ export const CartItem = (props: CartItemProps) => {
 					initialValues={{
 						mealNumber: 1,
 					}}
+					enableReinitialize
 					onSubmit={(values: mealNbr) => {
 						handleAddNewMealNbr(values)
-						// newMealNumber(values)
 					}}>
 					{({ handleSubmit, setFieldValue }) => (
-						<form onSubmit={handleSubmit}>
-							<QuantitySelect
-								// id={param.id}
-
-								onChange={(e) => {
-									console.log(e.target.value)
-
-									setFieldValue(`mealNumber`, +e.target.value)
-								}}
-								// onChange={handleChange}
-								
-							/>
-						</form>
+						<QuantitySelect
+							onChange={(e) => {
+								setFieldValue(`mealNumber`, +e.target.value)
+								handleSubmit()
+							}}
+						/>
 					)}
 				</Formik>
 				<PriceTag price={mealPrice} currency={currency} />
@@ -158,14 +115,23 @@ export const CartItem = (props: CartItemProps) => {
 				{/* <Link fontSize='sm' textDecor='underline'>
 					Delete
 				</Link> */}
-
-				<QuantitySelect
-					onChange={(e) => {
-						// const sumUp = totalPrice + (+e.target.value - 1) * mealPrice
-						// setTotalPrice(sumUp)
-						// setMealNumber(+e.target.value)
+				<Formik
+					initialValues={{
+						mealNumber: 1,
 					}}
-				/>
+					enableReinitialize
+					onSubmit={(values: mealNbr) => {
+						handleAddNewMealNbr(values)
+					}}>
+					{({ handleSubmit, setFieldValue }) => (
+						<QuantitySelect
+							onChange={(e) => {
+								setFieldValue(`mealNumber`, +e.target.value)
+								handleSubmit()
+							}}
+						/>
+					)}
+				</Formik>
 				<PriceTag price={mealPrice} currency={currency} />
 			</Flex>
 		</Flex>

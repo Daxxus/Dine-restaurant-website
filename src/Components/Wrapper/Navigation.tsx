@@ -74,7 +74,6 @@ const Nav = (props: Props) => {
 
 export default function WithAction() {
 	const { orders, isLoading } = useOrders()
-	// const { reservations, loading } = useReservations()
 	const { isAuth, setIsAuth, totalPrice, setTotalPrice } = useAuthContext()
 	const { avatar } = useAvatarContext()
 	const { clientEmail } = useSelector(

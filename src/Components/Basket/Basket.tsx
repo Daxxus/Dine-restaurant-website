@@ -16,7 +16,7 @@ interface MealProps {
 	image: string
 	mealPrice: number
 }
-export default function Basket() {	
+export default function Basket() {
 	const { clientEmail } = useSelector(
 		(state: Record<string, never>) => state.emailSlice
 	)
@@ -40,7 +40,7 @@ export default function Basket() {
 		<Flex
 			justify={"center"}
 			w={"full"}
-			h={{ base: "full", lg: "100vh" }}
+			h={{ base: "full", sm: "100vh",md: "100vh", lg: "100vh" }}
 			backgroundImage={BgImage}
 			backgroundSize={"cover"}
 			backgroundPosition={"center center"}>
@@ -77,8 +77,4 @@ export default function Basket() {
 		</Flex>
 	)
 }
-// reservations
-// 	?.find(
-// 		(el: { user: string }) => el.user === clientEmail
-// 	)
-// 	?.date.split("T") || null
+
