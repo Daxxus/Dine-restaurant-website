@@ -22,8 +22,8 @@ const MealCard = ({
 	edit,
 }: MealcardProps) => (
 	<Card
-		style={{ width: 300 }}
-		cover={<img alt='meal' src={image} style={{height:250}}/>}
+		style={{ width: 300, height: 400 }}
+		cover={<img alt='meal' src={image} style={{ height: 250 }} />}
 		actions={[
 			<div>{mealNumber} </div>,
 			<div> {price} </div>,

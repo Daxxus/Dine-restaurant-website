@@ -52,14 +52,13 @@ const Login = () => {
 	const notify1 = () => toast(`${logged}`)
 	const notify2 = () => toast(`${error}`)
 
-	const logUser = (client: Login) => {
-		axios
+	const logUser = async(client: Login) => {
+		await axios
 			.get(`http://localhost:3000/clients?email=${client.email}`)
 			.then((resp) => {
 				const { data } = resp
 
-				if (data[0].password === client.password) {				
-
+				if (data[0].password === client.password) {		
 					setIsAuth(true)
 					setAvatar(data[0].avatar)
 					setClientId(data[0].clientId)
@@ -73,7 +72,7 @@ const Login = () => {
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: Login) => {
-			return logUser(values)
+			return  logUser(values)
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries()

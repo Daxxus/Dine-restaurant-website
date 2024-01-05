@@ -2,12 +2,9 @@ import { NavLink } from "react-router-dom"
 import { GiCook } from "react-icons/gi"
 import { FaShoppingCart } from "react-icons/fa"
 import { useEffect } from "react"
-
 // import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
-// import useReservations from "../Clients/useReservations"
-// import useClients from "../Clients/Clients"
 import Counting from "../Counting/Counting"
 import useOrders from "../Clients/useOrders"
 import { toast } from "react-toastify"
@@ -41,12 +38,11 @@ interface Props {
 	children: React.ReactNode
 }
 
-// const Links = ["Home", "About Us", "Contact", 'Register', 'Login']
 // const links2 = [
 // 	{ label: "Home", to: "/" },
 // 	{ label: "About Us", to: "/aboutus" },
 // 	{ label: "Contact", to: "/contact" },
-// 	// { label: "Orders", to: "/buisness/orders" },
+//  { label: "Orders", to: "/buisness/orders" },
 // 	{ label: "Add order", to: "/buisness/orders/addOrder" },
 // 	{ label: "Login", to: "/login" },
 // 	{ label: "Register", to: "/register" },
@@ -79,7 +75,6 @@ export default function WithAction() {
 	const { clientEmail } = useSelector(
 		(state: Record<string, never>) => state.emailSlice
 	)
-
 	const { colorMode, toggleColorMode } = useColorMode()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
@@ -93,13 +88,11 @@ export default function WithAction() {
 			)
 			setTotalPrice(sumUp)
 		}
-	}, [orders, setTotalPrice])
+	}, [orders, setTotalPrice,isLoading])
 
 	const links2 = [
 		{ label: "Home", to: "/" },
-		{ label: "About Us", to: "/aboutus" },
-		// { label: "Contact", to: "/contact" },
-		// { label: "Orders", to: "/buisness/orders" },
+		{ label: "About Us", to: "/aboutus" },		
 		{ label: "Add order", to: "/buisness/orders/addOrder" },
 		{ label: "Login", to: "/login" },
 		{ label: "Register", to: "/register" },

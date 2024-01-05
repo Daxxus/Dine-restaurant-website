@@ -13,6 +13,7 @@ const useOrders = () => {
 			fetch(`http://localhost:3000/clientOrders?clientId=${clientId}`).then(
 				(response) => response.json()
 			),
+		enabled: clientId!==""
 	})
 
 	return { orders, isLoading, error }

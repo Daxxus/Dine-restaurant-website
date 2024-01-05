@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useAuthContext } from "../../Contexts/useAuthContext"
-
-import useCountdownContext from "../../Contexts/useCountdownContext"
+// import useCountdownContext from "../../Contexts/useCountdownContext"
 import { Formik, Field } from "formik"
 import {
 	Drawer,
@@ -46,10 +45,8 @@ const yupSchema = object({
 	people: yup.number().required(),
 })
 
-const Reservation = () => {
-	// const clients = useClients()
-	// const { clientId } = useAuthContext()
-	const { clientId } = useAuthContext()	
+const Reservation = () => {	
+	const { clientId } = useAuthContext()
 	const { clientEmail } = useSelector(
 		(state: Record<string, never>) => state.emailSlice
 	)
@@ -58,45 +55,18 @@ const Reservation = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const firstField = React.useRef()
 
-	const { setSecondsLeft } = useCountdownContext()
+	// const { setSecondsLeft } = useCountdownContext()
 
 	const pickerTime = (val: React.SetStateAction<string>) => {
 		setDatetime(val)
 	}
-	const addReservation = (newReservation: ReservationDetails) => {
-		axios
+	const addReservation = async (newReservation: ReservationDetails) => {
+		await axios
 			.post(` http://localhost:3000/reservations`, newReservation)
-			.then((resp) => {
-				const { data: reservation } = resp
-				if (reservation.clientId === clientId) {
-					const currentTime = new Date().getTime()
-					const finalTime: any = new Date(datetime)
-					let timeDiffrence: any = (finalTime - currentTime) / 1000
-					timeDiffrence = parseInt(timeDiffrence)
-					setSecondsLeft(timeDiffrence)
-					onClose()
-
-					return reservation
-				}
+			.then(() => {
+				onClose()
 			})
 	}
-
-	//TODO: use mutation to do this
-	// const addReservation = async (newReservation: ReservationDetails) => {
-	// 	console.log(newReservation)
-	// 	const Url = "http://localhost:3000/reservations"
-	// 	const resp = await fetch(Url, {
-	// 		method: "POST",
-	// 		headers: { "Content-type": "application/json;charset=UTF-8" },
-	// 		body: JSON.stringify(newReservation),
-	// 	})
-
-	// 	if (!resp.ok) {
-	// 		return {}
-	// 	}
-	// 	const data = await resp.json()
-	// 	return data
-	// }
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: ReservationDetails) => {

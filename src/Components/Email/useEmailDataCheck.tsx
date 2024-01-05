@@ -12,7 +12,7 @@ const useEmailDataCheck = () => {
 		return isAvilable
 	}
 
-	return { verifyMailAvilable } //obiekt bo values z register to obiekt values.email
+	return { verifyMailAvilable } 
 }
 
 export default useEmailDataCheck

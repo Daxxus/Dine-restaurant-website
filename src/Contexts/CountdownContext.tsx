@@ -18,6 +18,7 @@ export const CountdownProvider = ({
 	children: React.ReactNode
 }) => {
 	const [secondsLeft, setSecondsLeft] = useState(0)
+
 	useEffect(() => {
 		if (secondsLeft <= 0) return
 		const timeout = setTimeout(() => {

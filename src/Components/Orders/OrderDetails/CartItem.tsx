@@ -41,19 +41,35 @@ export const QuantitySelect = (props: SelectProps) => {
 
 export const CartItem = (props: CartItemProps) => {
 	const param = useParams()
-	const newMealNumber = (newNbr: mealNbr, id: string | number | undefined) => {
-		console.log(newNbr)
-		axios
+
+	// const newMealNumber = async (
+	// 	newNbr: mealNbr,
+	// 	id: string | number | undefined
+	// ) => {
+	// 	const response = await fetch(`http://localhost:3000/clientOrders/${id}`, {
+	// 		method: "PATCH",
+	// 		headers: { "Content-type": "application/json;charset=UTF-8" },
+	// 		body: JSON.stringify(newNbr),
+	// 	})
+	// 	const data = await response.json()
+	// 	return data
+	// }
+	const newMealNumber = async (
+		newNbr: mealNbr,
+		id: string | number | undefined
+	) => {
+		await axios
 			.patch(`http://localhost:3000/clientOrders/${id}`, newNbr)
 			.then((resp) => {
 				const { data } = resp
 				return data
 			})
 	}
+
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: mealNbr) => {
-			return newMealNumber(values, param.id)
+			return await newMealNumber(values, param.id)
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({

@@ -40,14 +40,16 @@ export default function SelectMenu() {
 			fetch("http://localhost:3000/menuItems").then((res) => res.json()),
 	})
 
-	const addOrder = (newOrder: OrderDetails) => {
-		axios.post(` http://localhost:3000/clientOrders`, newOrder).then((resp) => {
-			const { data: mealsName } = resp
-			return mealsName
-		})
-		setTimeout(() => {
-			setMenuTitle("")
-		}, 1000)
+	const addOrder = async (newOrder: OrderDetails) => {
+		await axios
+			.post(` http://localhost:3000/clientOrders`, newOrder)
+			.then((resp) => {
+				const { data: mealsName } = resp
+				return mealsName
+			})
+		// setTimeout(() => {
+		// 	setMenuTitle("")
+		// }, 1000)
 	}
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
@@ -64,10 +66,10 @@ export default function SelectMenu() {
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: OrderDetails) => {
-			return addOrder(values)
+			return await addOrder(values)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["clientOrders", clientId] })
+			queryClient.invalidateQueries({ queryKey: ["clientOrders"] })
 		},
 		onError: () => {
 			console.log("Error !!!!!")
@@ -76,12 +78,6 @@ export default function SelectMenu() {
 	const handleAdd = (newOrder: OrderDetails) => {
 		mutation.mutate(newOrder)
 	}
-	// const handleRedux = (image: string, mealPrice: number) => {
-	// 	// problem podział na userów
-	// 	dispatch(toCart(mealPrice))
-	// 	dispatch(addImage(image))
-	// 	// dispatch(addOrder(name))
-	// }
 
 	const handleRange = (e) => {
 		setSliderValue(e.target.value)
@@ -122,7 +118,6 @@ export default function SelectMenu() {
 						))}
 					/>
 				</Box>
-
 				<Box py={{ base: 20, md: 20 }} className={style.grid}>
 					{menuTitle
 						? menu?.map(
@@ -204,7 +199,6 @@ export default function SelectMenu() {
 													add={(mealPrice: number) => {
 														setFieldValue("mealPrice", mealPrice)
 														handleSubmit()
-														// handleRedux(el.image, mealPrice)
 													}}
 													mealNumber={(e) => {
 														setFieldValue(`mealNumber`, +e.target.value)

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import BgImage from "../../Images/a-restaurant-4857484.jpg"
 import { useNavigate } from "react-router-dom"
+import useOrders from "../../Clients/useOrders"
 import {
 	Box,
 	Flex,
@@ -11,7 +12,7 @@ import {
 	useColorModeValue as mode,
 } from "@chakra-ui/react"
 import { Formik } from "formik"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import {  useMutation, useQueryClient } from "@tanstack/react-query"
 import { CartItem } from "./CartItem"
 import { CartOrderSummary } from "./CartOrderSummary"
 
@@ -22,7 +23,7 @@ const updateMealOrderById = async (
 	updateMealOrder: SingleMeal,
 	id: string | undefined
 ) => {
-	const response = await fetch(`http://localhost:3000/orders/${id}`, {
+	const response = await fetch(`http://localhost:3000/clientOrders/${id}`, {
 		method: "PUT",
 		headers: { "Content-type": "application/json;charset=UTF-8" },
 		body: JSON.stringify(updateMealOrder),
@@ -32,23 +33,14 @@ const updateMealOrderById = async (
 }
 
 const OrderDetails = () => {
+	const { orders } = useOrders()
 	const param = useParams()
 	const navigate = useNavigate()
-	const queryClient = useQueryClient()
-
-	const {
-		data: meal,
-		isLoading,
-		error,
-	} = useQuery({
-		queryKey: ["clientOrders"],
-		queryFn: () =>
-			fetch(`http://localhost:3000/clientOrders/`).then((res) => res.json()),
-	})
+	const queryClient = useQueryClient()	
 
 	const mutation = useMutation({
 		mutationFn: async (values: SingleMeal) => {
-			return updateMealOrderById(values, param.id)
+			return await updateMealOrderById(values, param.id)
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["clientOrders", param.id] })
@@ -64,10 +56,8 @@ const OrderDetails = () => {
 	const navigateMenuList = () => {
 		navigate("/buisness/orders/addOrder")
 	}
-	if (error) <p>Can not get Order</p>
-	if (isLoading) <p>Loading...</p>
-	if (!meal) <p>No data!!!</p>
-
+	if (!orders) <p>No data!!!</p>	
+	
 	return (
 		<Flex
 			bgImage={BgImage}
@@ -84,7 +74,7 @@ const OrderDetails = () => {
 				<Formik
 					initialValues={{
 						mealNumber:
-							meal?.find((el: { id: number }) => el.id === Number(param.id))
+							orders?.find((el: { id: number }) => el.id === Number(param.id))
 								?.mealNumber || undefined,
 					}}
 					enableReinitialize
@@ -106,21 +96,10 @@ const OrderDetails = () => {
 									</Heading>
 
 									<Stack spacing='6'>
-										{meal?.map((el) => {
+										{orders?.map((el) => {
 											if (el.id === Number(param.id))
-												return (
-													<CartItem
-														key={el.id}
-														{...el}
-														// onClickDelete={() => deleteOrder(Number(param.id))}
-														// onChangeQuantity={2}
-													/>
-												)
+												return <CartItem key={el.id} {...el} />
 										})}
-										{/* {meal?.map((item) => (
-											
-											<CartItem key={item.id} {...item} />
-										))} */}
 									</Stack>
 								</Stack>
 

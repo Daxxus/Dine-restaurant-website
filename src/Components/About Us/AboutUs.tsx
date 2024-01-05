@@ -1,168 +1,131 @@
-"use client"
-
+// import BgImage from "../Images/coffeehouse-2600877_1280.jpg"
+import React from "react"
+import ModalComp from "./Modal"
+import CaptionCarousel from "./Carousel"
 import {
 	Container,
+	Stack,
 	Flex,
 	Box,
 	Heading,
 	Text,
-	IconButton,
 	Button,
-	VStack,
-	HStack,
-	Wrap,
-	WrapItem,
-	FormControl,
-	FormLabel,
-	Input,
-	InputGroup,
-	InputLeftElement,
-	Textarea,
+	Icon,
+	IconProps,
+	useColorModeValue,
+	useDisclosure,
 } from "@chakra-ui/react"
-import {
-	MdPhone,
-	MdEmail,
-	MdLocationOn,
-	MdFacebook,
-	MdOutlineEmail,
-} from "react-icons/md"
-import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs"
 
-function AboutUs() {
+export default function AboutUs() {
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const [size] = React.useState("full")
 	return (
-		<Container bg='#9DC4FB' maxW='full' mt={0} centerContent overflow='hidden'>
-			<Flex>
-				<Box
-					bg='#02054B'
-					color='white'
-					borderRadius='lg'
-					m={{ sm: 4, md: 16, lg: 10 }}
-					p={{ sm: 5, md: 5, lg: 16 }}>
-					<Box p={4}>
-						<Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
-							<WrapItem>
-								<Box>
-									<Heading>Contact</Heading>
-									<Text mt={{ sm: 3, md: 3, lg: 5 }} color='gray.500'>
-										Fill up the form below to contact
-									</Text>
-									<Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
-										<VStack pl={0} spacing={3} alignItems='flex-start'>
-											<Button
-												size='md'
-												height='48px'
-												width='200px'
-												variant='ghost'
-												color='#DCE2FF'
-												_hover={{ border: "2px solid #1C6FEB" }}
-												leftIcon={<MdPhone color='#1970F1' size='20px' />}>
-												+91-988888888
-											</Button>
-											<Button
-												size='md'
-												height='48px'
-												width='200px'
-												variant='ghost'
-												color='#DCE2FF'
-												_hover={{ border: "2px solid #1C6FEB" }}
-												leftIcon={<MdEmail color='#1970F1' size='20px' />}>
-												hello@abc.com
-											</Button>
-											<Button
-												size='md'
-												height='48px'
-												width='200px'
-												variant='ghost'
-												color='#DCE2FF'
-												_hover={{ border: "2px solid #1C6FEB" }}
-												leftIcon={<MdLocationOn color='#1970F1' size='20px' />}>
-												Karnavati, India
-											</Button>
-										</VStack>
-									</Box>
-									<HStack
-										mt={{ lg: 10, md: 10 }}
-										spacing={5}
-										px={5}
-										alignItems='flex-start'>
-										<IconButton
-											aria-label='facebook'
-											variant='ghost'
-											size='lg'
-											isRound={true}
-											_hover={{ bg: "#0D74FF" }}
-											icon={<MdFacebook size='28px' />}
-										/>
-										<IconButton
-											aria-label='github'
-											variant='ghost'
-											size='lg'
-											isRound={true}
-											_hover={{ bg: "#0D74FF" }}
-											icon={<BsGithub size='28px' />}
-										/>
-										<IconButton
-											aria-label='discord'
-											variant='ghost'
-											size='lg'
-											isRound={true}
-											_hover={{ bg: "#0D74FF" }}
-											icon={<BsDiscord size='28px' />}
-										/>
-									</HStack>
-								</Box>
-							</WrapItem>
-							<WrapItem>
-								<Box bg='white' borderRadius='lg'>
-									<Box m={8} color='#0B0E3F'>
-										<VStack spacing={5}>
-											<FormControl id='name'>
-												<FormLabel>Your Name</FormLabel>
-												<InputGroup borderColor='#E0E1E7'>
-													<InputLeftElement pointerEvents='none'>
-														<BsPerson color='gray.800' />
-													</InputLeftElement>
-													<Input type='text' size='md' />
-												</InputGroup>
-											</FormControl>
-											<FormControl id='name'>
-												<FormLabel>Mail</FormLabel>
-												<InputGroup borderColor='#E0E1E7'>
-													<InputLeftElement pointerEvents='none'>
-														<MdOutlineEmail color='gray.800' />
-													</InputLeftElement>
-													<Input type='text' size='md' />
-												</InputGroup>
-											</FormControl>
-											<FormControl id='name'>
-												<FormLabel>Message</FormLabel>
-												<Textarea
-													borderColor='gray.300'
-													_hover={{
-														borderRadius: "gray.300",
-													}}
-													placeholder='message'
-												/>
-											</FormControl>
-											<FormControl id='name' float='right'>
-												<Button
-													variant='solid'
-													bg='#0D74FF'
-													color='white'
-													_hover={{}}>
-													Send Message
-												</Button>
-											</FormControl>
-										</VStack>
-									</Box>
-								</Box>
-							</WrapItem>
-						</Wrap>
-					</Box>
-				</Box>
-			</Flex>
-		</Container>
+		<Flex
+		// bgImage={BgImage}
+		// w={"full"}
+		// h={{ base: "full", sm: "100vh",md: "100vh", lg: "100vh" }}
+		// backgroundSize={"cover"}
+		// // filter='grayscale(100%)'
+		>
+			<Container maxW={"7xl"}>
+				<Stack
+					align={"center"}
+					spacing={{ base: 8, md: 10 }}
+					py={{ base: 20, md: 28 }}
+					direction={{ base: "column", md: "row" }}>
+					<Stack flex={1} spacing={{ base: 5, md: 10 }}>
+						<Heading
+							lineHeight={1.1}
+							fontWeight={600}
+							fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}>
+							<Text
+								as={"span"}
+								position={"relative"}
+								_after={{
+									content: "''",
+									width: "full",
+									height: "30%",
+									position: "absolute",
+									bottom: 1,
+									left: 0,
+									bg: "red.400",
+									zIndex: -1,
+								}}>
+								All about us,
+							</Text>
+							<br />
+							<Text as={"span"} color={"red.400"}>
+								what You want to know!
+							</Text>
+						</Heading>
+						<Text color={"gray.500"}>
+							Our team is permanently burgeoning during the course of our
+							presence here in Wroclaw. We draw upon the expertise of the best
+							recipies each day and enjoy it with our clients
+						</Text>
+						<Stack
+							spacing={{ base: 4, sm: 6 }}
+							direction={{ base: "column", sm: "row" }}>
+							<Button
+								rounded={"full"}
+								size={"lg"}
+								fontWeight={"normal"}
+								px={6}
+								colorScheme={"red"}
+								bg={"red.400"}
+								onClick={onOpen}
+								_hover={{ bg: "red.500" }}>
+								Contact Us
+							</Button>
+						</Stack>
+					</Stack>
+					<Flex
+						flex={1}
+						justify={"center"}
+						align={"center"}
+						position={"relative"}
+						w={"full"}>
+						<Blob
+							w={"150%"}
+							h={"150%"}
+							position={"absolute"}
+							top={"-20%"}
+							left={0}
+							zIndex={-1}
+							color={useColorModeValue("red.50", "red.400")}
+						/>
+						<Box
+							position={"relative"}
+							height={350}
+							rounded={"2xl"}
+							boxShadow={"2xl"}
+							// width={"full"}
+							width={600}
+							overflow={"hidden"}>
+							<CaptionCarousel />
+						</Box>
+					</Flex>
+				</Stack>
+				<ModalComp onClose={onClose} isOpen={isOpen} size={size} />
+			</Container>
+		</Flex>
 	)
 }
 
-export default AboutUs
+const Blob = (props: IconProps) => {
+	return (
+		<Icon
+			width={"100%"}
+			viewBox='0 0 578 440'
+			fill='none'
+			xmlns='http://www.w3.org/2000/svg'
+			{...props}>
+			<path
+				fillRule='evenodd'
+				clipRule='evenodd'
+				d='M239.184 439.443c-55.13-5.419-110.241-21.365-151.074-58.767C42.307 338.722-7.478 282.729.938 221.217c8.433-61.644 78.896-91.048 126.871-130.712 34.337-28.388 70.198-51.348 112.004-66.78C282.34 8.024 325.382-3.369 370.518.904c54.019 5.115 112.774 10.886 150.881 49.482 39.916 40.427 49.421 100.753 53.385 157.402 4.13 59.015 11.255 128.44-30.444 170.44-41.383 41.683-111.6 19.106-169.213 30.663-46.68 9.364-88.56 35.21-135.943 30.551z'
+				fill='currentColor'
+			/>
+		</Icon>
+	)
+}

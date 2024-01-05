@@ -10,12 +10,11 @@ import {
 import ProtectWrapper from "./Contexts/ProtectContext"
 import Headroom from "react-headroom"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-// const Contact = lazy(() => import("./Components/Contact/Contact"))
 const AddOrder = lazy(() => import("./Components/Orders/AddOrder"))
-const OrderDetails = lazy(() => import("./Components/Orders/OrderDetails/OrderDetails"))
-// const Orders = lazy(() => import("./Components/Orders/Orders"))
+const OrderDetails = lazy(
+	() => import("./Components/Orders/OrderDetails/OrderDetails")
+)
 const Error404 = lazy(() => import("./Components/404/Error404"))
-// const Menu = lazy(() => import("./Components/Menu/Menu"))
 const AboutUs = lazy(() => import("./Components/About Us/AboutUs"))
 const Login = lazy(() => import("./Components/Login/Login"))
 const Basket = lazy(() => import("./Components/Basket/Basket"))
@@ -53,7 +52,6 @@ function App() {
 								<Route element={<AboutUs />} path='/aboutus' />
 								{/* <Route element={<Contact />} path='/contact' /> */}
 								<Route path='buisness'>
-									{/* <Route index element={<Menu />} /> */}
 									<Route path='orders'>
 										{/* <Route
 											index
