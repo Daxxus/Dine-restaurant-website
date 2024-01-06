@@ -1,9 +1,10 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import BgImage from "../Images/restaurant-449952_1920.jpg"
 import MealCard from "./MealCards"
 import useOrders from "../Clients/useOrders"
 import useReservations from "../Clients/useReservations"
-// import { useSelector } from "react-redux"
-import { useBreakpointValue, Flex,  Box } from "@chakra-ui/react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useBreakpointValue, Flex, Box } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import style from "./Styles/Basket.module.css"
 import axios from "axios"
@@ -26,30 +27,43 @@ export default function Basket() {
 	const jumpToOrderDetails = (id: string | number) => {
 		navigate(`/buisness/orders/${id}`)
 	}
-	const deleteOrder = async (id: number) => {
-		await axios
-			.delete(`http://localhost:3000/clientOrders/${id}`)
-			.then((response) => {
-				const { data: order } = response
-				return order
-			})
+	const deleteOrder = async (id: void) => {
+		const response = await axios.delete(
+			`http://localhost:3000/clientOrders/${id}`
+		)
+
+		const { data: order } = response
+		return order
+	}
+	const queryClient = useQueryClient()
+	const mutation = useMutation({
+		mutationFn: async (id) => {
+			return await deleteOrder(id)
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["clientOrders"] })
+		},
+		onError: () => {
+			console.log("Error !!!!!")
+		},
+	})
+	const handleDelete = (id: number) => {
+		mutation.mutate(id)
 	}
 
 	return (
 		<Flex
 			justify={"center"}
+			alignItems={`center`}
 			w={"full"}
-			h={{ base: "full", sm: "full", md: "100vh", lg: "100vh" }}
+			h={{ base: "full", sm: "100vh", md: "100vh", lg: "100vh" }}
 			backgroundImage={BgImage}
 			backgroundSize={"cover"}
 			backgroundPosition={"center center"}>
 			<Box
 				className={style.grid}
-				// direction={`row`}
-				// spacing={{ base: 5, md: 50 }}
 				py={{ base: 5, md: 50 }}
-				px={useBreakpointValue({ base: 4, md: 8 })}
-				>
+				px={useBreakpointValue({ base: 4, md: 8 })}>
 				{orders?.map((order: MealProps) => {
 					return (
 						<MealCard
@@ -61,10 +75,10 @@ export default function Basket() {
 								reservations
 									? "Reservation: " +
 											reservations[reservations.length - 1]?.date.split("T") ||
-									  "No reservation"
-									: "No reservation"
+									  null
+									: `No reservation`
 							}
-							delOrder={() => deleteOrder(order.id)}
+							delOrder={() => handleDelete(order.id)}
 							mealNumber={order.mealNumber}
 							edit={() => jumpToOrderDetails(order.id)}
 						/>

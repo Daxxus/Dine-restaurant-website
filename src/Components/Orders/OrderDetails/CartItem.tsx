@@ -58,12 +58,13 @@ export const CartItem = (props: CartItemProps) => {
 		newNbr: mealNbr,
 		id: string | number | undefined
 	) => {
-		await axios
-			.patch(`http://localhost:3000/clientOrders/${id}`, newNbr)
-			.then((resp) => {
-				const { data } = resp
-				return data
-			})
+		const resp = await axios.patch(
+			`http://localhost:3000/clientOrders/${id}`,
+			newNbr
+		)
+
+		const { data } = resp
+		return data
 	}
 
 	const queryClient = useQueryClient()
@@ -73,7 +74,7 @@ export const CartItem = (props: CartItemProps) => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [`clientOrders`, Number(param.id)],
+				queryKey: [`clientOrders`],
 			})
 		},
 		onError: () => {

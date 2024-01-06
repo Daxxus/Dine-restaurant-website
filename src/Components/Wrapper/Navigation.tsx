@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom"
 import { GiCook } from "react-icons/gi"
 import { FaShoppingCart } from "react-icons/fa"
 import { useEffect } from "react"
-// import ThemeMode from "../ThemeMode/ThemeMode"
 import { useAuthContext } from "../../Contexts/useAuthContext"
 import useAvatarContext from "../../Contexts/useAvatarContext"
 import Counting from "../Counting/Counting"
@@ -10,7 +9,6 @@ import useOrders from "../Clients/useOrders"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import "./NavCss/Nav.css"
-
 import {
 	Box,
 	Flex,
@@ -79,7 +77,7 @@ export default function WithAction() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const navigation = useNavigate()
 	const notify = () => toast(`Successfully logged out`)
-	useEffect(() => {		
+	useEffect(() => {
 		if (orders) {
 			const sumUp = orders.reduce(
 				(acc: number, cur: { mealPrice: number; mealNumber: number }) =>
@@ -88,11 +86,11 @@ export default function WithAction() {
 			)
 			setTotalPrice(sumUp)
 		}
-	}, [orders, setTotalPrice,isLoading])
+	}, [orders, setTotalPrice, isLoading])
 
 	const links2 = [
 		{ label: "Home", to: "/" },
-		{ label: "About Us", to: "/aboutus" },		
+		{ label: "About Us", to: "/aboutus" },
 		{ label: "Add order", to: "/buisness/orders/addOrder" },
 		{ label: "Login", to: "/login" },
 		{ label: "Register", to: "/register" },
@@ -118,7 +116,7 @@ export default function WithAction() {
 				<Button
 					variant={"solid"}
 					colorScheme={"teal"}
-					fontSize={{ base: "small", lg: "sm" }}
+					fontSize={{ base: "small", sm: "xs", md: "sm" }}
 					onClick={() => {
 						if (isAuth) {
 							setIsAuth(false)
@@ -126,14 +124,15 @@ export default function WithAction() {
 							navigation("/login")
 						}
 					}}>
-					LOGOUT
+					LogOut
 				</Button>
 			),
 			to: "/login  ",
 		},
 		{
 			label: isAuth && (
-				<Box fontSize={{ base: "small", lg: "md" }}>
+				<Box fontSize={{ base: "sm", sm: "6xs",md: "sm" }}			
+				>
 					<Counting />
 				</Box>
 			),
@@ -143,7 +142,7 @@ export default function WithAction() {
 			label: (
 				<Button
 					onClick={toggleColorMode}
-					fontSize={{ base: "small", lg: "large" }}>
+					fontSize={{ base: "small",sm:'xs', lg: "large" }}>
 					{colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 				</Button>
 			),
@@ -153,9 +152,11 @@ export default function WithAction() {
 
 	return (
 		<>
-			<Box bg={useColorModeValue("gray.100", "gray.900")} px={2}>
+			<Box bg={useColorModeValue("gray.100", "gray.900")} px={1}>
 				<Flex h={16} alignItems={"bottom"} justifyContent={"space-around"}>
-					<HStack spacing={{ base: 10, md: 18, lg: 6 }}>
+					<HStack 
+					// spacing={{ base: 10, md: 18, lg: 6 }}
+					>
 						<IconButton
 							// size={"md"}
 							fontSize={{ base: "small", lg: "lg" }}
@@ -164,15 +165,15 @@ export default function WithAction() {
 							display={{ md: "none" }}
 							onClick={isOpen ? onClose : onOpen}
 						/>
-						<Box fontSize={{ base: "4xl", sm: "4xl", md: "4xl" }}>
+						<Box fontSize={{ base: "4xl", sm: "4xl" }}>
 							<GiCook />
 						</Box>
 						<HStack
 							id='sidebar'
 							className='bar'
-							as={"nav"}
-							fontSize={{ base: "small", lg: "lg" }}
-							spacing={{ base: 0, md: 1, lg: 2 }}
+							as={"nav"}							
+							fontSize={{ base: "small",sm:'xs' ,lg: "lg" }}
+							spacing={{ base: 0,sm:0, md: 0, lg: 2 }}
 							display={{ base: "none", md: "flex" }}>
 							{links2.map((link, ind) => (
 								<Nav key={ind}>

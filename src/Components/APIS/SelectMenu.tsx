@@ -47,9 +47,7 @@ export default function SelectMenu() {
 				const { data: mealsName } = resp
 				return mealsName
 			})
-		// setTimeout(() => {
-		// 	setMenuTitle("")
-		// }, 1000)
+		
 	}
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")

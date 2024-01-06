@@ -27,8 +27,7 @@ const MealCard = ({
 		actions={[
 			<div>{mealNumber} </div>,
 			<div> {price} </div>,
-			<EditOutlined key='edit' type='button' onClick={edit} />,
-			// <DeleteOutlined  style={{fontSize:18}} onClick={del} />,
+			<EditOutlined key='edit' type='button' onClick={edit} />,	
 
 			<DeleteOutlined
 				type='button'

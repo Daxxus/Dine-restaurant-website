@@ -45,7 +45,7 @@ const yupSchema = object({
 	people: yup.number().required(),
 })
 
-const Reservation = () => {	
+const Reservation = () => {
 	const { clientId } = useAuthContext()
 	const { clientEmail } = useSelector(
 		(state: Record<string, never>) => state.emailSlice
@@ -61,11 +61,9 @@ const Reservation = () => {
 		setDatetime(val)
 	}
 	const addReservation = async (newReservation: ReservationDetails) => {
-		await axios
-			.post(` http://localhost:3000/reservations`, newReservation)
-			.then(() => {
-				onClose()
-			})
+		await axios.post(` http://localhost:3000/reservations`, newReservation)
+
+		onClose()
 	}
 	const queryClient = useQueryClient()
 	const mutation = useMutation({

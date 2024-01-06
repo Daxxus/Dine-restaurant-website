@@ -46,33 +46,33 @@ const Login = () => {
 	const { colorMode } = useColorMode()
 	const { isAuth, setIsAuth, setClientId } = useAuthContext()
 	const { setAvatar } = useAvatarContext()
-	
+
 	const logged = "Grats!!! successfully signed in"
 	const error = "Data errors"
 	const notify1 = () => toast(`${logged}`)
 	const notify2 = () => toast(`${error}`)
 
-	const logUser = async(client: Login) => {
-		await axios
-			.get(`http://localhost:3000/clients?email=${client.email}`)
-			.then((resp) => {
-				const { data } = resp
+	const logUser = async (client: Login) => {
+		const resp = await axios.get(
+			`http://localhost:3000/clients?email=${client.email}`
+		)
 
-				if (data[0].password === client.password) {		
-					setIsAuth(true)
-					setAvatar(data[0].avatar)
-					setClientId(data[0].clientId)
-					notify1()
-				} else {
-					notify2()
-				}
-			})
+		const { data } = resp
+
+		if (data[0].password === client.password) {
+			setIsAuth(true)
+			setAvatar(data[0].avatar)
+			setClientId(data[0].clientId)
+			notify1()
+		} else {
+			notify2()
+		}
 	}
 
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: Login) => {
-			return  logUser(values)
+			return await logUser(values)
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries()

@@ -42,15 +42,15 @@ const Counting = () => {
 	// secondsLeft > 0 && `(${secondsLeft})`
 
 	return (
-		<Box>
+		<Box width={{ base: `4xs`, sm: `4xs` }}>
 			{secondsLeft > 0 ? (
-				<Flex>
+				<Flex direction={`column`}>
 					<Text as={"cite"}>Your visit is only</Text>
 					<Text as={"cite"}>
-						<b className={style.font}>{days} </b> days
-						<b className={style.font}> {hrs}</b> hrs
-						<b className={style.font}> {mins}</b> mins
-						<b className={style.font}> {secs} </b>secs away
+						<b className={style.font}>{days} </b> d
+						<b className={style.font}> {hrs}</b> h
+						<b className={style.font}> {mins}</b> m
+						<b className={style.font}> {secs} </b>s away
 					</Text>
 				</Flex>
 			) : reservations?.length > 0 ? (
