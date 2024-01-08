@@ -142,24 +142,13 @@
     {
       "orderTitle": "Cranberry Crumb Bars",
       "mealPrice": 25,
-      "mealNumber": 4,
+      "mealNumber": 2,
       "orderId": 640366,
       "date": "6.01.2024",
       "image": "https://spoonacular.com/recipeImages/640366-312x231.jpg",
       "name": "jacek@interia.pl",
       "clientId": 2,
       "id": 15
-    },
-    {
-      "orderTitle": "Whole-wheat Flaxseed and Fennel Crackers",
-      "mealPrice": 33,
-      "mealNumber": 2,
-      "orderId": 665301,
-      "date": "6.01.2024",
-      "image": "https://spoonacular.com/recipeImages/665301-312x231.png",
-      "name": "jacek@interia.pl",
-      "clientId": 2,
-      "id": 16
     },
     {
       "orderTitle": "Dutch Oven Danish Cake",
@@ -237,6 +226,50 @@
       "name": "dariuszcudny@wp.pl",
       "clientId": 1,
       "id": 31
+    },
+    {
+      "orderTitle": "Coconut Pound Cake",
+      "mealPrice": 122,
+      "mealNumber": 1,
+      "orderId": 639802,
+      "date": "8.01.2024",
+      "image": "https://spoonacular.com/recipeImages/639802-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 34
+    },
+    {
+      "orderTitle": "Steamy Creamy Mushroom Risotto",
+      "mealPrice": 27,
+      "mealNumber": 3,
+      "orderId": 157375,
+      "date": "8.01.2024",
+      "image": "https://spoonacular.com/recipeImages/157375-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 37
+    },
+    {
+      "orderTitle": "Smokin' Good Margarita",
+      "mealPrice": 77,
+      "mealNumber": 1,
+      "orderId": 660398,
+      "date": "8.01.2024",
+      "image": "https://spoonacular.com/recipeImages/660398-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 38
+    },
+    {
+      "orderTitle": "Pumpkin Raisin Cake",
+      "mealPrice": 60,
+      "mealNumber": 2,
+      "orderId": 657369,
+      "date": "8.01.2024",
+      "image": "https://spoonacular.com/recipeImages/657369-312x231.jpg",
+      "name": "jacek@interia.pl",
+      "clientId": 2,
+      "id": 39
     }
   ],
   "menuItems": [

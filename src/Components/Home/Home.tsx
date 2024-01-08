@@ -28,8 +28,8 @@ export default function Home() {
 						fontWeight={700}
 						lineHeight={1.2}
 						fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}>
-						Our cuisine <br />
-						It's said the most well-seasoned across Wroclaw
+						Our cuisine, <br />
+						it's said the most well-seasoned across Wroclaw
 					</Text>
 				</Box>
 				<Box height={`100vh`}>

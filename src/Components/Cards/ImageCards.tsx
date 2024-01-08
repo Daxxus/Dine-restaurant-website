@@ -47,21 +47,23 @@ const ImageCards = ({
 }: Props) => {
 	return (
 		<Card maxW='2xs' {...onSubmit}>
-			<CardBody>
+			<CardBody
+				display={`flex`}
+				flexFlow={`column`}
+				justifyContent={`space-between`}>
 				<Image src={image} alt='Tasty some meals' borderRadius='lg'></Image>
 				<Stack mt='6' spacing='1'>
 					<Heading size='sm'> {heading} </Heading>
-					<Box display={`flex`} justifyContent={`space-between`} mt={6}>
-						<Text color='blue.600' fontSize='2xl' textAlign={"center"}>
-							${price}
-						</Text>
-						<QuantitySelect onChange={mealNumber} />
-					</Box>
 				</Stack>
+				<Box display={`flex`} justifyContent={`space-between`}>
+					<Text color='blue.600' fontSize='2xl' textAlign={"center"}>
+						${price}
+					</Text>
+					<QuantitySelect onChange={mealNumber} />
+				</Box>
 			</CardBody>
 			<Divider />
 			<CardFooter>
-				{/* <ButtonGroup spacing='2'> */}
 				<Button
 					variant='ghost'
 					colorScheme='blue'
