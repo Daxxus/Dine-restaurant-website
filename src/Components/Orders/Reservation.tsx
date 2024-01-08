@@ -70,8 +70,7 @@ const Reservation = () => {
 		mutationFn: async (values: ReservationDetails) => {
 			return addReservation(values)
 		},
-		onSuccess: () => {
-			// ważne te queryKey takie nasłuchiwanie na zmiany id clienta w reservations
+		onSuccess: () => {			
 			queryClient.invalidateQueries({ queryKey: ["reservations", clientId] })
 		},
 		onError: () => {

@@ -21,7 +21,6 @@ import {
 	useColorMode,
 } from "@chakra-ui/react"
 import { Select } from "chakra-react-select"
-
 import "react-toastify/dist/ReactToastify.css"
 import { useState } from "react"
 import BgImg from "../Images/restaurant-1837150_1920.jpg"
@@ -62,11 +61,9 @@ const notify2 = () => toast("The email address provided already exists")
 export default function FormRegister() {
 	const dispatch = useDispatch()
 	const { id: clientId } = useSelector((state:Record<string, never>) => state.clientId)
-
 	const { colorMode } = useColorMode()
-	const { verifyMailAvilable } = useEmailDataCheck() //array
+	const { verifyMailAvilable } = useEmailDataCheck() 
 	const [isError, setIsError] = useState(false)
-
 	const avatars = useAvatar()
 	const navigate = useNavigate()
 
@@ -118,8 +115,7 @@ export default function FormRegister() {
 					validationSchema={yupSchema}
 					onSubmit={async (values, { resetForm }) => {
 						const isAvilableMail = await verifyMailAvilable(values.email)
-						if (isAvilableMail) {
-							// nie zajęty
+						if (isAvilableMail) {						
 							setIsError(false)
 							notify()
 							addClient({
@@ -145,7 +141,7 @@ export default function FormRegister() {
 										as={Input}
 										id='email'
 										name='email'
-										type='text' // bo string a nie email
+										type='text' 
 										variant='filled'
 										placeholder='Input email adress'
 									/>
@@ -186,14 +182,13 @@ export default function FormRegister() {
 									<Select
 										id='avatar'
 										name='avatar'
-										variant='filled'
-										// placeholder='-Select Your Avatar-'
+										variant='filled'									
 										value={{ pic: values.avatar }}
 										options={avatars}
 										formatOptionLabel={(avatar: { pic: string }) => (
 											<Avatar src={avatar.pic} size={"xl"} />
 										)}
-										onChange={(e) => {
+										onChange={(e:unknown) => {
 											setFieldValue("avatar", e.pic)
 										}}
 									/>

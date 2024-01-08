@@ -50,18 +50,8 @@ function App() {
 							<Routes>
 								<Route element={<Home />} path='/' />
 								<Route element={<AboutUs />} path='/aboutus' />
-								{/* <Route element={<Contact />} path='/contact' /> */}
 								<Route path='buisness'>
 									<Route path='orders'>
-										{/* <Route
-											index
-											element={
-												<ProtectWrapper>
-													<Orders />
-												</ProtectWrapper>
-											}
-										/> */}
-
 										<Route
 											element={
 												<ProtectWrapper>

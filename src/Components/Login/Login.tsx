@@ -111,7 +111,6 @@ const Login = () => {
 							validationSchema={yupSchema}
 							onSubmit={(values: Login, { resetForm }) => {
 								resetForm({ values: "" || undefined })
-								// logUser(values)
 								dispatch(addEmail(values.email))
 								handleLogin({
 									...values,

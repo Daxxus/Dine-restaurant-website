@@ -22,7 +22,7 @@ const Counting = () => {
 				) => {
 					// console.log(new Date(a.date))
 					// console.log(new Date(b.date))
-					new Date(a.date) - new Date(b.date)
+					new Date(a.date).valueOf() - new Date(b.date).valueOf()
 				}
 			)[reservations.length - 1]
 
@@ -31,7 +31,7 @@ const Counting = () => {
 			if (closestDay) {
 				const currentTime = new Date().getTime()
 				const finalTime = new Date(closestDay.date)
-				const timeDiffrence = (finalTime - currentTime) / 1000
+				const timeDiffrence = (finalTime.valueOf() - currentTime) / 1000
 				setSecondsLeft(timeDiffrence)
 			} else {
 				setSecondsLeft(0)

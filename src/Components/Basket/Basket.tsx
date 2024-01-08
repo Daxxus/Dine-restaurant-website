@@ -47,19 +47,19 @@ export default function Basket() {
 			console.log("Error !!!!!")
 		},
 	})
-	const handleDelete = (id: number) => {
+	const handleDelete = (id: void | number) => {
 		mutation.mutate(id)
 	}
 
 	return (
 		<Flex
 			justify={"center"}
-			alignItems={`center`}
 			w={"full"}
-			h={{ base: "full", sm: "100vh", md: "100vh", lg: "100vh" }}
 			backgroundImage={BgImage}
 			backgroundSize={"cover"}
-			backgroundPosition={"center center"}>
+			h={{ base: "full", sm: "full", md: "full", lg: "full", xl: "100vh" }}
+			backgroundPosition={"center center"}
+			>
 			<Box
 				className={style.grid}
 				py={{ base: 5, md: 50 }}

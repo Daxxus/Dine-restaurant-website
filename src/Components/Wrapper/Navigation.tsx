@@ -36,17 +36,6 @@ interface Props {
 	children: React.ReactNode
 }
 
-// const links2 = [
-// 	{ label: "Home", to: "/" },
-// 	{ label: "About Us", to: "/aboutus" },
-// 	{ label: "Contact", to: "/contact" },
-//  { label: "Orders", to: "/buisness/orders" },
-// 	{ label: "Add order", to: "/buisness/orders/addOrder" },
-// 	{ label: "Login", to: "/login" },
-// 	{ label: "Register", to: "/register" },
-// 	{ label: <Button />, to: "/basket" },
-// ]
-
 const Nav = (props: Props) => {
 	const { children } = props
 	return (
@@ -131,8 +120,7 @@ export default function WithAction() {
 		},
 		{
 			label: isAuth && (
-				<Box fontSize={{ base: "sm", sm: "6xs",md: "sm" }}			
-				>
+				<Box fontSize={{ base: "sm", sm: "6xs", md: "sm" }}>
 					<Counting />
 				</Box>
 			),
@@ -142,11 +130,11 @@ export default function WithAction() {
 			label: (
 				<Button
 					onClick={toggleColorMode}
-					fontSize={{ base: "small",sm:'xs', lg: "large" }}>
+					fontSize={{ base: "small", sm: "xs", lg: "large" }}>
 					{colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 				</Button>
 			),
-			to: null,
+			to: null ,
 		},
 	]
 
@@ -154,7 +142,7 @@ export default function WithAction() {
 		<>
 			<Box bg={useColorModeValue("gray.100", "gray.900")} px={1}>
 				<Flex h={16} alignItems={"bottom"} justifyContent={"space-around"}>
-					<HStack 
+					<HStack
 					// spacing={{ base: 10, md: 18, lg: 6 }}
 					>
 						<IconButton
@@ -171,9 +159,9 @@ export default function WithAction() {
 						<HStack
 							id='sidebar'
 							className='bar'
-							as={"nav"}							
-							fontSize={{ base: "small",sm:'xs' ,lg: "lg" }}
-							spacing={{ base: 0,sm:0, md: 0, lg: 2 }}
+							as={"nav"}
+							fontSize={{ base: "small", sm: "xs", lg: "lg" }}
+							spacing={{ base: 0, sm: 0, md: 0, lg: 2 }}
 							display={{ base: "none", md: "flex" }}>
 							{links2.map((link, ind) => (
 								<Nav key={ind}>
