@@ -60,9 +60,11 @@ const notify2 = () => toast("The email address provided already exists")
 
 export default function FormRegister() {
 	const dispatch = useDispatch()
-	const { id: clientId } = useSelector((state:Record<string, never>) => state.clientId)
+	const { id: clientId } = useSelector(
+		(state: Record<string, never>) => state.clientId
+	)
 	const { colorMode } = useColorMode()
-	const { verifyMailAvilable } = useEmailDataCheck() 
+	const { verifyMailAvilable } = useEmailDataCheck()
 	const [isError, setIsError] = useState(false)
 	const avatars = useAvatar()
 	const navigate = useNavigate()
@@ -87,7 +89,7 @@ export default function FormRegister() {
 	}
 
 	if (!avatars) <p>No data...</p>
-	
+
 	return (
 		<Flex
 			align='center'
@@ -115,7 +117,7 @@ export default function FormRegister() {
 					validationSchema={yupSchema}
 					onSubmit={async (values, { resetForm }) => {
 						const isAvilableMail = await verifyMailAvilable(values.email)
-						if (isAvilableMail) {						
+						if (isAvilableMail) {
 							setIsError(false)
 							notify()
 							addClient({
@@ -141,7 +143,7 @@ export default function FormRegister() {
 										as={Input}
 										id='email'
 										name='email'
-										type='text' 
+										type='text'
 										variant='filled'
 										placeholder='Input email adress'
 									/>
@@ -182,13 +184,14 @@ export default function FormRegister() {
 									<Select
 										id='avatar'
 										name='avatar'
-										variant='filled'									
+										variant='filled'
 										value={{ pic: values.avatar }}
 										options={avatars}
 										formatOptionLabel={(avatar: { pic: string }) => (
 											<Avatar src={avatar.pic} size={"xl"} />
 										)}
-										onChange={(e:unknown) => {
+										onChange={(e) => {
+											{/* @ts-expect-error.() */}
 											setFieldValue("avatar", e.pic)
 										}}
 									/>

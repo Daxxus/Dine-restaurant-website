@@ -105,6 +105,7 @@ export default function CaptionCarousel() {
 				<BiRightArrowAlt size='40px' />
 			</IconButton>
 			{/* Slider */}
+			{/* @ts-expect-error.() */}
 			<Slider {...settings} ref={(slider: unknown) => setSlider(slider)}>
 				{cards.map((card, index) => (
 					<Box

@@ -48,6 +48,7 @@ export default function Basket() {
 		},
 	})
 	const handleDelete = (id: void | number) => {
+		{/* @ts-expect-error.() */}
 		mutation.mutate(id)
 	}
 

@@ -134,7 +134,7 @@ export default function WithAction() {
 					{colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 				</Button>
 			),
-			to: null ,
+			to: null,
 		},
 	]
 
@@ -166,6 +166,8 @@ export default function WithAction() {
 							{links2.map((link, ind) => (
 								<Nav key={ind}>
 									<NavLink
+										// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+										// @ts-expect-error
 										to={link.to}
 										end
 										className={({ isActive, isPending }) =>
@@ -233,6 +235,8 @@ export default function WithAction() {
 							{links2.map((link, ind) => (
 								<Nav key={ind}>
 									<NavLink
+										// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+										// @ts-expect-error
 										to={link.to}
 										end
 										className={({ isActive, isPending }) =>

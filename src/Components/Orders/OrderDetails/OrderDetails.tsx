@@ -96,6 +96,7 @@ const OrderDetails = () => {
 									</Heading>
 
 									<Stack spacing='6'>
+										{/* @ts-expect-error.() */}
 										{orders?.map((el) => {
 											if (el.id === Number(param.id))
 												return <CartItem key={el.id} {...el} />

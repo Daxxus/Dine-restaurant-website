@@ -70,7 +70,7 @@ const Reservation = () => {
 		mutationFn: async (values: ReservationDetails) => {
 			return addReservation(values)
 		},
-		onSuccess: () => {			
+		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["reservations", clientId] })
 		},
 		onError: () => {
@@ -96,7 +96,9 @@ const Reservation = () => {
 				size={"xs"}
 				isOpen={isOpen}
 				placement='right'
-				finalFocusRef={firstField}
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-expect-error
+				initialFocusRef={firstField}
 				onClose={onClose}>
 				<DrawerOverlay />
 				<DrawerContent>

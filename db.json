@@ -108,9 +108,9 @@
       "id": 8
     },
     {
-      "date": "2024-01-07T19:00",
-      "people": "5",
-      "orderDate": "7.01.2024",
+      "date": "2024-01-09T17:18",
+      "people": "4",
+      "orderDate": "9.01.2024",
       "clientId": 1,
       "user": "dariuszcudny@wp.pl",
       "id": 9
@@ -175,7 +175,7 @@
     {
       "orderTitle": "Sliced Baguette with Anchovy Chive Butter and Radishes",
       "mealPrice": 26,
-      "mealNumber": 1,
+      "mealNumber": 4,
       "orderId": 660243,
       "date": "7.01.2024",
       "image": "https://spoonacular.com/recipeImages/660243-312x231.jpg",
@@ -195,17 +195,6 @@
       "id": 23
     },
     {
-      "orderTitle": "Carrot Cucumber Salad (Asian Style)",
-      "mealPrice": 53,
-      "mealNumber": 1,
-      "orderId": 637194,
-      "date": "7.01.2024",
-      "image": "https://spoonacular.com/recipeImages/637194-312x231.jpg",
-      "name": "dariuszcudny@wp.pl",
-      "clientId": 1,
-      "id": 29
-    },
-    {
       "orderTitle": "Healthier Southern-Style Green Beans",
       "mealPrice": 66,
       "mealNumber": 1,
@@ -217,59 +206,15 @@
       "id": 30
     },
     {
-      "orderTitle": "Anticuchos Of White Seabass With Aji Chile Honey Marinade & Semilla Salsa",
-      "mealPrice": 34,
-      "mealNumber": 1,
-      "orderId": 632426,
-      "date": "7.01.2024",
-      "image": "https://spoonacular.com/recipeImages/632426-312x231.jpg",
+      "orderTitle": "Cranberry Crumb Bars",
+      "mealPrice": 25,
+      "mealNumber": 3,
+      "orderId": 640366,
+      "date": "9.01.2024",
+      "image": "https://spoonacular.com/recipeImages/640366-312x231.jpg",
       "name": "dariuszcudny@wp.pl",
       "clientId": 1,
       "id": 31
-    },
-    {
-      "orderTitle": "Coconut Pound Cake",
-      "mealPrice": 122,
-      "mealNumber": 1,
-      "orderId": 639802,
-      "date": "8.01.2024",
-      "image": "https://spoonacular.com/recipeImages/639802-312x231.jpg",
-      "name": "jacek@interia.pl",
-      "clientId": 2,
-      "id": 34
-    },
-    {
-      "orderTitle": "Steamy Creamy Mushroom Risotto",
-      "mealPrice": 27,
-      "mealNumber": 3,
-      "orderId": 157375,
-      "date": "8.01.2024",
-      "image": "https://spoonacular.com/recipeImages/157375-312x231.jpg",
-      "name": "jacek@interia.pl",
-      "clientId": 2,
-      "id": 37
-    },
-    {
-      "orderTitle": "Smokin' Good Margarita",
-      "mealPrice": 77,
-      "mealNumber": 1,
-      "orderId": 660398,
-      "date": "8.01.2024",
-      "image": "https://spoonacular.com/recipeImages/660398-312x231.jpg",
-      "name": "jacek@interia.pl",
-      "clientId": 2,
-      "id": 38
-    },
-    {
-      "orderTitle": "Pumpkin Raisin Cake",
-      "mealPrice": 60,
-      "mealNumber": 2,
-      "orderId": 657369,
-      "date": "8.01.2024",
-      "image": "https://spoonacular.com/recipeImages/657369-312x231.jpg",
-      "name": "jacek@interia.pl",
-      "clientId": 2,
-      "id": 39
     }
   ],
   "menuItems": [

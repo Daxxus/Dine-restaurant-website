@@ -1,7 +1,7 @@
 import AuthenticateContext from "./AuthContext"
 import { useContext } from "react"
 
-// tworzymy custom Context
+
 export const useAuthContext = () => {
 	const ctx = useContext(AuthenticateContext)
 	if (!ctx) {
