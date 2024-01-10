@@ -12,6 +12,7 @@ server.use(
  // Add custom route here if needed
  rewriter({
   "/api/*": "/$1",
+  /blog/:resource/:id/show	⇢ /:resource/:id,
  })
 );
 server.use(router);
