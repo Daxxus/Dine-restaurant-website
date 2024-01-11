@@ -41,12 +41,10 @@ export default function SelectMenu() {
 	})
 
 	const addOrder = async (newOrder: OrderDetails) => {
-		await axios
-			.post(`https://test-json-gamma.vercel.app/clientOrders`, newOrder)
-			.then((resp) => {
+		const resp   = await axios
+			.post(`https://test-json-gamma.vercel.app/clientOrders`, newOrder)			
 				const { data: mealsName } = resp
-				return mealsName
-			})
+				return mealsName			
 		
 	}
 	const [menu, setMenu] = useState(menuItem)
