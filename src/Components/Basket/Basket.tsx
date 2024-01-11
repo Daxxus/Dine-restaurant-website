@@ -29,7 +29,7 @@ export default function Basket() {
 	}
 	const deleteOrder = async (id: void) => {
 		const response = await axios.delete(
-			`http://localhost:3000/clientOrders/${id}`
+			`https://test-json-gamma.vercel.app/clientOrders/${id}`
 		)
 
 		const { data: order } = response
@@ -58,7 +58,7 @@ export default function Basket() {
 			w={"full"}
 			backgroundImage={BgImage}
 			backgroundSize={"cover"}
-			h={{ base: "full", sm: "full", md: "full", lg: "full", xl: "100vh" }}
+			h={{ base: "full", sm: "full", md: "100vh", lg: "100vh", xl: "100vh" }}
 			backgroundPosition={"center center"}
 			>
 			<Box
