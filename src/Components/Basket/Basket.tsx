@@ -58,7 +58,7 @@ export default function Basket() {
 			w={"full"}
 			backgroundImage={BgImage}
 			backgroundSize={"cover"}
-			h={{ base: "full", sm: "full", md: "100vh", lg: "100vh", xl: "100vh" }}
+			h={{ base: "100vh", sm: "100vh", md: "100vh", lg: "100vh", xl: "100vh" }}
 			backgroundPosition={"center center"}
 			>
 			<Box
