@@ -37,17 +37,18 @@ export default function SelectMenu() {
 	} = useQuery({
 		queryKey: ["menuItems"],
 		queryFn: () =>
-			fetch("https://test-json-gamma.vercel.app/menuItems").then((res) => res.json()),
+			fetch("https://test-json-gamma.vercel.app/menuItems").then((res) =>
+				res.json()
+			),
 	})
 
 	const addOrder = async (newOrder: OrderDetails) => {
 		await axios
-			.post(` https://test-json-gamma.vercel.app/clientOrders`, newOrder)
+			.post(`https://test-json-gamma.vercel.app/clientOrders`, newOrder)
 			.then((resp) => {
 				const { data: mealsName } = resp
 				return mealsName
 			})
-		
 	}
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
@@ -55,7 +56,9 @@ export default function SelectMenu() {
 
 	const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
 		const findMeal = menuItem.filter((el: { name: string }) => {
-			{/* @ts-expect-error.() */}
+			{
+				/* @ts-expect-error.() */
+			}
 			return el.name.toLowerCase().includes(e.target.value.toLowerCase().trim())
 		})
 		setMenuTitle(e.target.value)
@@ -77,7 +80,9 @@ export default function SelectMenu() {
 	const handleAdd = (newOrder: OrderDetails) => {
 		mutation.mutate(newOrder)
 	}
-{/* @ts-expect-error.() */}
+	{
+		/* @ts-expect-error.() */
+	}
 	const handleRange = (e) => {
 		setSliderValue(e.target.value)
 		const findMeal = menuItem.filter((el: { price: number }) => {
