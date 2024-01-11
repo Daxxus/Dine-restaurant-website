@@ -11,7 +11,7 @@ const useOrders = () => {
 		queryKey: ["clientOrders", clientId],
 		queryFn: () =>
 			fetch(
-				`https://test-json-gamma.vercel.app/clientOrders?clientId=${clientId}`
+				`http://localhost:3000/clientOrders?clientId=${clientId}`
 			).then((response) => response.json()),
 		enabled: clientId !== "",
 	})

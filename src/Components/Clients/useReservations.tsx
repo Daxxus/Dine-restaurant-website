@@ -8,7 +8,7 @@ const useReservations = () => {
 		queryKey: ["reservations", clientId],
 		queryFn: () =>
 			fetch(
-				`https://test-json-gamma.vercel.app/reservations?clientId=${clientId}`
+				`http://localhost:3000/reservations?clientId=${clientId}`
 			).then((res) => res.json()),
 	})
 
