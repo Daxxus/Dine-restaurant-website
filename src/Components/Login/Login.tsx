@@ -54,7 +54,7 @@ const Login = () => {
 
 	const logUser = async (client: Login) => {
 		const resp = await axios.get(
-			`http://localhost:3000/clients?email=${client.email}`
+			`https://test-json-gamma.vercel.app/clients?email=${client.email}`
 		)
 
 		const { data } = resp

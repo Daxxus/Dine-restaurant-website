@@ -10,10 +10,10 @@ const useOrders = () => {
 	} = useQuery({
 		queryKey: ["clientOrders", clientId],
 		queryFn: () =>
-			fetch(`http://localhost:3000/clientOrders?clientId=${clientId}`).then(
-				(response) => response.json()
-			),
-		enabled: clientId!==""
+			fetch(
+				`https://test-json-gamma.vercel.app/clientOrders?clientId=${clientId}`
+			).then((response) => response.json()),
+		enabled: clientId !== "",
 	})
 
 	return { orders, isLoading, error }

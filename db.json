@@ -26,6 +26,15 @@
 			"rememberMe": true,
 			"clientId": 3,
 			"id": 3
+		},
+		{
+			"email": "karo@wp.pl",
+			"password": "Edczaq",
+			"confirmPassword": "Edczaq",
+			"avatar": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
+			"rememberMe": true,
+			"clientId": 1,
+			"id": 4
 		}
 	],
 	"avatars": [
@@ -42,8 +51,78 @@
 			"id": 3
 		}
 	],
-	"reservations": [],
-	"clientOrders": [],
+	"reservations": [
+		{
+			"date": "2024-01-09T17:50",
+			"people": "4",
+			"orderDate": "9.01.2024",
+			"clientId": 2,
+			"user": "jacek@interia.pl",
+			"id": 1
+		},
+		{
+			"date": "2024-01-10T12:33",
+			"people": "3",
+			"orderDate": "10.01.2024",
+			"clientId": 1,
+			"user": "dariuszcudny@wp.pl",
+			"id": 2
+		},
+		{
+			"date": "2024-01-10T12:40",
+			"people": "3",
+			"orderDate": "10.01.2024",
+			"clientId": 1,
+			"user": "dariuszcudny@wp.pl",
+			"id": 3
+		}
+	],
+	"clientOrders": [
+		{
+			"orderTitle": "Coconut Pound Cake",
+			"mealPrice": 122,
+			"mealNumber": 4,
+			"orderId": 639802,
+			"date": "10.01.2024",
+			"image": "https://spoonacular.com/recipeImages/639802-312x231.jpg",
+			"name": "jacek@interia.pl",
+			"clientId": 2,
+			"id": 1
+		},
+		{
+			"orderTitle": "Best Soft Ginger Cookies",
+			"mealPrice": 49,
+			"mealNumber": 1,
+			"orderId": 634931,
+			"date": "10.01.2024",
+			"image": "https://spoonacular.com/recipeImages/634931-312x231.jpg",
+			"name": "dariuszcudny@wp.pl",
+			"clientId": 1,
+			"id": 2
+		},
+		{
+			"orderTitle": "Anticuchos Of White Seabass With Aji Chile Honey Marinade & Semilla Salsa",
+			"mealPrice": 34,
+			"mealNumber": 1,
+			"orderId": 632426,
+			"date": "10.01.2024",
+			"image": "https://spoonacular.com/recipeImages/632426-312x231.jpg",
+			"name": "dariuszcudny@wp.pl",
+			"clientId": 1,
+			"id": 3
+		},
+		{
+			"orderTitle": "Coconut Pound Cake",
+			"mealPrice": 122,
+			"mealNumber": 1,
+			"orderId": 639802,
+			"date": "10.01.2024",
+			"image": "https://spoonacular.com/recipeImages/639802-312x231.jpg",
+			"name": "dariuszcudny@wp.pl",
+			"clientId": 1,
+			"id": 4
+		}
+	],
 	"menuItems": [
 		{
 			"id": 632426,

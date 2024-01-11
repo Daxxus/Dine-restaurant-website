@@ -29,7 +29,7 @@ export default function Basket() {
 	}
 	const deleteOrder = async (id: void) => {
 		const response = await axios.delete(
-			`http://localhost:3000/clientOrders/${id}`
+			`https://test-json-gamma.vercel.app/clientOrders/${id}`
 		)
 
 		const { data: order } = response

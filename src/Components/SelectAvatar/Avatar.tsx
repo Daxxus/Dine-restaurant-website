@@ -9,7 +9,7 @@ export const useAvatar = () => {
 	const [avatars, setAvatars] = useState<Avatar[]>([])
 
 	const getAvatars = async () => {
-		const URL = "http://localhost:3000/avatars"
+		const URL = "https://test-json-gamma.vercel.app/avatars"
 		const download = await fetch(URL)
 		if (!download) {
 			return []
