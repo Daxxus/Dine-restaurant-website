@@ -37,12 +37,12 @@ export default function SelectMenu() {
 	} = useQuery({
 		queryKey: ["menuItems"],
 		queryFn: () =>
-			fetch("http://localhost:3000/menuItems").then((res) => res.json()),
+			fetch("https://test-json-gamma.vercel.app/menuItems").then((res) => res.json()),
 	})
 
 	const addOrder = async (newOrder: OrderDetails) => {
 		await axios
-			.post(` http://localhost:3000/clientOrders`, newOrder)
+			.post(`https://test-json-gamma.vercel.app/clientOrders`, newOrder)
 			.then((resp) => {
 				const { data: mealsName } = resp
 				return mealsName
