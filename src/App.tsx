@@ -29,7 +29,7 @@ const queryClient = new QueryClient({
 	queryCache: new QueryCache(),
 	defaultOptions: {
 		queries: {
-			staleTime: 100,
+			staleTime: 60_000,
 		},
 	},
 })
