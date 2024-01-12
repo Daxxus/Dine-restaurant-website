@@ -61,7 +61,7 @@ const Reservation = () => {
 		setDatetime(val)
 	}
 	const addReservation = async (newReservation: ReservationDetails) => {
-		await axios.post(`https://db-json-plfw.onrender.com/reservations`, newReservation)
+		await axios.post(`https://test-json-gamma.vercel.app/reservations`, newReservation)
 
 		onClose()
 	}
