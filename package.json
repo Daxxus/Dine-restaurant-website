@@ -1,6 +1,7 @@
 {
   "name": "project",
   "private": true,
+  "homepage": "https://daxxus.github.io/Dine-restaurant-website/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
