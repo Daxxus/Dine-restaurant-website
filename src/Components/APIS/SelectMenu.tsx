@@ -37,18 +37,17 @@ export default function SelectMenu() {
 	} = useQuery({
 		queryKey: ["menuItems"],
 		queryFn: () =>
-			fetch("http://localhost:3000/menuItems").then((res) =>
-				res.json()
-			),
+			fetch("http://localhost:3000/menuItems").then((res) => res.json()),
 	})
 
 	const addOrder = async (newOrder: OrderDetails) => {
-		await axios
-			.post(`http://localhost:3000/clientOrders`, newOrder)
-			.then((resp) => {
-				const { data: mealsName } = resp
-				return mealsName
-			})
+		const resp = await axios.post(
+			`http://localhost:3000/clientOrders`,
+			newOrder
+		)
+
+		const { data: mealsName } = resp
+		return mealsName
 	}
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
