@@ -9,4 +9,3 @@
 
 ### Site :   https://daxxus.github.io/Dine-restaurant-website/
 
-### Still under construction!!!!
