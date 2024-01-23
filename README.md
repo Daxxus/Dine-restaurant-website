@@ -13,5 +13,5 @@
 
 ### Site :   [https://daxxus.github.io/Dine-restaurant-website/](https://dine-restaurant-website-henna.vercel.app)https://dine-restaurant-website-henna.vercel.app
 
-### YouTube: or even better link showing all of the app functionalities (localhost)   https://youtu.be/aqQXOteAfvY
+### 	![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white) : or even better link showing all of the app functionalities (localhost)   https://youtu.be/aqQXOteAfvY
 
