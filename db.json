@@ -17,16 +17,8 @@
 			"rememberMe": true,
 			"clientId": 2,
 			"id": 2
-		},
-		{
-			"email": "anna@wp.pl",
-			"password": "Qazxsw",
-			"confirmPassword": "Qazxsw",
-			"avatar": "https://i.pinimg.com/236x/4d/1d/ef/4d1def82fcfe6b7fbace1e0b9cf5f627.jpg",
-			"rememberMe": true,
-			"clientId": 3,
-			"id": 3
 		}
+		
 	],
 	"avatars": [
 		{
