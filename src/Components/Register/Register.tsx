@@ -70,7 +70,7 @@ export default function FormRegister() {
 	const navigate = useNavigate()
 
 	const addClient = async (newClient: Register) => {
-		const Url = "https://test-json-gamma.vercel.app/clients"
+		const Url = "https://mulberry-thirsty-hide.glitch.me/clients"
 		const resp = await fetch(Url, {
 			method: "POST",
 			headers: { "Content-type": "application/json;charset=UTF-8" },
