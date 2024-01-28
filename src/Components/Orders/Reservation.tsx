@@ -61,7 +61,7 @@ const Reservation = () => {
 		setDatetime(val)
 	}
 	const addReservation = async (newReservation: ReservationDetails) => {
-		await axios.post(`https://cleanserver.onrender.com`, newReservation)
+		await axios.post(`https://mulberry-thirsty-hide.glitch.me`, newReservation)
 
 		onClose()
 	}
