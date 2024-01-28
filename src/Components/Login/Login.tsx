@@ -54,7 +54,7 @@ const Login = () => {
 
 	const logUser = async (client: Login) => {
 		const resp = await axios.get(
-			`https://test-json-gamma.vercel.app/clients?email=${client.email}`
+			`https://mulberry-thirsty-hide.glitch.me/clients?email=${client.email}`
 		)
 
 		const { data } = resp
