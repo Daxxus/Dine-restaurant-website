@@ -37,7 +37,7 @@ export default function SelectMenu() {
 	} = useQuery({
 		queryKey: ["menuItems"],
 		queryFn: () =>
-			fetch("https://test-json-gamma.vercel.app/menuItems").then((res) => res.json()),
+			fetch("https://mulberry-thirsty-hide.glitch.me/menuItems").then((res) => res.json()),
 	})
 
 	const addOrder = async (newOrder: OrderDetails) => {
