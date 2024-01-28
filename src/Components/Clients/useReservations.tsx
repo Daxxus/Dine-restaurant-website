@@ -7,7 +7,7 @@ const useReservations = () => {
 	const { data: reservations, isLoading: loading } = useQuery({
 		queryKey: ["reservations", clientId],
 		queryFn: () =>
-			fetch(`https://test-json-gamma.vercel.app/reservations?clientId=${clientId}`).then(
+			fetch(`https://mulberry-thirsty-hide.glitch.me/reservations?clientId=${clientId}`).then(
 				(res) => res.json()
 			),
 	})
