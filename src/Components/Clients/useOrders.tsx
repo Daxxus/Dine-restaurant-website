@@ -10,7 +10,7 @@ const useOrders = () => {
 	} = useQuery({
 		queryKey: ["clientOrders", clientId],
 		queryFn: () =>
-			fetch(`https://test-json-gamma.vercel.app/clientOrders?clientId=${clientId}`).then(
+			fetch(`https://mulberry-thirsty-hide.glitch.me/clientOrders?clientId=${clientId}`).then(
 				(response) => response.json()
 			),
 		enabled: clientId!==""
