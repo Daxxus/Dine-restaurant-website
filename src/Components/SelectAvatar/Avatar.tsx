@@ -9,7 +9,7 @@ export const useAvatar = () => {
 	const [avatars, setAvatars] = useState<Avatar[]>([])
 
 	const getAvatars = async () => {
-		const URL = "https://test-json-gamma.vercel.app/avatars"
+		const URL = "https://mulberry-thirsty-hide.glitch.me/avatars"
 		const download = await fetch(URL)
 		if (!download) {
 			return []
