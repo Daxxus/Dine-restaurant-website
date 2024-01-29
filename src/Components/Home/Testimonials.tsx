@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-"use client"
 import picGirl from "./Images/woman-1320810_1920.jpg"
 import picMan from "./Images/adult-2449725_1920.jpg"
 

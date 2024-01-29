@@ -1,4 +1,4 @@
-"use client"
+
 import Maps from "./Map"
 import Footer from "./Footer"
 import AllTestimonials from "./Testimonials"
