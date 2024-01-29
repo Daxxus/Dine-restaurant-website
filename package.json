@@ -9,7 +9,11 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "node server.js",
+<<<<<<< HEAD
     "server": "json-server --watch db.json"
+=======
+  
+>>>>>>> 10c0d108e818b594454bd7433696e9a5fdacd759
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

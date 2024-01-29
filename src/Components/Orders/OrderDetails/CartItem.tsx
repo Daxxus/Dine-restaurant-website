@@ -59,7 +59,7 @@ export const CartItem = (props: CartItemProps) => {
 		id: string | number | undefined
 	) => {
 		const resp = await axios.patch(
-			`http://localhost:3000/clientOrders/${id}`,
+			`https://mulberry-thirsty-hide.glitch.me/clientOrders/${id}`,
 			newNbr
 		)
 
