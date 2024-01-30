@@ -15,8 +15,6 @@
 
 ### Site :   [https://daxxus.github.io/Dine-restaurant-website/](https://dine-restaurant-website-henna.vercel.app)https://dine-restaurant-website-henna.vercel.app
 
-<<<<<<< HEAD
 ### Site :   https://dine-restaurant-website-henna.vercel.app
-=======
->>>>>>> 10c0d108e818b594454bd7433696e9a5fdacd759
+
 
