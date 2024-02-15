@@ -23,7 +23,7 @@ const updateMealOrderById = async (
 	updateMealOrder: SingleMeal,
 	id: string | undefined
 ) => {
-	const response = await fetch(`https://mulberry-thirsty-hide.glitch.me/clientOrders/${id}`, {
+	const response = await fetch(`https://test-json-gamma.vercel.app/clientOrders/${id}`, {
 		method: "PUT",
 		headers: { "Content-type": "application/json;charset=UTF-8" },
 		body: JSON.stringify(updateMealOrder),
