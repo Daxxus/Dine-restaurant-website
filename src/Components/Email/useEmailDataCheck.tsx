@@ -3,7 +3,7 @@ import axios from "axios"
 const useEmailDataCheck = () => {
 	const verifyMailAvilable = async (email: string) => {
 		const isAvilable = await axios
-			.get(`https://mulberry-thirsty-hide.glitch.me/clients?email=${email}`)
+			.get(`https://test-json-gamma.vercel.app/clients?email=${email}`)
 			.then((resp) => {
 				const { data } = resp
 
