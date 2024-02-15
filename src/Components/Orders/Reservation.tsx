@@ -61,17 +61,13 @@ const Reservation = () => {
 		setDatetime(val)
 	}
 	const addReservation = async (newReservation: ReservationDetails) => {
-<<<<<<< HEAD
 		await axios.post(
-			`http://localhost:3000/reservations`,
+			`https://test-json-gamma.vercel.app/reservations`,
 			newReservation
 		)
-=======
-		await axios.post(`https://mulberry-thirsty-hide.glitch.me`, newReservation)
->>>>>>> 10c0d108e818b594454bd7433696e9a5fdacd759
-
 		onClose()
 	}
+	
 	const queryClient = useQueryClient()
 	const mutation = useMutation({
 		mutationFn: async (values: ReservationDetails) => {
