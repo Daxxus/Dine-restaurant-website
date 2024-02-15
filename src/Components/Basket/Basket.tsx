@@ -29,7 +29,7 @@ export default function Basket() {
 	}
 	const deleteOrder = async (id: void) => {
 		const response = await axios.delete(
-			`https://mulberry-thirsty-hide.glitch.me/clientOrders/${id}`
+			`https://test-json-gamma.vercel.app/clientOrders/${id}`
 		)
 
 		const { data: order } = response
