@@ -8,7 +8,7 @@ const useClients = () => {
 	} = useQuery({
 		queryKey: ["clients"],
 		queryFn: () =>
-			fetch("https://mulberry-thirsty-hide.glitch.me/clients").then((res) => res.json()),
+			fetch("https://test-json-gamma.vercel.app/clients").then((res) => res.json()),
 	})
 	if (error) {
 		return <p>Can not get orders</p>
