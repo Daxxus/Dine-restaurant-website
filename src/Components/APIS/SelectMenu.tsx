@@ -37,26 +37,18 @@ export default function SelectMenu() {
 	} = useQuery({
 		queryKey: ["menuItems"],
 		queryFn: () =>
-			fetch("https://mulberry-thirsty-hide.glitch.me/menuItems").then((res) => res.json()),
+			fetch("https://test-json-gamma.vercel.app/menuItems").then((res) => res.json()),
 	})
 
 	const addOrder = async (newOrder: OrderDetails) => {
-<<<<<<< HEAD
 		const resp = await axios.post(
-			`http://localhost:3000/clientOrders`,
+			`https://test-json-gamma.vercel.app/clientOrders`,
 			newOrder
 		)
-
 		const { data: mealsName } = resp
 		return mealsName
-=======
-		const resp   = await axios
-			.post(`https://test-json-gamma.vercel.app/clientOrders`, newOrder)			
-				const { data: mealsName } = resp
-				return mealsName			
-		
->>>>>>> 10c0d108e818b594454bd7433696e9a5fdacd759
 	}
+	
 	const [menu, setMenu] = useState(menuItem)
 	const [menuTitle, setMenuTitle] = useState("")
 	const [sliderValue, setSliderValue] = useState(200)
